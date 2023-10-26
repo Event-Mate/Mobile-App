@@ -1,22 +1,34 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/event_mate_app.dart';
+import 'package:event_mate/injection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const EventMateApp());
-}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
-class EventMateApp extends StatelessWidget {
-  const EventMateApp({Key? key}) : super(key: key);
+  final overlayStyle = SystemUiOverlayStyle.dark.copyWith(
+    statusBarColor: Colors.black,
+    statusBarBrightness: Brightness.dark,
+  );
+  SystemChrome.setSystemUIOverlayStyle(overlayStyle);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'EventMate',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Scaffold(
-        body: Center(child: Text('Starting...')),
+  final injected = await setupInjection();
+  if (injected) {
+    runApp(
+      EasyLocalization(
+        supportedLocales: const [
+          Locale('tr'),
+          Locale('en'),
+        ],
+        path: 'assets/languages',
+        fallbackLocale: const Locale('tr'),
+        child: const EventMateApp(),
       ),
     );
+  } else {
+    throw Exception('Injection failed ❌');
   }
 }
