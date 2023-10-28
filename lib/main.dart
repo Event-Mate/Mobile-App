@@ -20,11 +20,11 @@ Future<void> main() async {
     runApp(
       EasyLocalization(
         supportedLocales: const [
-          Locale('tr'),
           Locale('en'),
+          Locale('tr'),
         ],
         path: 'assets/languages',
-        fallbackLocale: const Locale('tr'),
+        fallbackLocale: const Locale('en'),
         child: const EventMateApp(),
       ),
     );

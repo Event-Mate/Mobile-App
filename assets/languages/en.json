@@ -1,3 +1,15 @@
 {
-
+  "auth": {
+    "login_button_text": "Login",
+    "register_button_text": "Register"
+  },
+  "registration": {
+    "welcoming_text": "Welcome to EventMate! 🥳",
+    "name_form_title": "We'd love to get to know you better.\nWhat's your name?",
+    "form_button_next_title": "Next",
+    "name": "Name",
+    "name_hint_text": "Enter your name",
+    "email": "Email",
+    "password": "Password"
+  }
 }

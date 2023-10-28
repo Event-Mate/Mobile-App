@@ -6,7 +6,6 @@ import 'package:event_mate/core/enums/main_routes.dart';
 import 'package:event_mate/environment_variables.env';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/authentication_page.dart';
-import 'package:event_mate/presentation/core/themes/custom_input_decoration_theme.dart';
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +36,6 @@ class EventMateApp extends StatelessWidget {
             title: APP_TITLE,
             theme: ThemeData(
               primaryColor: context.colors.primary,
-              inputDecorationTheme: CustomInputDecorationTheme().theme,
               appBarTheme: const AppBarTheme(
                 systemOverlayStyle: SystemUiOverlayStyle(
                   statusBarIconBrightness: Brightness.light,
