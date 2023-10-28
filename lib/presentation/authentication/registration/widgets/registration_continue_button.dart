@@ -3,23 +3,23 @@ import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationContinueButton extends StatelessWidget {
-  const RegistrationContinueButton({super.key});
-
+  const RegistrationContinueButton({required this.onTap, this.enabled = true});
+  final VoidCallback onTap;
+  final bool enabled;
   @override
   Widget build(BuildContext context) {
     return SplashingButton(
-      onTap: () {
-        // TODO(Furkan): save & next
-      },
+      onTap: enabled ? onTap : null,
       decoration: BoxDecoration(
-        color: context.colors.primary,
+        color: enabled ? context.colors.primary : context.colors.disabled,
         borderRadius: BorderRadius.circular(18),
       ),
       child: Padding(
         padding: const EdgeInsets.all(24),
         child: Icon(
           Icons.arrow_forward_ios,
-          color: context.colors.background,
+          color:
+              enabled ? context.colors.background : context.colors.textDisabled,
         ),
       ),
     );

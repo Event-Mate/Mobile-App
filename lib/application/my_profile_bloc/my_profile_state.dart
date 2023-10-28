@@ -1,6 +1,6 @@
 part of 'my_profile_bloc.dart';
 
-class MyProfileState extends Equatable {
+final class MyProfileState extends Equatable {
   const MyProfileState({required this.userInformationOption});
 
   factory MyProfileState.initial() {

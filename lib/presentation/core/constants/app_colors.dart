@@ -5,7 +5,7 @@ class AppColors extends Equatable {
   const AppColors._({
     required this.background,
     required this.primary,
-    required this.primaryDisabled,
+    required this.disabled,
     required this.secondary,
     required this.tertiary,
     required this.accent,
@@ -17,9 +17,9 @@ class AppColors extends Equatable {
     required this.textPrimary,
     required this.textSecondary,
     required this.textTertiary,
+    required this.textDisabled,
     required this.whiteBase,
     required this.blackBase,
-    required this.surfaceSelected,
     required this.sheetsBackground,
     required this.error,
     required this.success,
@@ -28,19 +28,19 @@ class AppColors extends Equatable {
     return const AppColors._(
       background: Color(0xffFCFCFC),
       primary: Color(0xFF2ED87B),
-      primaryDisabled: Color(0xFFC9F1F3),
-      secondary: Color(0xffE9FBFB),
-      tertiary: Color(0xff19898F),
+      secondary: Color(0xFF21A85E),
+      tertiary: Color(0xFF198248),
+      disabled: Color(0xFFEBEBE4),
       accent: Color(0xff000000),
       greenPrimary: Color(0xff199A5E),
       borderPrimary: Color(0xFFE1E4E9),
       borderSecondary: Color(0xFFD4D7DC),
-      surfacePrimary: Color(0xFFF7F8F9),
-      surfaceSecondary: Color(0xFFE0E3E8),
-      surfaceSelected: Color(0xffE9FBFB),
+      surfacePrimary: Color(0xFFE7EAEE),
+      surfaceSecondary: Color(0xFFCCCED2),
       textPrimary: Color(0xFF1A1A1A),
       textSecondary: Color(0xFF8390A1),
       textTertiary: Color(0xffA2ABBA),
+      textDisabled: Color(0xFFD0D0D0),
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
       sheetsBackground: Color(0xffFFFFFF),
@@ -52,7 +52,7 @@ class AppColors extends Equatable {
     return const AppColors._(
       background: Color(0xFF1E1E1E),
       primary: Color(0xFF14B1B9),
-      primaryDisabled: Color(0xFF3C6165),
+      disabled: Color(0x60303030),
       secondary: Color(0xFF273C3C),
       tertiary: Color(0xFF19898F),
       accent: Color(0xFFE0E0E0),
@@ -61,10 +61,10 @@ class AppColors extends Equatable {
       borderSecondary: Color(0xFF555555),
       surfacePrimary: Color(0xFF1C1C1C),
       surfaceSecondary: Color(0xFF2B2B2B),
-      surfaceSelected: Color(0xFF273C3C),
       textPrimary: Color(0xFFFFFFFF),
       textSecondary: Color(0xFFC4C4C4),
       textTertiary: Color(0xFFA2ABBA),
+      textDisabled: Color(0xFFD0D0D0),
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
       sheetsBackground: Color(0xFF1E1E1E),
@@ -75,7 +75,7 @@ class AppColors extends Equatable {
 
   final Color background;
   final Color primary;
-  final Color primaryDisabled;
+  final Color disabled;
   final Color secondary;
   final Color tertiary;
   final Color accent;
@@ -83,10 +83,10 @@ class AppColors extends Equatable {
   final Color borderSecondary;
   final Color surfacePrimary;
   final Color surfaceSecondary;
-  final Color surfaceSelected;
   final Color textPrimary;
   final Color textSecondary;
   final Color textTertiary;
+  final Color textDisabled;
   final Color whiteBase;
   final Color blackBase;
   final Color greenPrimary;
@@ -99,7 +99,7 @@ class AppColors extends Equatable {
     return [
       background,
       primary,
-      primaryDisabled,
+      disabled,
       secondary,
       tertiary,
       accent,
@@ -107,10 +107,10 @@ class AppColors extends Equatable {
       borderSecondary,
       surfacePrimary,
       surfaceSecondary,
-      surfaceSelected,
       textPrimary,
       textSecondary,
       textTertiary,
+      textDisabled,
       whiteBase,
       blackBase,
       greenPrimary,

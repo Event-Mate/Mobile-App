@@ -12,7 +12,7 @@ class SplashingButton extends StatelessWidget {
   });
 
   final Widget child;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final BoxDecoration? decoration;
   final double? width;
   final double? height;
