@@ -14,7 +14,8 @@ class RegistrationSteps {
   };
 }
 
-class RegistrationNameFormBody extends StatelessWidget {
+class RegistrationNameFormBody extends StatelessWidget
+    with TextFormFieldStyleMixin {
   const RegistrationNameFormBody();
 
   @override
@@ -55,22 +56,9 @@ class RegistrationNameFormBody extends StatelessWidget {
                     .read<EmailRegistrationBloc>()
                     .addNameUpdated(name: value);
               },
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: context.colors.surfacePrimary,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  borderSide: BorderSide(color: context.colors.borderPrimary),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  borderSide: BorderSide(
-                    color: context.colors.secondary,
-                    width: 1.5,
-                  ),
-                ),
+              decoration: getInputDecoration(
+                context,
                 hintText: 'registration.name_hint_text'.tr(),
-                hintStyle: TextStyle(color: context.colors.textSecondary),
               ),
             ),
           ],

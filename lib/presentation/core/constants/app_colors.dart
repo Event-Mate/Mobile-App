@@ -35,7 +35,7 @@ class AppColors extends Equatable {
       greenPrimary: Color(0xff199A5E),
       borderPrimary: Color(0xFFE1E4E9),
       borderSecondary: Color(0xFFD4D7DC),
-      surfacePrimary: Color(0xFFE7EAEE),
+      surfacePrimary: Color(0xFFEFF1F2),
       surfaceSecondary: Color(0xFFCCCED2),
       textPrimary: Color(0xFF1A1A1A),
       textSecondary: Color(0xFF8390A1),

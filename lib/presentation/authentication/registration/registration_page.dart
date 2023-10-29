@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
+import 'package:event_mate/presentation/authentication/registration/mixin/text_form_field_mixin.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_continue_button.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_progress_circle.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
@@ -13,7 +14,6 @@ part 'widgets/registration_steps.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
-
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
