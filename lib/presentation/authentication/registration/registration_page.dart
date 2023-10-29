@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
+import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
 import 'package:event_mate/presentation/authentication/registration/mixin/text_form_field_mixin.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_continue_button.dart';
@@ -24,91 +25,95 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   void initState() {
     super.initState();
-    pageController = PageController(
-      initialPage: context.read<EmailRegistrationBloc>().state.currentStepIndex,
-    );
+    pageController = PageController();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
-      listenWhen: (previous, current) =>
-          previous.currentStepIndex != current.currentStepIndex,
-      listener: (context, state) {
-        pageController.animateToPage(
-          state.currentStepIndex,
-          duration: const Duration(milliseconds: 400),
-          curve: Curves.easeInOut,
-        );
-      },
-      child: BlocBuilder<EmailRegistrationBloc, EmailRegistrationState>(
-        builder: (context, state) {
-          final currentStepIndex = state.currentStepIndex;
-          return Scaffold(
-            backgroundColor: context.colors.background,
-            appBar: AppBar(
-              backgroundColor: context.colors.background,
-              elevation: 0,
-              leading: BouncingBackButton(
-                onTap: () {
-                  if (currentStepIndex <= 0) {
-                    Navigator.of(context).pop();
-                  } else {
-                    context.read<EmailRegistrationBloc>().addPreviousStep();
-                  }
-                },
-              ),
-              centerTitle: true,
-              title: Row(
-                children: [
-                  for (int i = 0; i < RegistrationSteps.steps.length; i++) ...[
-                    if (i == currentStepIndex) ...{
-                      RippleAnimation(
-                        color: context.colors.success,
-                        minRadius: 8,
-                        ripplesCount: 10,
-                        delay: const Duration(milliseconds: 300),
-                        duration: const Duration(milliseconds: 1800),
-                        repeat: true,
-                        child: const RegistrationProgressCircle(
-                          currentStep: true,
-                        ),
-                      )
-                    } else
-                      RegistrationProgressCircle(
-                        stepCompleted: _stepCompleted(
-                          index: i,
-                          currentStepIndex: currentStepIndex,
-                        ),
-                      ),
-                    if (i != RegistrationSteps.steps.length - 1)
-                      Container(
-                        width: 20,
-                        height: 4,
-                        color: _stepCompleted(
-                          index: i,
-                          currentStepIndex: currentStepIndex,
-                        )
-                            ? context.colors.success
-                            : context.colors.textSecondary,
-                      )
-                  ],
-                ],
-              ),
-            ),
-            body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: PageView(
-                  key: const PageStorageKey('registration_page_view'),
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: pageController,
-                  children: RegistrationSteps.steps.values.toList(),
-                ),
-              ),
-            ),
+    return BlocProvider(
+      create: (context) => getIt<EmailRegistrationBloc>(),
+      child: BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
+        listenWhen: (previous, current) =>
+            previous.currentStepIndex != current.currentStepIndex,
+        listener: (context, state) {
+          pageController.animateToPage(
+            state.currentStepIndex,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
           );
         },
+        child: BlocBuilder<EmailRegistrationBloc, EmailRegistrationState>(
+          builder: (context, state) {
+            final currentStepIndex = state.currentStepIndex;
+            return Scaffold(
+              backgroundColor: context.colors.background,
+              appBar: AppBar(
+                backgroundColor: context.colors.background,
+                elevation: 0,
+                leading: BouncingBackButton(
+                  color: context.colors.textPrimary,
+                  onTap: () {
+                    if (currentStepIndex <= 0) {
+                      Navigator.of(context).pop();
+                    } else {
+                      context.read<EmailRegistrationBloc>().addPreviousStep();
+                    }
+                  },
+                ),
+                centerTitle: true,
+                title: Row(
+                  children: [
+                    for (int i = 0;
+                        i < RegistrationSteps.steps.length;
+                        i++) ...[
+                      if (i == currentStepIndex) ...{
+                        RippleAnimation(
+                          color: context.colors.success,
+                          minRadius: 8,
+                          ripplesCount: 10,
+                          delay: const Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 1800),
+                          repeat: true,
+                          child: const RegistrationProgressCircle(
+                            currentStep: true,
+                          ),
+                        )
+                      } else
+                        RegistrationProgressCircle(
+                          stepCompleted: _stepCompleted(
+                            index: i,
+                            currentStepIndex: currentStepIndex,
+                          ),
+                        ),
+                      if (i != RegistrationSteps.steps.length - 1)
+                        Container(
+                          width: 20,
+                          height: 4,
+                          color: _stepCompleted(
+                            index: i,
+                            currentStepIndex: currentStepIndex,
+                          )
+                              ? context.colors.success
+                              : context.colors.textSecondary,
+                        )
+                    ],
+                  ],
+                ),
+              ),
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: PageView(
+                    key: const PageStorageKey('registration_page_view'),
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: pageController,
+                    children: RegistrationSteps.steps.values.toList(),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

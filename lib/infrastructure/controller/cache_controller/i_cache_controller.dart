@@ -9,4 +9,7 @@ abstract class ICacheController {
 
   Future<void> writeInt({required CacheKey key, required int value});
   int? readInt({required CacheKey key});
+
+  Future<void> writeString({required CacheKey key, required String value});
+  String? readString({required CacheKey key});
 }

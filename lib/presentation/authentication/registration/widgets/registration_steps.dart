@@ -14,8 +14,7 @@ class RegistrationSteps {
   };
 }
 
-class RegistrationNameFormBody extends StatelessWidget
-    with TextFormFieldStyleMixin {
+class RegistrationNameFormBody extends StatelessWidget with TextFormFieldMixin {
   const RegistrationNameFormBody();
 
   @override
@@ -49,17 +48,14 @@ class RegistrationNameFormBody extends StatelessWidget
                 ],
               ),
             ),
-            TextFormField(
-              cursorColor: context.colors.secondary,
+            EMTextFormField(
+              context,
+              hintText: 'registration.name_hint_text'.tr(),
               onChanged: (value) {
                 context
                     .read<EmailRegistrationBloc>()
                     .addNameUpdated(name: value);
               },
-              decoration: getInputDecoration(
-                context,
-                hintText: 'registration.name_hint_text'.tr(),
-              ),
             ),
           ],
         ),

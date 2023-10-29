@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:event_mate/environment_variables.env';
+import 'package:event_mate/environment_variables.env' as env;
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
 import 'package:event_mate/model/user_information.dart';
@@ -18,8 +18,8 @@ class RegistrationRepository implements IRegistrationRepository {
     try {
       // TODO(Furkan): path update
       final uri = Uri(
-        scheme: HTTPS_SCHEME,
-        host: AWS_HOST,
+        scheme: env.HTTPS_SCHEME,
+        host: env.AWS_HOST,
         path: 'api/auth/register',
       );
 

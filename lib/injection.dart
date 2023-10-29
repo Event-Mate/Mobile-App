@@ -1,6 +1,8 @@
+import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
+import 'package:event_mate/application/splash_bloc/splash_bloc.dart';
 import 'package:event_mate/configuration/sembast_configuration.dart'
     as sembast_conf;
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
@@ -70,6 +72,12 @@ Future<bool> _injectFacades() async {
 }
 
 Future<bool> _injectBlocs() async {
+  getIt.registerFactory<SplashBloc>(
+    () => SplashBloc(getIt<ICacheController>()),
+  );
+  getIt.registerFactory<AuthenticationBloc>(
+    () => AuthenticationBloc(getIt<ICacheController>()),
+  );
   getIt.registerFactory<EmailRegistrationBloc>(
     () => EmailRegistrationBloc(getIt<IRegistrationRepository>()),
   );
@@ -79,5 +87,6 @@ Future<bool> _injectBlocs() async {
   getIt.registerFactory<ColorThemeBloc>(
     () => ColorThemeBloc(getIt<ICacheController>()),
   );
+
   return true;
 }
