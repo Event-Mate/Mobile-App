@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
 import 'package:event_mate/model/user_information.dart';
+import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
+import 'package:event_mate/presentation/authentication/registration/registration_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'email_registration_event.dart';
@@ -15,9 +17,6 @@ class EmailRegistrationBloc
   EmailRegistrationBloc(
     this._iRegistrationRepository,
   ) : super(EmailRegistrationState.initial()) {
-    on<_NameUpdatedEvent>(
-      _onNameUpdatedEvent,
-    );
     on<_NavigatedToPreviousStep>(
       _onNavigatedToPreviousStep,
     );
@@ -30,8 +29,8 @@ class EmailRegistrationBloc
   }
   final IRegistrationRepository _iRegistrationRepository;
 
-  void addNameUpdated({required String name}) {
-    add(_NameUpdatedEvent(name: name));
+  void addUsernameUpdated({required String username}) {
+    add(_UsernameUpdatedEvent(username: username));
   }
 
   void addPreviousStep() {
@@ -40,13 +39,6 @@ class EmailRegistrationBloc
 
   void addNextStep() {
     add(const _NavigatedToNextStep());
-  }
-
-  Future<void> _onNameUpdatedEvent(
-    _NameUpdatedEvent event,
-    Emitter<EmailRegistrationState> emit,
-  ) async {
-    emit(state.copyWith(nameOption: some(event.name)));
   }
 
   Future<void> _onNavigatedToPreviousStep(

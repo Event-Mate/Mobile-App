@@ -4,12 +4,16 @@
     "register_button_text": "Register"
   },
   "registration": {
-    "welcoming_text": "Welcome to EventMate! 🥳",
-    "name_form_title": "We'd love to get to know you better.\nWhat's your name?",
-    "form_button_next_title": "Next",
-    "name": "Name",
+    "name_form_title": "Welcome to EventMate! 🥳",
+    "name_form_subtitle": "We'd love to get to know you better.\nWhat's your name?",
     "name_hint_text": "Enter your name",
-    "email": "Email",
-    "password": "Password"
+    "name_empty_error_message": "\u26A0 Name cannot be empty",
+    "name_length_error_message": "\u26A0 Name must be at least 3 characters long",
+    "username_form_title": "Great! Let's set up your username",
+    "username_form_subtitle": "Define your username",
+    "username_empty_error_message": "\u26A0 Username cannot be empty",
+    "username_length_error_message": "\u26A0 Username must be at least 2 characters long",
+    "username_hint_text": "username",
+    "form_button_next_title": "Next"
   }
 }

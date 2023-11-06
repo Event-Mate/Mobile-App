@@ -1,6 +1,7 @@
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
+//! Currently not used may be deleted later on
 mixin TextFormFieldMixin {
   static const _borderWidth = 1.5;
 
@@ -8,6 +9,7 @@ mixin TextFormFieldMixin {
     BuildContext context, {
     TextEditingController? controller,
     Function(String value)? onChanged,
+    required String? Function(String? value) validator,
     required String hintText,
   }) {
     assert(onChanged != null || controller != null);
@@ -15,11 +17,16 @@ mixin TextFormFieldMixin {
       cursorColor: context.colors.secondary,
       onChanged: onChanged,
       controller: controller,
+      validator: validator,
       decoration: InputDecoration(
         filled: true,
         fillColor: context.colors.surfacePrimary,
         hintText: hintText,
         hintStyle: TextStyle(color: context.colors.textSecondary),
+        errorStyle: TextStyle(
+          color: context.colors.error,
+          fontWeight: FontWeight.w600,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(8)),
           borderSide: BorderSide(

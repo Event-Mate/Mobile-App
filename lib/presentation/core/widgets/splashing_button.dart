@@ -20,16 +20,18 @@ class SplashingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      focusColor: context.colors.primary,
-      borderRadius: decoration?.borderRadius as BorderRadius?,
-      child: Ink(
-        width: width,
-        height: height,
-        padding: padding,
-        decoration: decoration,
-        child: Center(child: child),
+    return RepaintBoundary(
+      child: InkWell(
+        onTap: onTap,
+        focusColor: context.colors.primary,
+        borderRadius: decoration?.borderRadius as BorderRadius?,
+        child: Ink(
+          width: width,
+          height: height,
+          padding: padding,
+          decoration: decoration,
+          child: Center(child: child),
+        ),
       ),
     );
   }

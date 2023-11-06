@@ -4,6 +4,6 @@ enum RegistrationStepType {
   EMAIL,
   PASSWORD,
   GENDER,
-  DATEOFBIRTH,
+  DATE_OF_BIRTH,
   AVATAR_URL;
 }

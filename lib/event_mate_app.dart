@@ -14,9 +14,9 @@ import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'package:event_mate/presentation/core/splash/splash_page.dart';
-part 'package:event_mate/presentation/core/splash/root_page.dart';
-part 'package:event_mate/presentation/core/splash/loading_page.dart';
+part 'package:event_mate/presentation/splash/splash_page.dart';
+part 'package:event_mate/presentation/splash/root_page.dart';
+part 'package:event_mate/presentation/splash/loading_page.dart';
 
 class EventMateApp extends StatelessWidget {
   const EventMateApp({super.key});

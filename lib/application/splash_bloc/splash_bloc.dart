@@ -26,6 +26,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   ) async {
     emit(SplashLoadingState());
 
+    // TODO(Furkan): Splash implementation
     //* Burada app'i yayına aldıktan sonra, update var mı vs. kontrolu sağlanacak şimdilik temsili bir delay koyuyoruz.
     log('SplashLoadingState active...', name: 'SplashBloc');
     await Future.delayed(const Duration(seconds: 2));

@@ -19,6 +19,14 @@ class _NameUpdatedEvent extends EmailRegistrationEvent {
   List<Object> get props => [name];
 }
 
+class _UsernameUpdatedEvent extends EmailRegistrationEvent {
+  const _UsernameUpdatedEvent({required this.username});
+
+  final String username;
+  @override
+  List<Object> get props => [username];
+}
+
 class _NavigatedToPreviousStep extends EmailRegistrationEvent {
   const _NavigatedToPreviousStep();
 }
@@ -30,6 +38,7 @@ class _NavigatedToNextStep extends EmailRegistrationEvent {
 class _RegisterCompletedEvent extends EmailRegistrationEvent {
   const _RegisterCompletedEvent({required this.user});
   final UserInformation user;
+  // TODO(Furkan): Register bitiminde tüm blocların stateleri ile bu user doldurulup gönderilecek.
   @override
   List<Object> get props => [user];
 }
