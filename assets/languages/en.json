@@ -14,6 +14,11 @@
     "username_empty_error_message": "\u26A0 Username cannot be empty",
     "username_length_error_message": "\u26A0 Username must be at least 2 characters long",
     "username_hint_text": "username",
+    "email_form_title": "Awesome! Now we need your email",
+    "email_form_subtitle": "We'll use it to send you notifications about your events",
+    "email_empty_error_message": "\u26A0 Email cannot be empty",
+    "email_invalid_error_message": "\u26A0 Email is invalid",
+    "email_hint_text": "Enter your email",
     "form_button_next_title": "Next"
   }
 }

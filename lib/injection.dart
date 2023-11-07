@@ -1,5 +1,6 @@
 import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
+import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
@@ -91,6 +92,11 @@ Future<bool> _injectBlocs() async {
     // ignore: unnecessary_lambdas
     () => UsernameEditBloc(),
   );
+  getIt.registerFactory<EmailEditBloc>(
+    // ignore: unnecessary_lambdas
+    () => EmailEditBloc(),
+  );
+
   getIt.registerFactory<MyProfileBloc>(
     () => MyProfileBloc(getIt<IUserInformationStorage>()),
   );
