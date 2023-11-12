@@ -28,8 +28,8 @@ class AppColors extends Equatable {
     return const AppColors._(
       background: Color(0xffFCFCFC),
       primary: Color(0xFF2ED87B),
-      secondary: Color(0xFF21A85E),
-      tertiary: Color(0xFF198248),
+      secondary: Color(0xFF28C16D),
+      tertiary: Color(0xFF21A85B),
       disabled: Color(0xFFEBEBE4),
       accent: Color(0xff000000),
       greenPrimary: Color(0xff199A5E),

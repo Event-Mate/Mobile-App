@@ -22,27 +22,23 @@ class RegistrationProgressPathCircles extends StatelessWidget {
               if (i == currentStepIndex) ...{
                 RepaintBoundary(
                   child: RippleAnimation(
-                    color: context.colors.success,
+                    color: context.colors.secondary,
                     minRadius: 8,
                     ripplesCount: 10,
                     delay: const Duration(milliseconds: 300),
                     duration: const Duration(milliseconds: 1800),
                     repeat: true,
-                    child: const _ProgressPathCircle(
-                      currentStep: true,
-                    ),
+                    child: const _ProgressPathCircle(currentStep: true),
                   ),
                 )
               } else
-                _ProgressPathCircle(
-                  stepCompleted: i < currentStepIndex,
-                ),
+                _ProgressPathCircle(stepCompleted: i < currentStepIndex),
               if (i != RegistrationSteps.stepsMap.length - 1)
                 Container(
                   width: 20,
                   height: 4,
                   color: i < currentStepIndex
-                      ? context.colors.success
+                      ? context.colors.secondary
                       : context.colors.textSecondary,
                 )
             ],
@@ -62,27 +58,24 @@ class _ProgressPathCircle extends StatelessWidget {
   final bool currentStep;
   @override
   Widget build(BuildContext context) {
+    final placheholderSize = currentStep ? 9.0 : 12.0;
     return Container(
-      height: 20,
-      width: 20,
+      padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
-        color:
-            stepCompleted ? context.colors.success : context.colors.background,
+        color: stepCompleted
+            ? context.colors.secondary
+            : context.colors.background,
         border: Border.all(
           width: currentStep ? 5 : 2,
           color: stepCompleted || currentStep
-              ? context.colors.success
+              ? context.colors.secondary
               : context.colors.textSecondary,
         ),
         borderRadius: BorderRadius.circular(30),
       ),
       child: stepCompleted
-          ? Icon(
-              Icons.check,
-              color: context.colors.background,
-              size: 13,
-            )
-          : null,
+          ? Icon(Icons.check, color: context.colors.background, size: 14)
+          : SizedBox(width: placheholderSize, height: placheholderSize),
     );
   }
 }

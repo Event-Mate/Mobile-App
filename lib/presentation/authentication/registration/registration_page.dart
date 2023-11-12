@@ -87,7 +87,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       vertical: 12,
                     ),
                     child: PageView(
-                      key: const PageStorageKey('registration_page_view'),
                       physics: const NeverScrollableScrollPhysics(),
                       controller: pageController,
                       children: RegistrationSteps.stepsMap.values.toList(),
