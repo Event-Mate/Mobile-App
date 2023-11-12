@@ -4,6 +4,7 @@ import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
+import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
 import 'package:event_mate/application/splash_bloc/splash_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
 import 'package:event_mate/configuration/sembast_configuration.dart'
@@ -95,6 +96,10 @@ Future<bool> _injectBlocs() async {
   getIt.registerFactory<EmailEditBloc>(
     // ignore: unnecessary_lambdas
     () => EmailEditBloc(),
+  );
+  getIt.registerFactory<PasswordEditBloc>(
+    // ignore: unnecessary_lambdas
+    () => PasswordEditBloc(),
   );
 
   getIt.registerFactory<MyProfileBloc>(

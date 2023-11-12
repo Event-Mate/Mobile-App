@@ -9,7 +9,10 @@ class CustomTextFormField extends StatefulWidget {
     this.onChanged,
     this.errorText,
     this.leading,
+    this.trailing,
     this.value,
+    this.keyboardType = TextInputType.text,
+    this.obscureText = false,
   }) : assert(
           controller == null || onChanged == null,
           'Cannot provide both a controller and an onChanged callback at the same time!',
@@ -20,7 +23,10 @@ class CustomTextFormField extends StatefulWidget {
   final String? hintText;
   final String? errorText;
   final Widget? leading;
+  final Widget? trailing;
   final String? value;
+  final TextInputType keyboardType;
+  final bool obscureText;
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();
@@ -69,6 +75,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   initialValue: widget.value,
                   onChanged: widget.onChanged,
                   controller: widget.controller,
+                  keyboardType: widget.keyboardType,
+                  obscureText: widget.obscureText,
                   cursorColor: widget.errorText != null
                       ? context.colors.error
                       : context.colors.primary,
@@ -79,6 +87,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   ),
                 ),
               ),
+              if (widget.trailing != null) widget.trailing!,
             ],
           ),
         ),

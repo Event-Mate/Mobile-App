@@ -1,11 +1,13 @@
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
+import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_email_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_name_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_password_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_username_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_progress_path_circles.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
@@ -42,6 +44,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         BlocProvider(create: (context) => getIt<NameEditBloc>()),
         BlocProvider(create: (context) => getIt<UsernameEditBloc>()),
         BlocProvider(create: (context) => getIt<EmailEditBloc>()),
+        BlocProvider(create: (context) => getIt<PasswordEditBloc>()),
       ],
       child: BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
         listenWhen: (previous, current) =>
@@ -102,12 +105,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
 class RegistrationSteps {
   const RegistrationSteps._();
-  // TODO(Furkan): Add password,gender,date,avatar steps
+  // TODO(Furkan): Add gender,date,avatar steps
   static Map<RegistrationStepType, Widget> stepsMap = {
     RegistrationStepType.NAME: const RegistrationNameFormBody(),
     RegistrationStepType.USERNAME: const RegistrationUsernameFormBody(),
     RegistrationStepType.EMAIL: const RegistrationEmailFormBody(),
-    RegistrationStepType.PASSWORD: Container(color: Colors.red),
+    RegistrationStepType.PASSWORD: const RegistrationPasswordFormBody(),
     RegistrationStepType.GENDER: Container(color: Colors.yellow),
     RegistrationStepType.DATE_OF_BIRTH: Container(color: Colors.purple),
     RegistrationStepType.AVATAR_URL: Container(color: Colors.orange),

@@ -11,14 +11,19 @@
     "name_length_error_message": "\u26A0 Name must be at least 3 characters long",
     "username_form_title": "Great! Let's set up your username",
     "username_form_subtitle": "Define your username",
+    "username_hint_text": "username",
     "username_empty_error_message": "\u26A0 Username cannot be empty",
     "username_length_error_message": "\u26A0 Username must be at least 2 characters long",
-    "username_hint_text": "username",
     "email_form_title": "Awesome! Now we need your email",
     "email_form_subtitle": "We'll use it to send you notifications about your events",
+    "email_hint_text": "Enter your email",
     "email_empty_error_message": "\u26A0 Email cannot be empty",
     "email_invalid_error_message": "\u26A0 Email is invalid",
-    "email_hint_text": "Enter your email",
+    "password_form_title": "Almost there! Now we need your password",
+    "password_form_subtitle": "We'll use it to log you in",
+    "password_hint_text": "Enter your password",
+    "password_empty_error_message": "\u26A0 Password cannot be empty",
+    "password_length_error_message": "\u26A0 Password must be at least 6 characters long",
     "form_button_next_title": "Next"
   }
 }

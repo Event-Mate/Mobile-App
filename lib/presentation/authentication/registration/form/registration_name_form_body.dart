@@ -27,6 +27,7 @@ class RegistrationNameFormBody extends StatelessWidget {
           formField: CustomTextFormField(
             hintText: 'registration.name_hint_text'.tr(),
             errorText: state.errorText?.tr(),
+            keyboardType: TextInputType.name,
             value: state.nameOrEmpty,
             onChanged: (value) {
               context.read<NameEditBloc>().addNameUpdated(name: value);

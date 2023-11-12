@@ -37,13 +37,13 @@ class FormBody extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: 4),
                   Text(
                     subtitle,
                     style: Theme.of(context)
                         .textTheme
-                        .headlineSmall
-                        ?.copyWith(color: context.colors.textPrimary),
+                        .titleMedium
+                        ?.copyWith(color: context.colors.textSecondary),
                   ),
                 ],
               ),
