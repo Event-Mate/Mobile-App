@@ -19,8 +19,17 @@ class GenderEditState extends Equatable {
   final Option<String?> errorOption;
   final bool validating;
 
-  @override
-  List<Object> get props => [genderOption, errorOption, validating];
+  GenderEditState copyWith({
+    Option<GenderType>? genderOption,
+    Option<String?>? errorOption,
+    bool? validating,
+  }) {
+    return GenderEditState(
+      genderOption: genderOption ?? this.genderOption,
+      errorOption: errorOption ?? this.errorOption,
+      validating: validating ?? this.validating,
+    );
+  }
 
   GenderType? get genderOrNull => genderOption.fold(() => null, id);
 
@@ -38,18 +47,8 @@ class GenderEditState extends Equatable {
       );
 
   String? get errorText => errorOption.fold(() => null, id);
-
-  GenderEditState copyWith({
-    Option<GenderType>? genderOption,
-    Option<String?>? errorOption,
-    bool? validating,
-  }) {
-    return GenderEditState(
-      genderOption: genderOption ?? this.genderOption,
-      errorOption: errorOption ?? this.errorOption,
-      validating: validating ?? this.validating,
-    );
-  }
+  @override
+  List<Object> get props => [genderOption, errorOption, validating];
 
   @override
   bool? get stringify => true;
