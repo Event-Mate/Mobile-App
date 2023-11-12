@@ -51,10 +51,10 @@ class AppColors extends Equatable {
   factory AppColors.dark() {
     return const AppColors._(
       background: Color(0xFF1E1E1E),
-      primary: Color(0xFF14B1B9),
+      primary: Color(0xFF2ED87B),
+      secondary: Color(0xFF28C16D),
+      tertiary: Color(0xFF21A85B),
       disabled: Color(0x60303030),
-      secondary: Color(0xFF273C3C),
-      tertiary: Color(0xFF19898F),
       accent: Color(0xFFE0E0E0),
       greenPrimary: Color(0xFF199A5E),
       borderPrimary: Color(0xFF3C3C3C),

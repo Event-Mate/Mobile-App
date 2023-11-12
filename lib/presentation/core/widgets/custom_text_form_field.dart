@@ -81,9 +81,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   cursorColor: widget.errorText != null
                       ? context.colors.error
                       : context.colors.primary,
+                  style: TextStyle(color: context.colors.textPrimary),
                   focusNode: _focusNode,
                   decoration: InputDecoration(
                     hintText: widget.hintText,
+                    hintStyle: TextStyle(color: context.colors.textSecondary),
                     border: InputBorder.none,
                   ),
                 ),
