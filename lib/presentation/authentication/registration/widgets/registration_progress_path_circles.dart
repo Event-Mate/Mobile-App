@@ -23,8 +23,8 @@ class RegistrationProgressPathCircles extends StatelessWidget {
                 RepaintBoundary(
                   child: RippleAnimation(
                     color: context.colors.secondary,
-                    minRadius: 8,
-                    ripplesCount: 10,
+                    minRadius: 10,
+                    ripplesCount: 8,
                     delay: const Duration(milliseconds: 300),
                     duration: const Duration(milliseconds: 1800),
                     repeat: true,
@@ -75,7 +75,7 @@ class _ProgressPathCircle extends StatelessWidget {
       ),
       child: stepCompleted
           ? Icon(Icons.check, color: context.colors.background, size: 14)
-          : SizedBox(width: placheholderSize, height: placheholderSize),
+          : SizedBox.square(dimension: placheholderSize),
     );
   }
 }
