@@ -1,3 +1,4 @@
+import 'package:event_mate/presentation/core/widgets/input_error_text.dart';
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -94,10 +95,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         if (widget.errorText != null)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              widget.errorText!,
-              style: TextStyle(color: context.colors.error),
-            ),
+            child: InputErrorText(text: widget.errorText!),
           ),
       ],
     );
