@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +42,7 @@ class GenderEditBloc extends Bloc<GenderEditEvent, GenderEditState> {
       validating: false,
       errorOption: state.genderOption.fold(
         () {
-          return some('registration.gender_empty_error_message'.tr());
+          return some('registration.gender_empty_error_message');
         },
         (_) {
           return some(null);

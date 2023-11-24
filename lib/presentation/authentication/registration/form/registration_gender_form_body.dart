@@ -30,9 +30,11 @@ class RegistrationGenderFormBody extends StatelessWidget {
               for (final gender in GenderType.values) ...[
                 _GenderRadioTile(genderType: gender)
               ],
-              const SizedBox(height: 12),
               if (state.errorText != null)
-                InputErrorText(text: state.errorText!),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: InputErrorText(text: state.errorText!.tr()),
+                ),
             ],
           ),
           onSubmit: () {

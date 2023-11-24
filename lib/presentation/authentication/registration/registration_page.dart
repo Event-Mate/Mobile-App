@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
@@ -6,6 +8,7 @@ import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dar
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_birthday_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_email_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_gender_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_name_form_body.dart';
@@ -42,12 +45,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getIt<EmailRegistrationBloc>()),
-        BlocProvider(create: (context) => getIt<NameEditBloc>()),
-        BlocProvider(create: (context) => getIt<UsernameEditBloc>()),
-        BlocProvider(create: (context) => getIt<EmailEditBloc>()),
-        BlocProvider(create: (context) => getIt<PasswordEditBloc>()),
-        BlocProvider(create: (context) => getIt<GenderEditBloc>()),
+        BlocProvider(create: (_) => getIt<EmailRegistrationBloc>()),
+        BlocProvider(create: (_) => getIt<NameEditBloc>()),
+        BlocProvider(create: (_) => getIt<UsernameEditBloc>()),
+        BlocProvider(create: (_) => getIt<EmailEditBloc>()),
+        BlocProvider(create: (_) => getIt<PasswordEditBloc>()),
+        BlocProvider(create: (_) => getIt<GenderEditBloc>()),
+        BlocProvider(
+          create: (_) => getIt<BirthdayEditBloc>()
+            ..addInit(langCode: context.deviceLocale.languageCode),
+        ),
       ],
       child: BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
         listenWhen: (previous, current) =>
@@ -63,8 +70,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
         child: BlocBuilder<EmailRegistrationBloc, EmailRegistrationState>(
           builder: (context, state) {
             final currentStepIndex = state.currentStepIndex;
-            return WillPopScope(
-              onWillPop: () async => false,
+            return PopScope(
+              canPop: false,
               child: Scaffold(
                 backgroundColor: context.colors.background,
                 appBar: AppBar(
@@ -107,14 +114,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
 class RegistrationSteps {
   const RegistrationSteps._();
-  // TODO(Furkan): Add date,avatar steps
+  // TODO(Furkan): Add avatar step
   static Map<RegistrationStepType, Widget> stepsMap = {
     RegistrationStepType.NAME: const RegistrationNameFormBody(),
     RegistrationStepType.USERNAME: const RegistrationUsernameFormBody(),
     RegistrationStepType.EMAIL: const RegistrationEmailFormBody(),
     RegistrationStepType.PASSWORD: const RegistrationPasswordFormBody(),
     RegistrationStepType.GENDER: const RegistrationGenderFormBody(),
-    RegistrationStepType.DATE_OF_BIRTH: Container(color: Colors.purple),
+    RegistrationStepType.DATE_OF_BIRTH: const RegistrationBirthdayFormBody(),
     RegistrationStepType.AVATAR_URL: Container(color: Colors.orange),
   };
 }

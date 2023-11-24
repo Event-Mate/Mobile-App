@@ -50,8 +50,8 @@ dependencies:
   bloc_concurrency: ^0.2.2
   fluttertoast: ^8.2.2
   provider: ^6.0.5
-  # simple_ripple_animation: ^0.0.7
   animated_text_kit: ^4.2.2
+  auto_size_text: ^3.0.0
 
   # Custom EventMate Packages
   ripple_animation:

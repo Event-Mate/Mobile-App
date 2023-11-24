@@ -16,12 +16,16 @@ class InputErrorText extends StatelessWidget {
           color: context.colors.error,
         ),
         const SizedBox(width: 4),
-        Text(
-          text,
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(color: context.colors.error),
+        Expanded(
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: context.colors.error),
+          ),
         ),
       ],
     );
