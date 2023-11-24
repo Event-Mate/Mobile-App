@@ -30,6 +30,10 @@
     "gender_woman": "Woman",
     "gender_non_binary": "Non-Binary",
     "gender_empty_error_message": "Please select your gender.",
+    "birthday_form_title": "Let's Make It Personal! 🎉",
+    "birthday_form_subtitle": "Share your birthday with us to add a personal touch to your experience. Expect special surprises and messages on your big day!",
+    "birthday_hint_text": "dd/mm/yyyy",
+    "birthday_empty_error_message": "Don't forget to enter your birthdate.",
     "form_button_next_title": "Next"
   }
 }

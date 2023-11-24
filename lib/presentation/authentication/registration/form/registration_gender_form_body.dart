@@ -69,7 +69,12 @@ class _GenderRadioTile extends StatelessWidget {
             maxLines: 1,
           ),
           contentPadding: EdgeInsets.zero,
-          activeColor: context.colors.primary,
+          fillColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.selected))
+              return context.colors.primary;
+            else
+              return context.colors.textPrimary;
+          }),
           groupValue: selectedGender,
           onChanged: (value) {
             if (value != null) {
