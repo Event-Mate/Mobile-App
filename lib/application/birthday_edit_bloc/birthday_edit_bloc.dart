@@ -53,13 +53,7 @@ class BirthdayEditBloc extends Bloc<BirthdayEditEvent, BirthdayEditState> {
         validating: false,
         errorOption: state.birthdayOption.fold(
           () => some('registration.birthday_empty_error_message'),
-          (date) {
-            final pureDate = date.toString().trim();
-            if (pureDate.isEmpty) {
-              return some('registration.birthday_empty_error_message');
-            }
-            return some(null);
-          },
+          (_) => some(null),
         ),
       ),
     );

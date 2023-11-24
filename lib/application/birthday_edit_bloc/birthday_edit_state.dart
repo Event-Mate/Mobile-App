@@ -59,10 +59,12 @@ final class BirthdayEditState extends Equatable {
   String get birthdayOrEmpty => birthdayOption.fold(
         () => '',
         (date) {
+          final day = date.day.toString().padLeft(2, '0');
+          final month = date.month.toString().padLeft(2, '0');
           if (langCode == LocaleType.TR.value) {
-            return '${date.day}/${date.month}/${date.year}';
+            return '$day/$month/${date.year}';
           } else {
-            return '${date.month}/${date.day}/${date.year}';
+            return '$month/$day/${date.year}';
           }
         },
       );
