@@ -1,3 +1,40 @@
 {
-  "auth_page_login_button_text": "Giriş yap"
+  "auth": {
+    "login_button_text": "Giriş Yap",
+    "register_button_text": "Kayıt Ol"
+  },
+  "registration": {
+    "name_form_title": "EventMate'e Hoş Geldiniz! 🥳",
+    "name_form_subtitle": "Sizi daha iyi tanımak isteriz.\nAdınız nedir?",
+    "name_hint_text": "Adınızı girin",
+    "name_empty_error_message": "Ad boş olamaz.",
+    "name_length_error_message": "Ad en az 3 karakter uzunluğunda olmalıdır.",
+    "username_form_title": "Harika! Kullanıcı adınızı belirleyelim",
+    "username_form_subtitle": "Kullanıcı adınızı tanımlayın",
+    "username_hint_text": "Kullanıcı adı",
+    "username_empty_error_message": "Kullanıcı adı boş olamaz.",
+    "username_length_error_message": "Kullanıcı adı en az 2 karakter uzunluğunda olmalıdır.",
+    "email_form_title": "Harika! Şimdi e-posta adresinize ihtiyacımız var",
+    "email_form_subtitle": "Bu, etkinliklerinizle ilgili bildirimleri size göndermek için kullanılacaktır",
+    "email_hint_text": "E-posta adresinizi girin",
+    "email_empty_error_message": "E-posta boş olamaz.",
+    "email_invalid_error_message": "E-posta geçersiz.",
+    "password_form_title": "Neredeyse bittik! Şimdi şifrenize ihtiyacımız var",
+    "password_form_subtitle": "Sizi giriş yapmak için kullanacağız",
+    "password_hint_text": "Şifrenizi girin",
+    "password_empty_error_message": "Şifre boş olamaz.",
+    "password_length_error_message": "Şifre en az 6 karakter uzunluğunda olmalıdır.",
+    "gender_form_title": "Lütfen cinsiyetinizi belirtin",
+    "gender_form_subtitle": "Cinsiyetinizi kişiselleştirilmiş içerik önerilerimiz için kullanıyoruz.",
+    "gender_man": "Erkek",
+    "gender_woman": "Kadın",
+    "gender_non_binary": "Non-Binary",
+    "gender_empty_error_message": "Lütfen cinsiyetinizi seçin.",
+    "birthday_form_title": "Doğum gününü bizimle paylaş 🎂",
+    "birthday_form_subtitle": "Deneyiminize kişisel bir dokunuş eklemek için doğum gününüzü paylaşın.",
+    "birthday_hint_text": "gg/aa/yyyy",
+    "birthday_empty_error_message": "Doğum tarihinizi girmeyi unutmayın.",
+    "birthday_error_invalid_text": "Lütfen geçerli bir tarih girin.",
+    "form_button_next_title": "İleri"
+  }
 }

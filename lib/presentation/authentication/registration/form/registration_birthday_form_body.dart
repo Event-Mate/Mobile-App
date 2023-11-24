@@ -41,7 +41,7 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
                       lastDate: dateNow,
                       initialDatePickerMode: DatePickerMode.year,
                       errorFormatText:
-                          'registration.birthday_error_format_text'.tr(),
+                          'registration.birthday_error_invalid_text'.tr(),
                       errorInvalidText:
                           'registration.birthday_error_invalid_text'.tr(),
                       builder: (context, child) {
@@ -95,14 +95,14 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
                         ),
                         Text(
                           state.birthdayOption.isNone()
-                              ? 'registration.birthday_hint_text'
+                              ? 'registration.birthday_hint_text'.tr()
                               : state.birthdayOrEmpty,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     color: context.colors.textSecondary,
                                     fontWeight: FontWeight.w600,
                                   ),
-                        ).tr(),
+                        ),
                         const SizedBox.shrink(),
                       ],
                     ),

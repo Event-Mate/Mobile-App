@@ -20,11 +20,11 @@ class InputErrorText extends StatelessWidget {
           child: Text(
             text,
             overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: context.colors.error),
+            maxLines: 2,
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: context.colors.error,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ),
       ],
