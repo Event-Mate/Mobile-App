@@ -4,7 +4,7 @@
     "register_button_text": "Register"
   },
   "registration": {
-    "name_form_title": "Welcome to EventMate! 🥳",
+    "name_form_title": "Welcome to \nEventMate! 🥳",
     "name_form_subtitle": "We'd love to get to know you better.\nWhat's your name?",
     "name_hint_text": "Enter your name",
     "name_empty_error_message": "Name cannot be empty.",
