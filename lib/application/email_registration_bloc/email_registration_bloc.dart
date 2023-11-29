@@ -1,10 +1,11 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
-import 'package:event_mate/model/user_information.dart';
+import 'package:event_mate/model/user_data.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
 import 'package:event_mate/presentation/authentication/registration/registration_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,22 +24,23 @@ class EmailRegistrationBloc
     on<_NavigatedToNextStep>(
       _onNavigatedToNextStep,
     );
-    on<_RegisterCompletedEvent>(
+    on<_RegistrationCompletedEvent>(
       _onRegisterCompletedEvent,
     );
   }
   final IRegistrationRepository _iRegistrationRepository;
 
-  void addUsernameUpdated({required String username}) {
-    add(_UsernameUpdatedEvent(username: username));
-  }
-
   void addPreviousStep() {
     add(const _NavigatedToPreviousStep());
   }
 
-  void addNextStep() {
-    add(const _NavigatedToNextStep());
+  /// [userData] is the data that involves past and current step data.
+  void addNextStep({required UserData userData}) {
+    add(_NavigatedToNextStep(userData: userData));
+  }
+
+  void addCompleteRegistration({required UserData user}) {
+    add(_RegistrationCompletedEvent(userData: user));
   }
 
   Future<void> _onNavigatedToPreviousStep(
@@ -52,15 +54,31 @@ class EmailRegistrationBloc
     _NavigatedToNextStep event,
     Emitter<EmailRegistrationState> emit,
   ) async {
-    emit(state.copyWith(currentStepIndex: state.currentStepIndex + 1));
+    emit(state.copyWith(
+      currentStepIndex: state.currentStepIndex + 1,
+      userData: event.userData,
+    ));
   }
 
   Future<void> _onRegisterCompletedEvent(
-    _RegisterCompletedEvent event,
+    _RegistrationCompletedEvent event,
     Emitter<EmailRegistrationState> emit,
   ) async {
+    emit(
+      state.copyWith(
+        processFailureOrUnitOption: none(),
+        completing: true,
+      ),
+    );
+    log('event.userData: ${event.userData}');
     final failureOrUnit =
-        await _iRegistrationRepository.registerUser(userInfo: event.user);
-    emit(state.copyWith(processFailureOrUnitOption: some(failureOrUnit)));
+        await _iRegistrationRepository.registerUser(userData: event.userData);
+    log('failureOrUnit: $failureOrUnit');
+    emit(
+      state.copyWith(
+        processFailureOrUnitOption: some(failureOrUnit),
+        completing: false,
+      ),
+    );
   }
 }

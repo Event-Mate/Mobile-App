@@ -8,10 +8,10 @@ sealed class AvatarEditEvent extends Equatable {
 }
 
 class _AvatarUpdatedEvent extends AvatarEditEvent {
-  const _AvatarUpdatedEvent({required this.avatarUrl});
+  const _AvatarUpdatedEvent({required this.avatarFile});
 
-  final String avatarUrl;
+  final File avatarFile;
 
   @override
-  List<Object> get props => [avatarUrl];
+  List<Object> get props => [avatarFile];
 }

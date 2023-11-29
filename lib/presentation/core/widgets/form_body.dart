@@ -1,3 +1,4 @@
+import 'package:event_mate/presentation/authentication/registration/widgets/registration_complete_button.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_continue_button.dart';
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
@@ -7,15 +8,20 @@ class FormBody extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.formField,
-    required this.onSubmit,
-    this.submitButton,
-  });
+    this.skipStepButton,
+    this.onContinue,
+    this.onSubmit,
+  }) : assert(
+          onContinue != null || onSubmit != null,
+          'onContinue and onSubmit cannot be null at the same time',
+        );
 
   final String title;
   final String subtitle;
   final Widget formField;
-  final VoidCallback onSubmit;
-  final Widget? submitButton;
+  final Widget? skipStepButton;
+  final VoidCallback? onContinue;
+  final VoidCallback? onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +57,24 @@ class FormBody extends StatelessWidget {
             formField,
           ],
         ),
-        if (submitButton != null)
+        if (onSubmit != null)
           Align(
             alignment: Alignment.bottomCenter,
-            child: submitButton,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RegistrationCompleteButton(onTap: onSubmit!),
+                if (skipStepButton != null) ...[
+                  skipStepButton!,
+                ],
+              ],
+            ),
           )
         else
           Align(
             alignment: Alignment.bottomRight,
             child: RegistrationContinueButton(
-              onTap: onSubmit,
+              onTap: onContinue!,
             ),
           ),
       ],

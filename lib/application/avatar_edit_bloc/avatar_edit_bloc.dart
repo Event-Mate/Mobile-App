@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -14,14 +15,14 @@ class AvatarEditBloc extends Bloc<AvatarEditEvent, AvatarEditState> {
     );
   }
 
-  void addAvatarUpdated({required String avatarUrl}) {
-    add(_AvatarUpdatedEvent(avatarUrl: avatarUrl));
+  void addAvatarUpdated({required File avatarFile}) {
+    add(_AvatarUpdatedEvent(avatarFile: avatarFile));
   }
 
   FutureOr<void> _onAvatarUpdatedEvent(
     _AvatarUpdatedEvent event,
     Emitter<AvatarEditState> emit,
   ) {
-    emit(state.copyWith(avatarOption: some(event.avatarUrl)));
+    emit(state.copyWith(avatarOption: some(event.avatarFile)));
   }
 }

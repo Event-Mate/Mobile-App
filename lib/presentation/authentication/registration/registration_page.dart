@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dar
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_avatar_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_birthday_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_email_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_gender_form_body.dart';
@@ -55,6 +57,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           create: (_) => getIt<BirthdayEditBloc>()
             ..addInit(langCode: context.deviceLocale.languageCode),
         ),
+        BlocProvider(create: (_) => getIt<AvatarEditBloc>()),
       ],
       child: BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
         listenWhen: (previous, current) =>
@@ -114,7 +117,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
 class RegistrationSteps {
   const RegistrationSteps._();
-  // TODO(Furkan): Add avatar step
   static Map<RegistrationStepType, Widget> stepsMap = {
     RegistrationStepType.NAME: const RegistrationNameFormBody(),
     RegistrationStepType.USERNAME: const RegistrationUsernameFormBody(),
@@ -122,6 +124,6 @@ class RegistrationSteps {
     RegistrationStepType.PASSWORD: const RegistrationPasswordFormBody(),
     RegistrationStepType.GENDER: const RegistrationGenderFormBody(),
     RegistrationStepType.DATE_OF_BIRTH: const RegistrationBirthdayFormBody(),
-    RegistrationStepType.AVATAR_URL: Container(color: Colors.orange),
+    RegistrationStepType.AVATAR_URL: const RegistrationAvatarFormBody(),
   };
 }

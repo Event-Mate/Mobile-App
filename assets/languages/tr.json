@@ -28,13 +28,18 @@
     "gender_form_subtitle": "Cinsiyetinizi kişiselleştirilmiş içerik önerilerimiz için kullanıyoruz.",
     "gender_man": "Erkek",
     "gender_woman": "Kadın",
-    "gender_non_binary": "Non-Binary",
+    "gender_other": "Diğer",
+    "gender_none": "Belirtmek istemiyorum",
     "gender_empty_error_message": "Lütfen cinsiyetinizi seçin.",
     "birthday_form_title": "Doğum gününü bizimle paylaş 🎂",
     "birthday_form_subtitle": "Deneyiminize kişisel bir dokunuş eklemek için doğum gününüzü paylaşın.",
     "birthday_hint_text": "gg/aa/yyyy",
     "birthday_empty_error_message": "Doğum tarihinizi girmeyi unutmayın.",
     "birthday_error_invalid_text": "Lütfen geçerli bir tarih girin.",
+    "avatar_form_title": "Bir profil fotoğrafı ekleyin 📸",
+    "avatar_form_subtitle": "Profil fotoğrafı olan kullanıcılar, diğer kullanıcılar tarafından daha kolay tanınır.",
+    "avatar_form_skip_for_now": "Şimdilik atla",
+    "avatar_form_error_message": "Fotoğrafınız yüklenirken bir hata oluştu.",
     "form_button_next_title": "İleri"
   }
 }

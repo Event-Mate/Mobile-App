@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/core/constants/app_icons.dart';
@@ -78,19 +77,19 @@ class _CircularProfilePhotoButton extends StatelessWidget {
                 );
               }
               // TODO(Furkan): UserInfo bir extension yardımıyla edinilebilecek kadar kücük bir parça haline gelsin. Sonrasında tüm state.userInformationOption lar düzenlenecek.
-              final avatarUrl = state.userInformationOption.fold(
+              final avatarFile = state.userInformationOption.fold(
                 () => null,
                 (userInformationOrFailure) => userInformationOrFailure.fold(
                   (failure) => null,
-                  (userInformation) => userInformation.avatarUrl,
+                  (userInformation) => userInformation.avatarFile,
                 ),
               );
 
-              if (avatarUrl == null) const SizedBox();
+              if (avatarFile == null) const SizedBox();
 
-              return CachedNetworkImage(
+              return Image.file(
+                avatarFile!,
                 fit: BoxFit.cover,
-                imageUrl: avatarUrl!,
               );
             },
           ),

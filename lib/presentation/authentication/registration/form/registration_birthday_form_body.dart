@@ -21,7 +21,13 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
             current.isFormValid;
       },
       listener: (context, state) {
-        context.read<EmailRegistrationBloc>().addNextStep();
+        final bloc = context.read<EmailRegistrationBloc>();
+        final userData = bloc.state.userData;
+        bloc.addNextStep(
+          userData: userData.copyWith(
+            dateOfBirth: state.birthdayDateOrNull,
+          ),
+        );
       },
       child: BlocBuilder<BirthdayEditBloc, BirthdayEditState>(
         builder: (context, state) {
@@ -115,7 +121,7 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
                   ),
               ],
             ),
-            onSubmit: () {
+            onContinue: () {
               context.read<BirthdayEditBloc>().addBirthdayValidate();
             },
           );

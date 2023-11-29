@@ -7,38 +7,21 @@ sealed class EmailRegistrationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class _InitEvent extends EmailRegistrationEvent {
-  const _InitEvent();
-}
-
-class _NameUpdatedEvent extends EmailRegistrationEvent {
-  const _NameUpdatedEvent({required this.name});
-
-  final String name;
-  @override
-  List<Object> get props => [name];
-}
-
-class _UsernameUpdatedEvent extends EmailRegistrationEvent {
-  const _UsernameUpdatedEvent({required this.username});
-
-  final String username;
-  @override
-  List<Object> get props => [username];
-}
-
 class _NavigatedToPreviousStep extends EmailRegistrationEvent {
   const _NavigatedToPreviousStep();
 }
 
 class _NavigatedToNextStep extends EmailRegistrationEvent {
-  const _NavigatedToNextStep();
+  const _NavigatedToNextStep({required this.userData});
+  final UserData userData;
+
+  @override
+  List<Object> get props => [userData];
 }
 
-class _RegisterCompletedEvent extends EmailRegistrationEvent {
-  const _RegisterCompletedEvent({required this.user});
-  final UserInformation user;
-  // TODO(Furkan): Register bitiminde tüm blocların stateleri ile bu user doldurulup gönderilecek.
+class _RegistrationCompletedEvent extends EmailRegistrationEvent {
+  const _RegistrationCompletedEvent({required this.userData});
+  final UserData userData;
   @override
-  List<Object> get props => [user];
+  List<Object> get props => [userData];
 }

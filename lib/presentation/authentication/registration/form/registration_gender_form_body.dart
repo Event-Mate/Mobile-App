@@ -17,7 +17,11 @@ class RegistrationGenderFormBody extends StatelessWidget {
       listenWhen: (previous, current) =>
           previous.validating && !current.validating && current.isFormValid,
       listener: (context, state) {
-        context.read<EmailRegistrationBloc>().addNextStep();
+        final bloc = context.read<EmailRegistrationBloc>();
+        final userData = bloc.state.userData;
+        bloc.addNextStep(
+          userData: userData.copyWith(genderType: state.genderOrNull),
+        );
       },
       builder: (context, state) {
         return FormBody(
@@ -37,7 +41,7 @@ class RegistrationGenderFormBody extends StatelessWidget {
                 ),
             ],
           ),
-          onSubmit: () {
+          onContinue: () {
             context.read<GenderEditBloc>().addGenderValidated();
           },
         );
@@ -94,8 +98,10 @@ class _GenderRadioTile extends StatelessWidget {
         return "registration.gender_man".tr();
       case GenderType.WOMAN:
         return "registration.gender_woman".tr();
-      case GenderType.NON_BINARY:
-        return "registration.gender_non_binary".tr();
+      case GenderType.OTHER:
+        return "registration.gender_other".tr();
+      case GenderType.NONE:
+        return "registration.gender_none".tr();
       default:
         return "";
     }

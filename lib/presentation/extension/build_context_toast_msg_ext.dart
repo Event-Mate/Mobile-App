@@ -11,7 +11,7 @@ extension BuildContextToastMsgExt on BuildContext {
       msg: message,
       gravity: gravity,
       toastLength: Toast.LENGTH_LONG,
-      backgroundColor: colors.borderSecondary,
+      backgroundColor: colors.surfaceSecondary,
       textColor: colors.textPrimary,
       fontSize: 16.0,
     );

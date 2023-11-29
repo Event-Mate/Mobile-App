@@ -28,13 +28,19 @@
     "gender_form_subtitle": "We use your gender to help personalize our content recommendations for you.",
     "gender_man": "Man",
     "gender_woman": "Woman",
-    "gender_non_binary": "Non-Binary",
+    "gender_other": "Other",
+    "gender_none": "Prefer not to say",
     "gender_empty_error_message": "Please select your gender.",
     "birthday_form_title": "Let us know your birthday 🎂",
     "birthday_form_subtitle": "Share your birthday with us to add a personal touch to your experience.",
     "birthday_hint_text": "mm/dd/yyyy",
     "birthday_empty_error_message": "Don't forget to enter your birthdate.",
     "birthday_error_invalid_text": "Please enter a valid date.",
-    "form_button_next_title": "Next"
+    "avatar_form_title": "Please upload a profile picture 📸",
+    "avatar_form_subtitle": "Users with profile pictures are more likely to find event mates.",
+    "avatar_form_skip_for_now": "Skip for now",
+    "avatar_form_error_message": "An error occured while uploading your profile picture.",
+    "form_button_next_title": "Next",
+    "form_button_complete_title": "Complete"
   }
 }

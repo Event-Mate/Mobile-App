@@ -1,6 +1,6 @@
 part of 'gender_edit_bloc.dart';
 
-class GenderEditState extends Equatable {
+final class GenderEditState extends Equatable {
   const GenderEditState({
     required this.genderOption,
     required this.validating,
