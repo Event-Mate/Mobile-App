@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:event_mate/environment_variables.env' as env;
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
-import 'package:event_mate/model/user_data.dart';
+import 'package:event_mate/model/registration_data.dart';
 import 'package:event_mate/service/custom_http_client.dart';
 
 class RegistrationRepository implements IRegistrationRepository {
@@ -15,7 +15,7 @@ class RegistrationRepository implements IRegistrationRepository {
 
   @override
   Future<Either<RegistrationRepositoryFailure, Unit>> registerUser({
-    required UserData userData,
+    required RegistrationData registrationData,
   }) async {
     try {
       final uri = Uri(
@@ -24,9 +24,16 @@ class RegistrationRepository implements IRegistrationRepository {
         path: 'api/auth/register',
       );
 
-      final response = await _client.post(
+      final files = registrationData.avatarFile != null
+          ? [registrationData.avatarFile!]
+          : List<File>.empty();
+
+      log('files: $files');
+
+      final response = await _client.postWithFiles(
         uri,
-        body: jsonEncode(userData.toMap()),
+        files,
+        body: registrationData.toMap(),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         },

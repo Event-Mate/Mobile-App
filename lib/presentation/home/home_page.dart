@@ -30,11 +30,11 @@ class HomePage extends StatelessWidget {
             _CircularProfilePhotoButton(),
           ],
         ),
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('123123'),
+              const Text('123123'),
             ],
           ),
         ),

@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
 
-class UserData extends Equatable {
-  // TODO(Furkan): Avatar file key ?
-  const UserData({
+class RegistrationData extends Equatable {
+  const RegistrationData({
     required this.displayName,
     required this.username,
     required this.email,
@@ -15,21 +14,8 @@ class UserData extends Equatable {
     required this.avatarFile,
   });
 
-  // TODO(Furkan): receiving model may be updated
-  factory UserData.fromMap(Map<String, dynamic> json) {
-    return UserData(
-      displayName: json['fullName'] as String,
-      username: json['username'] as String,
-      email: json['email'] as String,
-      password: json['password'] as String,
-      genderType: GenderType.fromValue(json['gender'] as String),
-      dateOfBirth: json['dateOfBirth'] as DateTime,
-      avatarFile: json['avatar_url'] as File?,
-    );
-  }
-
-  factory UserData.empty() {
-    return UserData(
+  factory RegistrationData.empty() {
+    return RegistrationData(
       displayName: '',
       username: '',
       email: '',
@@ -48,6 +34,7 @@ class UserData extends Equatable {
   final DateTime dateOfBirth;
   final File? avatarFile;
 
+  //* This doesn't involve avatar file, attach it to multipart request as a file.
   Map<String, String> toMap() {
     return {
       'fullName': displayName,
@@ -56,11 +43,10 @@ class UserData extends Equatable {
       'password': password,
       'gender': genderType.value,
       'dateOfBirth': dateOfBirth.toIso8601String(),
-      // 'avatar': avatarFile,
     };
   }
 
-  UserData copyWith({
+  RegistrationData copyWith({
     String? displayName,
     String? username,
     String? email,
@@ -69,7 +55,7 @@ class UserData extends Equatable {
     DateTime? dateOfBirth,
     File? avatarFile,
   }) {
-    return UserData(
+    return RegistrationData(
       displayName: displayName ?? this.displayName,
       username: username ?? this.username,
       email: email ?? this.email,

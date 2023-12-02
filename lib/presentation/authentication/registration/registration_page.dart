@@ -19,6 +19,9 @@ import 'package:event_mate/presentation/authentication/registration/form/registr
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_progress_path_circles.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/extension/build_context_toast_msg_ext.dart';
+import 'package:event_mate/presentation/extension/easy_navigation_ext.dart';
+import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,17 +62,41 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
         BlocProvider(create: (_) => getIt<AvatarEditBloc>()),
       ],
-      child: BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
-        listenWhen: (previous, current) =>
-            previous.currentStepIndex != current.currentStepIndex,
-        listener: (context, state) {
-          pageController.animateToPage(
-            state.currentStepIndex,
-            duration: const Duration(milliseconds: 400),
-            curve: Curves.easeInOut,
-          );
-          FocusScope.of(context).unfocus();
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
+            listenWhen: (previous, current) =>
+                previous.currentStepIndex != current.currentStepIndex,
+            listener: (context, state) {
+              pageController.animateToPage(
+                state.currentStepIndex,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+              );
+              FocusScope.of(context).unfocus();
+            },
+          ),
+          BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
+            listenWhen: (previous, current) =>
+                previous.processFailureOrUnitOption !=
+                current.processFailureOrUnitOption,
+            listener: (context, state) {
+              state.processFailureOrUnitOption.fold(
+                () {},
+                (failureOrUnit) {
+                  failureOrUnit.fold(
+                    (failure) {
+                      context.showErrorToast('registration_failure'.tr());
+                    },
+                    (_) {
+                      context.openPageWithClearStack(const HomePage());
+                    },
+                  );
+                },
+              );
+            },
+          ),
+        ],
         child: BlocBuilder<EmailRegistrationBloc, EmailRegistrationState>(
           builder: (context, state) {
             final currentStepIndex = state.currentStepIndex;

@@ -48,11 +48,11 @@ class RegistrationAvatarFormBody extends StatelessWidget {
             child: _AvatarForm(),
           ),
           skipStepButton: const _SkipStepButton(),
-          onSubmit: () {
+          onRegistrationSubmit: () {
             final bloc = context.read<EmailRegistrationBloc>();
-            final userData = bloc.state.userData;
+            final registrationData = bloc.state.registrationData;
             bloc.addCompleteRegistration(
-              user: userData.copyWith(
+              registrationData: registrationData.copyWith(
                 avatarFile: context.read<AvatarEditBloc>().state.avatarOrNull,
               ),
             );
@@ -79,7 +79,9 @@ class _SkipStepButton extends StatelessWidget {
           child: BouncingButton(
             onTap: () {
               final bloc = context.read<EmailRegistrationBloc>();
-              bloc.addCompleteRegistration(user: bloc.state.userData);
+              bloc.addCompleteRegistration(
+                registrationData: bloc.state.registrationData,
+              );
             },
             child: Text(
               'registration.avatar_form_skip_for_now'.tr(),

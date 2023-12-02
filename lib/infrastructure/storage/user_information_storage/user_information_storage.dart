@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+/* import 'package:dartz/dartz.dart';
 import 'package:event_mate/failure/storage/user_information_storage_failure.dart';
 import 'package:event_mate/infrastructure/storage/user_information_storage/i_user_information_storage.dart';
 import 'package:event_mate/model/user_data.dart';
@@ -12,14 +12,14 @@ class UserInformationStorage implements IUserInformationStorage {
 
   // TODO(Furkan): Burada record içine verilen key'ler unique olmalı. Şimdilik hata vermesin diye storeKey verildi. UserId benzeri bir şey verilmeli
   @override
-  Future<Either<UserInformationStorageFailure, UserData>> get() async {
+  Future<Either<UserInformationStorageFailure, RegistrationData>> get() async {
     try {
       final userMap = await _store.record(storeKey).get(_database);
 
       if (userMap == null)
         return left(const UserInformationStorageNotFoundFailure());
-
-      return right(UserData.fromMap(userMap));
+      // TODO(Furkan): Burada userdata kullan
+      return right(RegistrationData.fromMap(userMap));
     } catch (e) {
       return left(
         UserInformationStorageUnknownFailure(
@@ -30,7 +30,7 @@ class UserInformationStorage implements IUserInformationStorage {
 
   @override
   Future<Either<UserInformationStorageFailure, Unit>> put(
-    UserData userInfo,
+    RegistrationData userInfo,
   ) async {
     try {
       final userInfoMap = userInfo.toMap();
@@ -45,3 +45,4 @@ class UserInformationStorage implements IUserInformationStorage {
     }
   }
 }
+ */

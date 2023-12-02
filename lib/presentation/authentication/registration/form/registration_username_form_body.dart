@@ -19,9 +19,11 @@ class RegistrationUsernameFormBody extends StatelessWidget {
       },
       listener: (context, state) {
         final bloc = context.read<EmailRegistrationBloc>();
-        final userData = bloc.state.userData;
+        final registrationData = bloc.state.registrationData;
         bloc.addNextStep(
-          userData: userData.copyWith(username: state.usernameOrEmpty),
+          registrationData: registrationData.copyWith(
+            username: state.usernameOrEmpty,
+          ),
         );
       },
       child: BlocBuilder<UsernameEditBloc, UsernameEditState>(
@@ -46,7 +48,7 @@ class RegistrationUsernameFormBody extends StatelessWidget {
                     ?.copyWith(color: context.colors.textSecondary),
               ),
             ),
-            onContinue: () {
+            onRegistrationContinue: () {
               context.read<UsernameEditBloc>().addUsernameValidate();
             },
           );

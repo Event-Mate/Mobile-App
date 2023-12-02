@@ -12,16 +12,16 @@ class _NavigatedToPreviousStep extends EmailRegistrationEvent {
 }
 
 class _NavigatedToNextStep extends EmailRegistrationEvent {
-  const _NavigatedToNextStep({required this.userData});
-  final UserData userData;
+  const _NavigatedToNextStep({required this.registrationData});
+  final RegistrationData registrationData;
 
   @override
-  List<Object> get props => [userData];
+  List<Object> get props => [registrationData];
 }
 
 class _RegistrationCompletedEvent extends EmailRegistrationEvent {
-  const _RegistrationCompletedEvent({required this.userData});
-  final UserData userData;
+  const _RegistrationCompletedEvent({required this.registrationData});
+  final RegistrationData registrationData;
   @override
-  List<Object> get props => [userData];
+  List<Object> get props => [registrationData];
 }

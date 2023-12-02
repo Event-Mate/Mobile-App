@@ -62,17 +62,20 @@ Future<bool> _injectPackages() async {
 }
 
 Future<bool> _injectStorages() async {
-  final userInformationStoreRef =
-      sembast_conf.getStoreRef(UserInformationStorage.storeKey);
   getIt.registerSingleton<ICacheController>(
     SharedPreferencesCacheController(getIt<SharedPreferences>()),
   );
+  // TODO(Furkan): Uncomment this when user information storage is ready
+/*   final userInformationStoreRef =
+      sembast_conf.getStoreRef(UserInformationStorage.storeKey);
+
   getIt.registerSingleton<IUserInformationStorage>(
     UserInformationStorage(
       getIt<sembast.Database>(),
       userInformationStoreRef,
     ),
-  );
+  ); */
+
   return true;
 }
 

@@ -18,9 +18,11 @@ class RegistrationGenderFormBody extends StatelessWidget {
           previous.validating && !current.validating && current.isFormValid,
       listener: (context, state) {
         final bloc = context.read<EmailRegistrationBloc>();
-        final userData = bloc.state.userData;
+        final registrationData = bloc.state.registrationData;
         bloc.addNextStep(
-          userData: userData.copyWith(genderType: state.genderOrNull),
+          registrationData: registrationData.copyWith(
+            genderType: state.genderOrNull,
+          ),
         );
       },
       builder: (context, state) {
@@ -41,7 +43,7 @@ class RegistrationGenderFormBody extends StatelessWidget {
                 ),
             ],
           ),
-          onContinue: () {
+          onRegistrationContinue: () {
             context.read<GenderEditBloc>().addGenderValidated();
           },
         );

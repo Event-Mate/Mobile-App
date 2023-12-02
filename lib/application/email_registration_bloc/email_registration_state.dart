@@ -4,7 +4,7 @@ final class EmailRegistrationState extends Equatable {
   const EmailRegistrationState({
     required this.currentStepIndex,
     required this.processFailureOrUnitOption,
-    required this.userData,
+    required this.registrationData,
     required this.completing,
   });
 
@@ -12,7 +12,7 @@ final class EmailRegistrationState extends Equatable {
     return EmailRegistrationState(
       currentStepIndex: 0,
       processFailureOrUnitOption: none(),
-      userData: UserData.empty(),
+      registrationData: RegistrationData.empty(),
       completing: false,
     );
   }
@@ -20,21 +20,21 @@ final class EmailRegistrationState extends Equatable {
   final int currentStepIndex;
   final Option<Either<RegistrationRepositoryFailure, Unit>>
       processFailureOrUnitOption;
-  final UserData userData;
+  final RegistrationData registrationData;
   final bool completing;
 
   EmailRegistrationState copyWith({
     Option<Either<RegistrationRepositoryFailure, Unit>>?
         processFailureOrUnitOption,
     int? currentStepIndex,
-    UserData? userData,
+    RegistrationData? registrationData,
     bool? completing,
   }) {
     return EmailRegistrationState(
       currentStepIndex: currentStepIndex ?? this.currentStepIndex,
       processFailureOrUnitOption:
           processFailureOrUnitOption ?? this.processFailureOrUnitOption,
-      userData: userData ?? this.userData,
+      registrationData: registrationData ?? this.registrationData,
       completing: completing ?? this.completing,
     );
   }
@@ -47,7 +47,7 @@ final class EmailRegistrationState extends Equatable {
   List<Object> get props => [
         currentStepIndex,
         processFailureOrUnitOption,
-        userData,
+        registrationData,
         completing,
       ];
 }

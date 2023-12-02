@@ -9,10 +9,11 @@ class FormBody extends StatelessWidget {
     required this.subtitle,
     required this.formField,
     this.skipStepButton,
-    this.onContinue,
-    this.onSubmit,
+    this.updateProfileButton,
+    this.onRegistrationContinue,
+    this.onRegistrationSubmit,
   }) : assert(
-          onContinue != null || onSubmit != null,
+          onRegistrationContinue != null || onRegistrationSubmit != null,
           'onContinue and onSubmit cannot be null at the same time',
         );
 
@@ -20,8 +21,9 @@ class FormBody extends StatelessWidget {
   final String subtitle;
   final Widget formField;
   final Widget? skipStepButton;
-  final VoidCallback? onContinue;
-  final VoidCallback? onSubmit;
+  final Widget? updateProfileButton;
+  final VoidCallback? onRegistrationContinue;
+  final VoidCallback? onRegistrationSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -57,26 +59,28 @@ class FormBody extends StatelessWidget {
             formField,
           ],
         ),
-        if (onSubmit != null)
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                RegistrationCompleteButton(onTap: onSubmit!),
-                if (skipStepButton != null) ...[
-                  skipStepButton!,
+        if (updateProfileButton != null) ...{
+          Align(alignment: Alignment.bottomCenter, child: updateProfileButton)
+        } else ...{
+          if (onRegistrationSubmit != null)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  RegistrationCompleteButton(onTap: onRegistrationSubmit!),
+                  if (skipStepButton != null) ...[
+                    skipStepButton!,
+                  ],
                 ],
-              ],
+              ),
+            )
+          else
+            Align(
+              alignment: Alignment.bottomRight,
+              child: RegistrationContinueButton(onTap: onRegistrationContinue!),
             ),
-          )
-        else
-          Align(
-            alignment: Alignment.bottomRight,
-            child: RegistrationContinueButton(
-              onTap: onContinue!,
-            ),
-          ),
+        }
       ],
     );
   }

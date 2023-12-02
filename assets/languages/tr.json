@@ -40,6 +40,8 @@
     "avatar_form_subtitle": "Profil fotoğrafı olan kullanıcılar, diğer kullanıcılar tarafından daha kolay tanınır.",
     "avatar_form_skip_for_now": "Şimdilik atla",
     "avatar_form_error_message": "Fotoğrafınız yüklenirken bir hata oluştu.",
-    "form_button_next_title": "İleri"
+    "registration_failure": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "form_button_next_title": "İleri",
+    "form_button_complete_title": "Kaydı tamamla"
   }
 }

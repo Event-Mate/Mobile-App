@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
-import 'package:event_mate/model/user_data.dart';
+import 'package:event_mate/model/registration_data.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
 import 'package:event_mate/presentation/authentication/registration/registration_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,13 +32,13 @@ class EmailRegistrationBloc
     add(const _NavigatedToPreviousStep());
   }
 
-  /// [userData] is the data that involves past and current step data.
-  void addNextStep({required UserData userData}) {
-    add(_NavigatedToNextStep(userData: userData));
+  /// [registrationData] is the data that involves the user's registration data up to the current step.
+  void addNextStep({required RegistrationData registrationData}) {
+    add(_NavigatedToNextStep(registrationData: registrationData));
   }
 
-  void addCompleteRegistration({required UserData user}) {
-    add(_RegistrationCompletedEvent(userData: user));
+  void addCompleteRegistration({required RegistrationData registrationData}) {
+    add(_RegistrationCompletedEvent(registrationData: registrationData));
   }
 
   Future<void> _onNavigatedToPreviousStep(
@@ -56,7 +54,7 @@ class EmailRegistrationBloc
   ) async {
     emit(state.copyWith(
       currentStepIndex: state.currentStepIndex + 1,
-      userData: event.userData,
+      registrationData: event.registrationData,
     ));
   }
 
@@ -70,10 +68,11 @@ class EmailRegistrationBloc
         completing: true,
       ),
     );
-    log('event.userData: ${event.userData}');
-    final failureOrUnit =
-        await _iRegistrationRepository.registerUser(userData: event.userData);
-    log('failureOrUnit: $failureOrUnit');
+
+    final failureOrUnit = await _iRegistrationRepository.registerUser(
+      registrationData: event.registrationData,
+    );
+
     emit(
       state.copyWith(
         processFailureOrUnitOption: some(failureOrUnit),

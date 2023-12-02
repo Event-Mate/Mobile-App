@@ -57,8 +57,7 @@ class CustomHttpClient extends BaseClient {
 
     for (final file in files) {
       final multipartFile = await MultipartFile.fromPath(
-        // TODO(Furkan): double check and take param here if needed
-        'files',
+        'file',
         file.path,
       );
       multipartFiles.add(multipartFile);

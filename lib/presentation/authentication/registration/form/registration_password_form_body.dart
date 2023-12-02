@@ -20,9 +20,11 @@ class RegistrationPasswordFormBody extends StatelessWidget {
       },
       listener: (context, state) {
         final bloc = context.read<EmailRegistrationBloc>();
-        final userData = bloc.state.userData;
+        final registrationData = bloc.state.registrationData;
         bloc.addNextStep(
-          userData: userData.copyWith(password: state.passwordOrEmpty),
+          registrationData: registrationData.copyWith(
+            password: state.passwordOrEmpty,
+          ),
         );
       },
       child: BlocBuilder<PasswordEditBloc, PasswordEditState>(
@@ -53,7 +55,7 @@ class RegistrationPasswordFormBody extends StatelessWidget {
                     .addPasswordUpdated(password: value);
               },
             ),
-            onContinue: () {
+            onRegistrationContinue: () {
               context.read<PasswordEditBloc>().addPasswordValidate();
             },
           );

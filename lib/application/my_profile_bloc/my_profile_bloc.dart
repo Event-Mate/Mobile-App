@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/storage/user_information_storage_failure.dart';
 import 'package:event_mate/infrastructure/storage/user_information_storage/i_user_information_storage.dart';
-import 'package:event_mate/model/user_data.dart';
+import 'package:event_mate/model/registration_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'my_profile_event.dart';
