@@ -56,4 +56,35 @@ class RegistrationRepository implements IRegistrationRepository {
       return left(RegistrationUnknownFailure('RegistartionUnknownFailure: $e'));
     }
   }
+
+  @override
+  Future<Either<RegistrationUsernameAlreadyExistsFailure, Unit>>
+      validateUsername({required String username}) async {
+    final uri = Uri(
+      scheme: env.HTTPS_SCHEME,
+      host: env.AWS_HOST,
+      path: 'api/auth/verify-username/$username',
+    );
+
+    final response = await _client.post(
+      uri,
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json',
+      },
+    );
+
+    final result = jsonDecode(response.body) as Map<String, dynamic>;
+
+    final error = result['error'];
+
+    if (error == null) {
+      return right(unit);
+    } else {
+      return left(
+        RegistrationUsernameAlreadyExistsFailure(
+          "RegistrationUsernameAlreadyExistsFailure: $error",
+        ),
+      );
+    }
+  }
 }

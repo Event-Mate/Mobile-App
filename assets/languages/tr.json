@@ -14,6 +14,8 @@
     "username_hint_text": "Kullanıcı adı",
     "username_empty_error_message": "Kullanıcı adı boş olamaz.",
     "username_length_error_message": "Kullanıcı adı en az 2 karakter uzunluğunda olmalıdır.",
+    "username_whitespace_error_message": "Kullanıcı adı boşluk içeremez.",
+    "username_already_exists_error_message": "Bu kullanıcı adı alınmış, tekrar deneyin.",
     "email_form_title": "Harika! Şimdi e-posta adresinize ihtiyacımız var",
     "email_form_subtitle": "Bu, etkinliklerinizle ilgili bildirimleri size göndermek için kullanılacaktır",
     "email_hint_text": "E-posta adresinizi girin",
@@ -40,6 +42,7 @@
     "avatar_form_subtitle": "Profil fotoğrafı olan kullanıcılar, diğer kullanıcılar tarafından daha kolay tanınır.",
     "avatar_form_skip_for_now": "Şimdilik atla",
     "avatar_form_error_message": "Fotoğrafınız yüklenirken bir hata oluştu.",
+    "input_validating_text": "Doğrulanıyor...",
     "registration_failure": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     "form_button_next_title": "İleri",
     "form_button_complete_title": "Kaydı tamamla"

@@ -6,4 +6,9 @@ abstract class IRegistrationRepository {
   Future<Either<RegistrationRepositoryFailure, Unit>> registerUser({
     required RegistrationData registrationData,
   });
+
+  Future<Either<RegistrationUsernameAlreadyExistsFailure, Unit>>
+      validateUsername({
+    required String username,
+  });
 }

@@ -34,6 +34,7 @@ class RegistrationUsernameFormBody extends StatelessWidget {
             formField: CustomTextFormField(
               hintText: 'registration.username_hint_text'.tr(),
               errorText: state.errorText?.tr(),
+              validating: state.validating,
               value: state.usernameOrEmpty,
               onChanged: (value) {
                 context

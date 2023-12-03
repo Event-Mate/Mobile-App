@@ -14,6 +14,8 @@
     "username_hint_text": "username",
     "username_empty_error_message": "Username cannot be empty.",
     "username_length_error_message": "Username must be at least 2 characters long.",
+    "username_whitespace_error_message": "Username cannot contain whitespaces.",
+    "username_already_exists_error_message": "Username is already in use by another user. Please try another.",
     "email_form_title": "Awesome! Now we need your email",
     "email_form_subtitle": "We'll use it to send you notifications about your events",
     "email_hint_text": "Enter your email",
@@ -40,6 +42,7 @@
     "avatar_form_subtitle": "Users with profile pictures are more likely to find event mates.",
     "avatar_form_skip_for_now": "Skip for now",
     "avatar_form_error_message": "An error occured while uploading your profile picture.",
+    "input_validating_text": "Validating...",
     "registration_failure": "An error occured. Please try again later.",
     "form_button_next_title": "Next",
     "form_button_complete_title": "Complete"

@@ -1,4 +1,5 @@
 import 'package:event_mate/presentation/core/widgets/input_error_text.dart';
+import 'package:event_mate/presentation/core/widgets/input_validating_text.dart';
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ class CustomTextFormField extends StatefulWidget {
     this.controller,
     this.onChanged,
     this.errorText,
+    this.validating,
     this.leading,
     this.trailing,
     this.value,
@@ -23,6 +25,7 @@ class CustomTextFormField extends StatefulWidget {
   final Function(String value)? onChanged;
   final String? hintText;
   final String? errorText;
+  final bool? validating;
   final Widget? leading;
   final Widget? trailing;
   final String? value;
@@ -94,11 +97,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ],
           ),
         ),
-        if (widget.errorText != null)
+        if (widget.validating != null && widget.validating!) ...{
+          const Padding(
+            padding: EdgeInsets.only(top: 8.0),
+            child: InputValidatingText(),
+          )
+        } else if (widget.errorText != null) ...{
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: InputErrorText(text: widget.errorText!),
-          ),
+          )
+        }
       ],
     );
   }

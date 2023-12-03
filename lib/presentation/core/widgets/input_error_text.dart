@@ -9,6 +9,7 @@ class InputErrorText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Icon(
           Icons.error,
@@ -21,7 +22,7 @@ class InputErrorText extends StatelessWidget {
             text,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   color: context.colors.error,
                   fontWeight: FontWeight.w600,
                 ),
