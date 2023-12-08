@@ -21,6 +21,7 @@
     "email_hint_text": "E-posta adresinizi girin",
     "email_empty_error_message": "E-posta boş olamaz.",
     "email_invalid_error_message": "E-posta geçersiz.",
+    "email_already_exists_error_message": "Bu e-posta kullanılıyor. Lütfen başka bir e-posta adresi deneyin.",
     "password_form_title": "Neredeyse bittik! Şimdi şifrenize ihtiyacımız var",
     "password_form_subtitle": "Sizi giriş yapmak için kullanacağız",
     "password_hint_text": "Şifrenizi girin",
@@ -42,7 +43,8 @@
     "avatar_form_subtitle": "Profil fotoğrafı olan kullanıcılar, diğer kullanıcılar tarafından daha kolay tanınır.",
     "avatar_form_skip_for_now": "Şimdilik atla",
     "avatar_form_error_message": "Fotoğrafınız yüklenirken bir hata oluştu.",
-    "input_validating_text": "Doğrulanıyor...",
+    "input_validating_text": "Doğrulanıyor",
+    "input_validated_text": "Doğrulandı!",
     "registration_failure": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     "form_button_next_title": "İleri",
     "form_button_complete_title": "Kaydı tamamla"

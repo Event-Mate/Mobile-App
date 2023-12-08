@@ -109,8 +109,9 @@ Future<bool> _injectBlocs() async {
     ),
   );
   getIt.registerFactory<EmailEditBloc>(
-    // ignore: unnecessary_lambdas
-    () => EmailEditBloc(),
+    () => EmailEditBloc(
+      getIt<IRegistrationRepository>(),
+    ),
   );
   getIt.registerFactory<PasswordEditBloc>(
     // ignore: unnecessary_lambdas

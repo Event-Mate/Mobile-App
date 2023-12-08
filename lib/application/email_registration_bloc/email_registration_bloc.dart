@@ -26,6 +26,7 @@ class EmailRegistrationBloc
       _onRegisterCompletedEvent,
     );
   }
+
   final IRegistrationRepository _iRegistrationRepository;
 
   void addPreviousStep() {
@@ -62,22 +63,21 @@ class EmailRegistrationBloc
     _RegistrationCompletedEvent event,
     Emitter<EmailRegistrationState> emit,
   ) async {
-    emit(
-      state.copyWith(
-        processFailureOrUnitOption: none(),
-        completing: true,
-      ),
-    );
+    emit(state.copyWith(processFailureOrUnitOption: none(), completing: true));
 
-    final failureOrUnit = await _iRegistrationRepository.registerUser(
+    final failureOrUserData = await _iRegistrationRepository.registerUser(
       registrationData: event.registrationData,
     );
 
-    emit(
-      state.copyWith(
-        processFailureOrUnitOption: some(failureOrUnit),
-        completing: false,
-      ),
+    final newState = failureOrUserData.fold(
+      (failure) {
+        return state.copyWith(processFailureOrUnitOption: some(left(failure)));
+      },
+      (userData) {
+        return state.copyWith(processFailureOrUnitOption: some(right(unit)));
+      },
     );
+
+    emit(newState.copyWith(completing: false));
   }
 }

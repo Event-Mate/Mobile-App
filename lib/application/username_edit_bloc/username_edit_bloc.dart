@@ -46,30 +46,32 @@ class UsernameEditBloc extends Bloc<UsernameEditEvent, UsernameEditState> {
   ) async {
     emit(state.copyWith(validating: true));
 
-    final failureOrUnit = await _iRegistrationRepository.validateUsername(
-      username: state.usernameOrEmpty,
+    final newErrorOption = await state.usernameOption.fold(
+      () async {
+        return some('registration.username_empty_error_message');
+      },
+      (username) async {
+        final hasWhiteSpace = RegExp(r'\s').hasMatch(username.trim());
+        if (username.trim().isEmpty) {
+          return some('registration.username_empty_error_message');
+        } else if (username.trim().length < 2) {
+          return some('registration.username_length_error_message');
+        } else if (hasWhiteSpace) {
+          return some('registration.username_whitespace_error_message');
+        } else {
+          final failureOrUnit = await _iRegistrationRepository.validateUsername(
+            username: state.usernameOrEmpty,
+          );
+          if (failureOrUnit.isLeft()) {
+            return some(
+              'registration.username_already_exists_error_message',
+            );
+          }
+          return some(null);
+        }
+      },
     );
 
-    emit(
-      state.copyWith(
-        validating: false,
-        errorOption: state.usernameOption.fold(
-          () => some('registration.username_empty_error_message'),
-          (username) {
-            final hasWhiteSpace = RegExp(r'\s').hasMatch(username.trim());
-            if (username.trim().isEmpty) {
-              return some('registration.username_empty_error_message');
-            } else if (username.trim().length < 2) {
-              return some('registration.username_length_error_message');
-            } else if (hasWhiteSpace) {
-              return some('registration.username_whitespace_error_message');
-            } else if (failureOrUnit.isLeft()) {
-              return some('registration.username_already_exists_error_message');
-            }
-            return some(null);
-          },
-        ),
-      ),
-    );
+    emit(state.copyWith(validating: false, errorOption: newErrorOption));
   }
 }

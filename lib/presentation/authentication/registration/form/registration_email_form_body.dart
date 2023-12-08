@@ -34,6 +34,7 @@ class RegistrationEmailFormBody extends StatelessWidget {
             hintText: 'registration.email_hint_text'.tr(),
             errorText: state.errorText?.tr(),
             keyboardType: TextInputType.emailAddress,
+            validating: state.validating,
             value: state.emailOrEmpty,
             onChanged: (value) {
               context.read<EmailEditBloc>().addEmailUpdated(email: value);

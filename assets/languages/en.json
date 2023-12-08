@@ -21,6 +21,7 @@
     "email_hint_text": "Enter your email",
     "email_empty_error_message": "Email cannot be empty.",
     "email_invalid_error_message": "Email is invalid.",
+    "email_already_exists_error_message": "Email is already in use by another user. Please try another.",
     "password_form_title": "Almost there! Now we need your password",
     "password_form_subtitle": "We'll use it to log you in",
     "password_hint_text": "Enter your password",
@@ -42,7 +43,8 @@
     "avatar_form_subtitle": "Users with profile pictures are more likely to find event mates.",
     "avatar_form_skip_for_now": "Skip for now",
     "avatar_form_error_message": "An error occured while uploading your profile picture.",
-    "input_validating_text": "Validating...",
+    "input_validating_text": "Validating",
+    "input_validated_text": "Validated!",
     "registration_failure": "An error occured. Please try again later.",
     "form_button_next_title": "Next",
     "form_button_complete_title": "Complete"
