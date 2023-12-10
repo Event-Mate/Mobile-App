@@ -1,6 +1,6 @@
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_complete_button.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_continue_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class FormBody extends StatelessWidget {

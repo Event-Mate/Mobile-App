@@ -1,4 +1,4 @@
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

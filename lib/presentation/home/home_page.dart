@@ -1,9 +1,9 @@
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/core/constants/app_icons.dart';
+import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/easy_navigation_ext.dart';
 import 'package:event_mate/presentation/profile/my_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,11 +29,11 @@ class HomePage extends StatelessWidget {
             _CircularProfilePhotoButton(),
           ],
         ),
-        body: Center(
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('123123'),
+              Text('123123'),
             ],
           ),
         ),

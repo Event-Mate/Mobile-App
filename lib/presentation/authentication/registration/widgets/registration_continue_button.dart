@@ -1,5 +1,5 @@
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/splashing_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationContinueButton extends StatelessWidget {

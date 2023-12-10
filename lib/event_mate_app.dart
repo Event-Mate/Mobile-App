@@ -8,15 +8,15 @@ import 'package:event_mate/core/enums/main_routes.dart';
 import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/authentication_page.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/easy_navigation_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'package:event_mate/presentation/splash/splash_page.dart';
-part 'package:event_mate/presentation/splash/root_page.dart';
 part 'package:event_mate/presentation/splash/loading_page.dart';
+part 'package:event_mate/presentation/splash/root_page.dart';
+part 'package:event_mate/presentation/splash/splash_page.dart';
 
 class EventMateApp extends StatelessWidget {
   const EventMateApp({super.key});

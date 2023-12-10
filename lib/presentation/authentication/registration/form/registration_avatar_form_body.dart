@@ -3,10 +3,10 @@ import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:event_mate/injection.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
 import 'package:event_mate/presentation/core/widgets/form_body.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/build_context_toast_msg_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

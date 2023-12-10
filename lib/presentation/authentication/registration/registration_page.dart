@@ -17,10 +17,10 @@ import 'package:event_mate/presentation/authentication/registration/form/registr
 import 'package:event_mate/presentation/authentication/registration/form/registration_password_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_username_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_progress_path_circles.dart';
+import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/build_context_toast_msg_ext.dart';
-import 'package:event_mate/presentation/extension/easy_navigation_ext.dart';
 import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,7 +86,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 (failureOrUnit) {
                   failureOrUnit.fold(
                     (failure) {
-                      context.showErrorToast('registration.registration_failure'.tr());
+                      context.showErrorToast(
+                          'registration.registration_failure'.tr());
                     },
                     (_) {
                       context.openPageWithClearStack(const HomePage());

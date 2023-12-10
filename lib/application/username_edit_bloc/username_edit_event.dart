@@ -18,7 +18,3 @@ class _UsernameUpdatedEvent extends UsernameEditEvent {
 class _UsernameValidateEvent extends UsernameEditEvent {
   const _UsernameValidateEvent();
 }
-
-class _ResetValidationEvent extends UsernameEditEvent {
-  const _ResetValidationEvent();
-}

@@ -1,8 +1,9 @@
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/build_context_toast_msg_ext.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,7 +74,9 @@ class MyProfilePage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        print('logged out!');
+                        if (kDebugMode) {
+                          print('logged out!');
+                        }
                       },
                     )
                   ],
