@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
+import 'package:event_mate/environment.dart' as env;
+import 'package:event_mate/infrastructure/repository/registration_repository.dart';
+import 'package:event_mate/infrastructure/storage/user_data_storage/user_data_storage.dart';
 
 class UserData extends Equatable {
   const UserData({
@@ -12,7 +15,21 @@ class UserData extends Equatable {
     required this.avatarUrl,
   });
 
+  /// Factory constructor that will be used when data is received from the [RegistrationRepository].
   factory UserData.fromMap(Map<String, dynamic> map) {
+    return UserData(
+      id: map['_id'] as String,
+      displayName: map['fullName'] as String,
+      username: map['username'] as String,
+      email: map['email'] as String,
+      genderType: GenderType.fromValue(map['gender'] as String),
+      dateOfBirth: DateTime.parse(map['dateOfBirth'] as String),
+      avatarUrl: '${env.AWS_ASSETS_HOST}${map['avatar'] as String}',
+    );
+  }
+
+  /// Factory constructor that will be used when data is received from the [UserDataStorage].
+  factory UserData.fromJSON(Map<String, dynamic> map) {
     return UserData(
       id: map['_id'] as String,
       displayName: map['fullName'] as String,

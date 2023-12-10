@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:event_mate/configuration/sembast_configuration.dart';
 import 'package:event_mate/failure/storage/user_data_storage_failure.dart';
@@ -23,13 +21,13 @@ class UserDataStorage implements IUserDataStorage {
   }) async {
     try {
       final userMap = await _store.record(uniqueId).get(_database);
-      log('userMap: $userMap');
 
       if (userMap == null) {
         return left(const UserDataStorageNotFoundFailure());
       }
-      final userData = UserData.fromMap(userMap);
-      log('userData: $userData');
+
+      final userData = UserData.fromJSON(userMap);
+
       return right(userData);
     } catch (e) {
       return left(

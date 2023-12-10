@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/core/custom_failure.dart';
@@ -85,17 +84,15 @@ class EmailRegistrationBloc
         final userData = userDataWithToken.value1;
         final token = userDataWithToken.value2;
 
-        final idSaved = await _iCacheController.writeString(
+        await _iCacheController.writeString(
           key: CacheKey.UID,
           value: userData.id,
         );
 
-        final tokenSaved = await _iCacheController.writeString(
+        await _iCacheController.writeString(
           key: CacheKey.ACCESS_TOKEN,
           value: token,
         );
-
-        log('idSaved: $idSaved || tokenSaved: $tokenSaved');
 
         final failureOrUnit = await _iUserDataStorage.put(
           uniqueId: userData.id,
