@@ -3,7 +3,10 @@ enum CacheKey {
   UID("event_mate_user_id"),
 
   //* INT
-  COLOR_THEME("color_theme");
+  COLOR_THEME("color_theme"),
+
+  //* STRING
+  ACCESS_TOKEN("access_token");
 
   const CacheKey(this.value);
   final String value;

@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:event_mate/core/mixins/api_header_mixin.dart';
-import 'package:event_mate/environment_variables.env' as env;
+import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
 import 'package:event_mate/model/registration_data.dart';
@@ -17,7 +17,8 @@ class RegistrationRepository
   final CustomHttpClient _client;
 
   @override
-  Future<Either<RegistrationRepositoryFailure, UserData>> registerUser({
+  Future<Either<RegistrationRepositoryFailure, UserDataWithToken>>
+      registerUser({
     required RegistrationData registrationData,
   }) async {
     try {
@@ -42,9 +43,10 @@ class RegistrationRepository
       final success = result['success'] as bool;
 
       final data = result['data'] as Map<String, dynamic>;
+      final accessToken = result['accessToken'] as String;
 
       if (success) {
-        return right(UserData.fromMap(data));
+        return right(Tuple2(UserData.fromMap(data), accessToken));
       } else {
         // TODO(Furkan): Burası güncellenecek failure tiplerine göre. Şimdilik unknown failure döndürüyoruz
         return left(

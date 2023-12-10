@@ -86,7 +86,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 (failureOrUnit) {
                   failureOrUnit.fold(
                     (failure) {
-                      context.showErrorToast('registration_failure'.tr());
+                      context.showErrorToast('registration.registration_failure'.tr());
                     },
                     (_) {
                       context.openPageWithClearStack(const HomePage());

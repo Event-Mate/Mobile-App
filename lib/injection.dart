@@ -12,15 +12,15 @@ import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dar
 import 'package:event_mate/application/splash_bloc/splash_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
 import 'package:event_mate/configuration/sembast_configuration.dart'
-    as sembast_conf;
+    as sembast_config;
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/shared_preferences_cache_controller.dart';
 import 'package:event_mate/infrastructure/facade/i_image_facade.dart';
 import 'package:event_mate/infrastructure/facade/image_facade.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
 import 'package:event_mate/infrastructure/repository/registration_repository.dart';
-import 'package:event_mate/infrastructure/storage/user_information_storage/i_user_information_storage.dart';
-import 'package:event_mate/infrastructure/storage/user_information_storage/user_information_storage.dart';
+import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';
+import 'package:event_mate/infrastructure/storage/user_data_storage/user_data_storage.dart';
 import 'package:event_mate/service/custom_http_client.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
@@ -52,7 +52,7 @@ Future<bool> _injectPackages() async {
   getIt.registerSingleton<CustomHttpClient>(CustomHttpClient());
   getIt.registerSingleton<ImagePicker>(ImagePicker());
 
-  final sembastDb = await sembast_conf.openDatabase();
+  final sembastDb = await sembast_config.openDatabase();
   if (sembastDb == null) {
     return false;
   } else {
@@ -65,16 +65,15 @@ Future<bool> _injectStorages() async {
   getIt.registerSingleton<ICacheController>(
     SharedPreferencesCacheController(getIt<SharedPreferences>()),
   );
-  // TODO(Furkan): Uncomment this when user information storage is ready
-/*   final userInformationStoreRef =
-      sembast_conf.getStoreRef(UserInformationStorage.storeKey);
 
-  getIt.registerSingleton<IUserInformationStorage>(
-    UserInformationStorage(
+  final userDataStoreRef = sembast_config.getStoreRef(UserDataStorage.storeKey);
+
+  getIt.registerSingleton<IUserDataStorage>(
+    UserDataStorage(
+      userDataStoreRef,
       getIt<sembast.Database>(),
-      userInformationStoreRef,
     ),
-  ); */
+  );
 
   return true;
 }
@@ -97,7 +96,11 @@ Future<bool> _injectBlocs() async {
     () => AuthenticationBloc(getIt<ICacheController>()),
   );
   getIt.registerFactory<EmailRegistrationBloc>(
-    () => EmailRegistrationBloc(getIt<IRegistrationRepository>()),
+    () => EmailRegistrationBloc(
+      getIt<IRegistrationRepository>(),
+      getIt<IUserDataStorage>(),
+      getIt<ICacheController>(),
+    ),
   );
   getIt.registerFactory<NameEditBloc>(
     // ignore: unnecessary_lambdas
@@ -133,7 +136,10 @@ Future<bool> _injectBlocs() async {
     () => ImagePickerBloc(getIt<IImageFacade>()),
   );
   getIt.registerFactory<MyProfileBloc>(
-    () => MyProfileBloc(getIt<IUserInformationStorage>()),
+    () => MyProfileBloc(
+      getIt<IUserDataStorage>(),
+      getIt<ICacheController>(),
+    ),
   );
   getIt.registerFactory<ColorThemeBloc>(
     () => ColorThemeBloc(getIt<ICacheController>()),

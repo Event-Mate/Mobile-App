@@ -13,7 +13,7 @@ Future<Database?> openDatabase() async {
   try {
     // Get a platform-specific directory where persistent app data can be stored
     final appDocumentDir = await getApplicationDocumentsDirectory();
-    // Path with the form: /platform-specific-directory/demo.db
+    // Path with the form: /platform-specific-directory/sembast_storage.db
     final dbPath = join(appDocumentDir.path, 'sembast_storage.db');
 
     final database = await databaseFactoryIo.openDatabase(dbPath);

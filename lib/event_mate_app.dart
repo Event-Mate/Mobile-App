@@ -5,7 +5,7 @@ import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/application/splash_bloc/splash_bloc.dart';
 import 'package:event_mate/core/enums/main_routes.dart';
-import 'package:event_mate/environment_variables.env' as env;
+import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/authentication_page.dart';
 import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';

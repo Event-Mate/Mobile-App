@@ -3,8 +3,11 @@ import 'package:event_mate/failure/repository/registration_repository_failure.da
 import 'package:event_mate/model/registration_data.dart';
 import 'package:event_mate/model/user_data.dart';
 
+typedef UserDataWithToken = Tuple2<UserData, String>;
+
 abstract class IRegistrationRepository {
-  Future<Either<RegistrationRepositoryFailure, UserData>> registerUser({
+  Future<Either<RegistrationRepositoryFailure, UserDataWithToken>>
+      registerUser({
     required RegistrationData registrationData,
   });
 

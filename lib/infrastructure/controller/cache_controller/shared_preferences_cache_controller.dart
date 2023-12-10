@@ -42,7 +42,7 @@ class SharedPreferencesCacheController implements ICacheController {
   }
 
   @override
-  Future<void> writeString({required CacheKey key, required String value}) {
+  Future<bool> writeString({required CacheKey key, required String value}) {
     return _sharedPref.setString(key.value, value);
   }
 }

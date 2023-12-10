@@ -1,38 +1,35 @@
 part of 'my_profile_bloc.dart';
 
 final class MyProfileState extends Equatable {
-  const MyProfileState({required this.userInformationOption});
+  const MyProfileState({required this.userDataOption});
 
   factory MyProfileState.initial() {
-    return MyProfileState(userInformationOption: none());
+    return MyProfileState(userDataOption: none());
   }
 
-  final Option<Either<UserInformationStorageFailure, RegistrationData>>
-      userInformationOption;
+  final Option<Either<UserDataStorageFailure, UserData>> userDataOption;
 
   MyProfileState copyWith({
-    Option<Either<UserInformationStorageFailure, RegistrationData>>?
-        userInformationOption,
+    Option<Either<UserDataStorageFailure, UserData>>? userDataOption,
   }) {
     return MyProfileState(
-      userInformationOption:
-          userInformationOption ?? this.userInformationOption,
+      userDataOption: userDataOption ?? this.userDataOption,
     );
   }
 
-  RegistrationData? get userInformationOrNull => userInformationOption.fold(
+  UserData? get userDataOrNull => userDataOption.fold(
         () => null,
-        (failureOrUserInfo) => failureOrUserInfo.fold(
+        (failureOrUserData) => failureOrUserData.fold(
           (failure) => null,
-          (userInfo) => userInfo,
+          (userData) => userData,
         ),
       );
 
-  bool get processFailed => userInformationOption.fold(
+  bool get processFailed => userDataOption.fold(
         () => false,
-        (failureOrUserInfo) => failureOrUserInfo.isLeft(),
+        (failureOrUserData) => failureOrUserData.isLeft(),
       );
 
   @override
-  List<Object?> get props => [userInformationOption];
+  List<Object?> get props => [userDataOption];
 }

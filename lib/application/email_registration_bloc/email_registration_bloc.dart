@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/failure/repository/registration_repository_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
+import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
+import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
 import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
+import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';
 import 'package:event_mate/model/registration_data.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
 import 'package:event_mate/presentation/authentication/registration/registration_page.dart';
@@ -15,6 +19,8 @@ class EmailRegistrationBloc
     extends Bloc<EmailRegistrationEvent, EmailRegistrationState> {
   EmailRegistrationBloc(
     this._iRegistrationRepository,
+    this._iUserDataStorage,
+    this._iCacheController,
   ) : super(EmailRegistrationState.initial()) {
     on<_NavigatedToPreviousStep>(
       _onNavigatedToPreviousStep,
@@ -28,6 +34,8 @@ class EmailRegistrationBloc
   }
 
   final IRegistrationRepository _iRegistrationRepository;
+  final IUserDataStorage _iUserDataStorage;
+  final ICacheController _iCacheController;
 
   void addPreviousStep() {
     add(const _NavigatedToPreviousStep());
@@ -65,16 +73,36 @@ class EmailRegistrationBloc
   ) async {
     emit(state.copyWith(processFailureOrUnitOption: none(), completing: true));
 
-    final failureOrUserData = await _iRegistrationRepository.registerUser(
+    final failureOrUserDataWToken = await _iRegistrationRepository.registerUser(
       registrationData: event.registrationData,
     );
 
-    final newState = failureOrUserData.fold(
-      (failure) {
+    final newState = await failureOrUserDataWToken.fold(
+      (failure) async {
         return state.copyWith(processFailureOrUnitOption: some(left(failure)));
       },
-      (userData) {
-        return state.copyWith(processFailureOrUnitOption: some(right(unit)));
+      (userDataWithToken) async {
+        final userData = userDataWithToken.value1;
+        final token = userDataWithToken.value2;
+
+        final idSaved = await _iCacheController.writeString(
+          key: CacheKey.UID,
+          value: userData.id,
+        );
+
+        final tokenSaved = await _iCacheController.writeString(
+          key: CacheKey.ACCESS_TOKEN,
+          value: token,
+        );
+
+        log('idSaved: $idSaved || tokenSaved: $tokenSaved');
+
+        final failureOrUnit = await _iUserDataStorage.put(
+          uniqueId: userData.id,
+          userData: userData,
+        );
+
+        return state.copyWith(processFailureOrUnitOption: some(failureOrUnit));
       },
     );
 

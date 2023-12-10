@@ -18,14 +18,12 @@ final class EmailRegistrationState extends Equatable {
   }
 
   final int currentStepIndex;
-  final Option<Either<RegistrationRepositoryFailure, Unit>>
-      processFailureOrUnitOption;
+  final Option<Either<CustomFailure, Unit>> processFailureOrUnitOption;
   final RegistrationData registrationData;
   final bool completing;
 
   EmailRegistrationState copyWith({
-    Option<Either<RegistrationRepositoryFailure, Unit>>?
-        processFailureOrUnitOption,
+    Option<Either<CustomFailure, Unit>>? processFailureOrUnitOption,
     int? currentStepIndex,
     RegistrationData? registrationData,
     bool? completing,

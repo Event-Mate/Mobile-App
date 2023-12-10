@@ -26,11 +26,11 @@ class MyProfilePage extends StatelessWidget {
         },
         child: BlocBuilder<MyProfileBloc, MyProfileState>(
           builder: (context, state) {
-            if (state.userInformationOption.isNone())
+            if (state.userDataOption.isNone())
               return const Center(child: CircularProgressIndicator());
 
             assert(!state.processFailed);
-            final userInfo = state.userInformationOrNull!;
+            final userData = state.userDataOrNull!;
 
             return SafeArea(
               child: Padding(
@@ -43,9 +43,9 @@ class MyProfilePage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Text('displayName: ${userInfo.displayName}'),
-                        Text('email: ${userInfo.email}'),
-                        Text('username: ${userInfo.username}'),
+                        Text('displayName: ${userData.displayName}'),
+                        Text('email: ${userData.email}'),
+                        Text('username: ${userData.username}'),
                       ],
                     ),
                     BouncingButton(
