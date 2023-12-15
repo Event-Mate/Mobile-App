@@ -19,14 +19,16 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: context.colors.background,
         appBar: AppBar(
-          backgroundColor: context.colors.background,
+          backgroundColor: context.colors.primary,
           elevation: 0,
+          centerTitle: true,
           title: const Icon(
             AppIcons.appIcon,
             size: 34,
           ),
           actions: const [
             _CircularProfilePhotoButton(),
+            SizedBox(width: 8),
           ],
         ),
         body: const Center(
@@ -87,8 +89,8 @@ class _CircularProfilePhotoButton extends StatelessWidget {
 
               return Image.network(
                 avatarUrl,
-                width: 48,
-                height: 48,
+                width: 36,
+                height: 36,
                 fit: BoxFit.cover,
               );
             },
