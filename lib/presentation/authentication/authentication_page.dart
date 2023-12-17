@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/presentation/authentication/login/login_page.dart';
 import 'package:event_mate/presentation/authentication/registration/registration_page.dart';
 import 'package:event_mate/presentation/core/constants/app_assets.dart';
 import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
@@ -44,9 +45,7 @@ class _AuthButtons extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         SplashingButton(
-          onTap: () {
-            // TODO(Furkan): open Login page
-          },
+          onTap: () => context.openPage(const LoginPage()),
           decoration: BoxDecoration(
             color: context.colors.accent,
             borderRadius: BorderRadius.circular(8),
@@ -65,9 +64,7 @@ class _AuthButtons extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SplashingButton(
-          onTap: () {
-            context.openPage(const RegistrationPage());
-          },
+          onTap: () => context.openPage(const RegistrationPage()),
           width: width,
           decoration: BoxDecoration(
             color: context.colors.background,

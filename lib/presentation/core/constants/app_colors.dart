@@ -23,7 +23,7 @@ class AppColors extends Equatable {
     required this.sheetsBackground,
     required this.error,
     required this.success,
-    required this.orange,
+    required this.orangeBase,
   });
   factory AppColors.light() {
     return const AppColors._(
@@ -36,7 +36,7 @@ class AppColors extends Equatable {
       greenPrimary: Color(0xff199A5E),
       borderPrimary: Color(0xFFE1E4E9),
       borderSecondary: Color(0xFFD4D7DC),
-      surfacePrimary: Color(0xFFEFF1F2),
+      surfacePrimary: Color.fromARGB(255, 61, 190, 254),
       surfaceSecondary: Color(0xFFCCCED2),
       textPrimary: Color(0xFF1A1A1A),
       textSecondary: Color(0xFF8390A1),
@@ -47,7 +47,7 @@ class AppColors extends Equatable {
       sheetsBackground: Color(0xffFFFFFF),
       error: Color(0xFFEC5C5C),
       success: Color(0xFF32A164),
-      orange: Color(0xffFB8C00),
+      orangeBase: Color(0xffFB8C00),
     );
   }
   factory AppColors.dark() {
@@ -72,7 +72,7 @@ class AppColors extends Equatable {
       sheetsBackground: Color(0xFF1E1E1E),
       error: Color(0xFFEC5C5C),
       success: Color(0xFF32A164),
-      orange: Color(0xffFB8C00),
+      orangeBase: Color(0xffFB8C00),
     );
   }
 
@@ -96,7 +96,7 @@ class AppColors extends Equatable {
   final Color sheetsBackground;
   final Color error;
   final Color success;
-  final Color orange;
+  final Color orangeBase;
 
   @override
   List<Object> get props {
@@ -121,7 +121,7 @@ class AppColors extends Equatable {
       sheetsBackground,
       error,
       success,
-      orange,
+      orangeBase,
     ];
   }
 }

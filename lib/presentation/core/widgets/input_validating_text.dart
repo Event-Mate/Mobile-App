@@ -8,7 +8,7 @@ class InputValidatingText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = context.colors.orange;
+    final color = context.colors.orangeBase;
     return Row(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
