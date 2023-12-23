@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -33,8 +34,7 @@ class LoginPageHeader extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  // TODO(Furkan): Translate this text
-                  'Login Here',
+                  'login.page_title'.tr(),
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
@@ -43,8 +43,7 @@ class LoginPageHeader extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  // TODO(Furkan): Translate this text
-                  'Welcome back you’ve\nbeen missed!',
+                  'login.page_subtitle'.tr(),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

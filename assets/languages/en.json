@@ -50,6 +50,8 @@
     "form_button_complete_title": "Complete"
   },
   "login": {
+    "page_title": "EventMate",
+    "page_subtitle": "Welcome back you’ve\nbeen missed!",
     "email_hint_text": "Email",
     "password_hint_text": "Password",
     "sign_in_button_text": "Sign In",

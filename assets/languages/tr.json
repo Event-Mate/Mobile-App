@@ -50,6 +50,8 @@
     "form_button_complete_title": "Kaydı tamamla"
   },
   "login": {
+    "page_title": "EventMate",
+    "page_subtitle": "Tekrar hoş geldin\n Seni özledik 🥺",
     "email_hint_text": "E-posta",
     "password_hint_text": "Şifre",
     "sign_in_button_text": "Giriş Yap",
