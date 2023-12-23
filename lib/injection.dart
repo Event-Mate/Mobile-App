@@ -3,6 +3,7 @@ import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
 import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
+import 'package:event_mate/application/email_login_bloc/email_login_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
 import 'package:event_mate/application/image_picker_bloc/image_picker_bloc.dart';
@@ -17,8 +18,10 @@ import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_co
 import 'package:event_mate/infrastructure/controller/cache_controller/shared_preferences_cache_controller.dart';
 import 'package:event_mate/infrastructure/facade/i_image_facade.dart';
 import 'package:event_mate/infrastructure/facade/image_facade.dart';
-import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
-import 'package:event_mate/infrastructure/repository/registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/login_repository/i_login_repository.dart';
+import 'package:event_mate/infrastructure/repository/login_repository/login_repository.dart';
+import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/registration_repository/registration_repository.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/user_data_storage.dart';
 import 'package:event_mate/service/custom_http_client.dart';
@@ -82,6 +85,9 @@ Future<bool> _injectFacades() async {
   getIt.registerSingleton<IRegistrationRepository>(
     RegistrationRepository(getIt<CustomHttpClient>()),
   );
+  getIt.registerSingleton<ILoginRepository>(
+    LoginRepository(getIt<CustomHttpClient>()),
+  );
   getIt.registerSingleton<IImageFacade>(
     ImageFacade(getIt<ImagePicker>()),
   );
@@ -100,6 +106,13 @@ Future<bool> _injectBlocs() async {
       getIt<IRegistrationRepository>(),
       getIt<IUserDataStorage>(),
       getIt<ICacheController>(),
+    ),
+  );
+  getIt.registerFactory<EmailLoginBloc>(
+    () => EmailLoginBloc(
+      getIt<ILoginRepository>(),
+      getIt<ICacheController>(),
+      getIt<IUserDataStorage>(),
     ),
   );
   getIt.registerFactory<NameEditBloc>(

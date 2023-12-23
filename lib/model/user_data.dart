@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
 import 'package:event_mate/environment.dart' as env;
-import 'package:event_mate/infrastructure/repository/registration_repository.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/user_data_storage.dart';
 
 class UserData extends Equatable {

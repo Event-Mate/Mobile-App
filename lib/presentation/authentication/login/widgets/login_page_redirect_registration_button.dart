@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/presentation/authentication/registration/registration_page.dart';
 import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
@@ -12,8 +13,7 @@ class LoginPageRedirectRegistrationButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          // TODO(Furkan): Translate this text
-          'Don’t have an account? ',
+          '${'login.dont_have_account_button_text'.tr()} ',
           style: Theme.of(context)
               .textTheme
               .labelMedium
@@ -21,15 +21,14 @@ class LoginPageRedirectRegistrationButton extends StatelessWidget {
         ),
         BouncingButton(
           child: Text(
-            // TODO(Furkan): Translate this text
-            'Sign Up',
+            'login.redirect_to_registration_button_text'.tr(),
             style: Theme.of(context)
                 .textTheme
                 .labelMedium
                 ?.copyWith(color: context.colors.primary),
           ),
           onTap: () {
-            context.openPage(const RegistrationPage());
+            context.openPageWithReplacement(const RegistrationPage());
           },
         )
       ],

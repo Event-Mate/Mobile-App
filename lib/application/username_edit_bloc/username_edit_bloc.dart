@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'username_edit_event.dart';

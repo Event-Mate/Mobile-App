@@ -7,6 +7,7 @@ import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
 import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
+import 'package:event_mate/core/enums/main_routes.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_avatar_form_body.dart';
@@ -21,7 +22,6 @@ import 'package:event_mate/presentation/core/extension/build_context_easy_naviga
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
-import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -87,10 +87,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   failureOrUnit.fold(
                     (failure) {
                       context.showErrorToast(
-                          'registration.registration_failure'.tr());
+                        'registration.registration_failure'.tr(),
+                      );
                     },
                     (_) {
-                      context.openPageWithClearStack(const HomePage());
+                      context.openNamedPageWithClearStack(AppRoutes.HOME.value);
                     },
                   );
                 },

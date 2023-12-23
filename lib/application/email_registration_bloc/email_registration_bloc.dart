@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/core/custom_failure.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
-import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';
 import 'package:event_mate/model/registration_data.dart';
 import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';

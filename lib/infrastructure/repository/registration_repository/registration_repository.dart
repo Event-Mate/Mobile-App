@@ -5,7 +5,8 @@ import 'package:dartz/dartz.dart';
 import 'package:event_mate/core/mixins/api_header_mixin.dart';
 import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/failure/repository/registration_repository_failure.dart';
-import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
+
 import 'package:event_mate/model/registration_data.dart';
 import 'package:event_mate/model/user_data.dart';
 import 'package:event_mate/service/custom_http_client.dart';
@@ -40,18 +41,14 @@ class RegistrationRepository
       );
 
       final result = jsonDecode(response.body) as Map<String, dynamic>;
-      final success = result['success'] as bool;
+      final error = _handleNetworkErrors(response.statusCode, result);
 
-      final data = result['data'] as Map<String, dynamic>;
-      final accessToken = result['accessToken'] as String;
-
-      if (success) {
-        return right(Tuple2(UserData.fromMap(data), accessToken));
+      if (error != null) {
+        return left(error);
       } else {
-        // TODO(Furkan): Burası güncellenecek failure tiplerine göre. Şimdilik unknown failure döndürüyoruz
-        return left(
-          const RegistrationUnknownFailure('RegistartionUnknownFailure'),
-        );
+        final data = result['data'] as Map<String, dynamic>;
+        final accessToken = result['accessToken'] as String;
+        return right(Tuple2(UserData.fromMap(data), accessToken));
       }
     } catch (e) {
       return left(RegistrationUnknownFailure('RegistartionUnknownFailure: $e'));
@@ -69,9 +66,7 @@ class RegistrationRepository
 
     final response = await _client.post(
       uri,
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
+      headers: nonSessionApiHeader,
     );
 
     final result = jsonDecode(response.body) as Map<String, dynamic>;
@@ -101,9 +96,7 @@ class RegistrationRepository
 
     final response = await _client.post(
       uri,
-      headers: {
-        HttpHeaders.contentTypeHeader: 'application/json',
-      },
+      headers: nonSessionApiHeader,
     );
 
     final result = jsonDecode(response.body) as Map<String, dynamic>;
@@ -120,4 +113,15 @@ class RegistrationRepository
       );
     }
   }
+}
+
+RegistrationRepositoryFailure? _handleNetworkErrors(
+  int statusCode,
+  Map<String, dynamic> result,
+) {
+  if (statusCode == 200) return null;
+
+  return RegistrationUnknownFailure(
+    "RegistrationUnknownFailure: ${result['error']}",
+  );
 }

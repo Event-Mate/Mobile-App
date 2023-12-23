@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/infrastructure/repository/i_registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'email_edit_event.dart';
