@@ -48,5 +48,15 @@
     "registration_failure": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
     "form_button_next_title": "İleri",
     "form_button_complete_title": "Kaydı tamamla"
+  },
+  "login": {
+    "email_hint_text": "E-posta",
+    "password_hint_text": "Şifre",
+    "sign_in_button_text": "Giriş Yap",
+    "forgot_password_button_text": "Şifremi Unuttum",
+    "dont_have_account_button_text": "Hesabınız Yok mu?",
+    "redirect_to_registration_button_text": "Kaydol",
+    "failed_toast_message": "Giriş başarısız. Lütfen tekrar deneyin.",
+    "success_toast_message": "Başarıyla giriş yapıldı!"
   }
 }

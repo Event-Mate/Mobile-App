@@ -48,5 +48,15 @@
     "registration_failure": "An error occured. Please try again later.",
     "form_button_next_title": "Next",
     "form_button_complete_title": "Complete"
+  },
+  "login": {
+    "email_hint_text": "Email",
+    "password_hint_text": "Password",
+    "sign_in_button_text": "Sign In",
+    "forgot_password_button_text": "Forgot Password?",
+    "dont_have_account_button_text": "Don't have an account?",
+    "redirect_to_registration_button_text": "Sign Up",
+    "failed_toast_message": "Login failed. Please try again.",
+    "success_toast_message": "Successfully logged in!"
   }
 }
