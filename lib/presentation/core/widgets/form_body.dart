@@ -1,5 +1,6 @@
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_complete_button.dart';
 import 'package:event_mate/presentation/authentication/registration/widgets/registration_continue_button.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -40,18 +41,16 @@ class FormBody extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: context.colors.textPrimary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    style: tsHeadLineLarge.copyWith(
+                      color: context.colors.textPrimary,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(color: context.colors.textSecondary),
+                    style: tsBodyLarge.copyWith(
+                      color: context.colors.textSecondary,
+                    ),
                   ),
                 ],
               ),

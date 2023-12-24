@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/form_body.dart';
 import 'package:event_mate/presentation/core/widgets/input_error_text.dart';
@@ -103,11 +104,10 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
                           state.birthdayOption.isNone()
                               ? 'registration.birthday_hint_text'.tr()
                               : state.birthdayOrEmpty,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: context.colors.textSecondary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                          style: tsBodySmall.copyWith(
+                            color: context.colors.textSecondary,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                         const SizedBox.shrink(),
                       ],

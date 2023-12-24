@@ -3,6 +3,7 @@ import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:event_mate/injection.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
@@ -85,10 +86,7 @@ class _SkipStepButton extends StatelessWidget {
             },
             child: Text(
               'registration.avatar_form_skip_for_now'.tr(),
-              style: TextStyle(
-                color: context.colors.textSecondary,
-                decoration: TextDecoration.underline,
-              ),
+              style: tsBodySmall.copyWith(color: context.colors.textSecondary),
             ),
           ),
         );

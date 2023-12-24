@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_login_bloc/email_login_bloc.dart';
 import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/custom_progress_indicator.dart';
 import 'package:event_mate/presentation/core/widgets/splashing_button.dart';
@@ -45,10 +46,9 @@ class LoginPageSignInButton extends StatelessWidget {
 
           return Text(
             'login.sign_in_button_text'.tr(),
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+            style: tsBodyMedium.copyWith(
               color: context.colors.background,
+              fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
           );

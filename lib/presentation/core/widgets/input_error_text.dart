@@ -1,3 +1,4 @@
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class InputErrorText extends StatelessWidget {
       children: [
         Icon(
           Icons.error,
-          size: 18,
+          size: 20,
           color: context.colors.error,
         ),
         const SizedBox(width: 4),
@@ -22,10 +23,10 @@ class InputErrorText extends StatelessWidget {
             text,
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: context.colors.error,
-                  fontWeight: FontWeight.w600,
-                ),
+            style: tsBodySmall.copyWith(
+              color: context.colors.error,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],

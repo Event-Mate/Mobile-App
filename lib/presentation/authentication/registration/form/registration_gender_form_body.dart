@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/form_body.dart';
 import 'package:event_mate/presentation/core/widgets/input_error_text.dart';
@@ -69,20 +70,19 @@ class _GenderRadioTile extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium!
-                .copyWith(color: context.colors.textPrimary),
+            style: tsBodyMedium.copyWith(color: context.colors.textPrimary),
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
           ),
           contentPadding: EdgeInsets.zero,
-          fillColor: MaterialStateColor.resolveWith((states) {
-            if (states.contains(MaterialState.selected))
-              return context.colors.primary;
-            else
-              return context.colors.textPrimary;
-          }),
+          fillColor: MaterialStateColor.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.selected))
+                return context.colors.primary;
+              else
+                return context.colors.textPrimary;
+            },
+          ),
           groupValue: selectedGender,
           onChanged: (value) {
             if (value != null) {

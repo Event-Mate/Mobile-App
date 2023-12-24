@@ -1,4 +1,5 @@
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
@@ -65,12 +66,13 @@ class MyProfilePage extends StatelessWidget {
                           ),
                         ),
                         child: Text(
+                          // #translate: logout
                           'logout',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(color: context.colors.textPrimary),
+                          style: tsBodyMedium.copyWith(
+                            color: context.colors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       onTap: () {

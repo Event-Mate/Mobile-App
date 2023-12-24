@@ -41,7 +41,7 @@
     "birthday_error_invalid_text": "Please enter a valid date.",
     "avatar_form_title": "Please upload a profile picture 📸",
     "avatar_form_subtitle": "Users with profile pictures are more likely to find event mates.",
-    "avatar_form_skip_for_now": "Skip for now",
+    "avatar_form_skip_for_now": "Skip for now and finish registration",
     "avatar_form_error_message": "An error occured while uploading your profile picture.",
     "input_validating_text": "Validating",
     "input_validated_text": "Validated!",

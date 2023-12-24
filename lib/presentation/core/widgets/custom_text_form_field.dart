@@ -1,3 +1,4 @@
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/input_error_text.dart';
 import 'package:event_mate/presentation/core/widgets/input_validating_text.dart';
@@ -84,16 +85,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   cursorColor: widget.errorText != null
                       ? context.colors.error
                       : context.colors.primary,
-                  style: TextStyle(
+                  style: tsBodyMedium.copyWith(
                     color: context.colors.textPrimary,
-                    fontSize: 14,
                   ),
                   focusNode: _focusNode,
                   decoration: InputDecoration(
                     hintText: widget.hintText,
-                    hintStyle: TextStyle(
+                    hintStyle: tsBodyMedium.copyWith(
                       color: context.colors.textSecondary,
-                      fontSize: 14,
                     ),
                     border: InputBorder.none,
                   ),

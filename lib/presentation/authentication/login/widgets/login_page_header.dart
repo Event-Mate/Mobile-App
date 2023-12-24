@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
@@ -35,18 +36,14 @@ class LoginPageHeader extends StatelessWidget {
               children: [
                 Text(
                   'login.page_title'.tr(),
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
+                  style: tsHeadLineLarge.copyWith(
                     color: context.colors.background,
                   ),
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'login.page_subtitle'.tr(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                  style: tsHeadLineSmall.copyWith(
                     color: context.colors.background,
                   ),
                   textAlign: TextAlign.center,

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/custom_text_form_field.dart';
 import 'package:event_mate/presentation/core/widgets/form_body.dart';
@@ -43,10 +44,7 @@ class RegistrationUsernameFormBody extends StatelessWidget {
               },
               leading: Text(
                 '@',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(color: context.colors.textSecondary),
+                style: tsBodyMedium.copyWith(color: context.colors.textSecondary),
               ),
             ),
             onRegistrationContinue: () {

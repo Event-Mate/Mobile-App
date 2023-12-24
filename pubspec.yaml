@@ -85,6 +85,11 @@ flutter:
   assets:
     - assets/languages/
     - assets/svg/
+    - assets/fonts/
+  fonts:
+    - family: Poppins
+      fonts: 
+        - asset: assets/fonts/Poppins-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

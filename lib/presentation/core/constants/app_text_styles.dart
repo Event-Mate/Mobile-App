@@ -1,25 +1,39 @@
 import 'package:flutter/material.dart';
 
-const f14w500 = TextStyle(
-  fontSize: 14,
-  fontWeight: FontWeight.w500,
-  color: Colors.black,
-);
+const _FontPoppins = 'Poppins';
 
-const f15w700 = TextStyle(
-  fontSize: 15,
+TextStyle tsHeadLineLarge = const TextStyle(
+  fontSize: 30,
   fontWeight: FontWeight.w700,
-  color: Colors.black,
+  fontFamily: _FontPoppins,
 );
 
-const f16w500 = TextStyle(
+TextStyle tsHeadLineMedium = const TextStyle(
+  fontSize: 26,
+  fontWeight: FontWeight.w700,
+  fontFamily: _FontPoppins,
+);
+
+TextStyle tsHeadLineSmall = const TextStyle(
+  fontSize: 22,
+  fontWeight: FontWeight.w700,
+  fontFamily: _FontPoppins,
+);
+
+TextStyle tsBodyLarge = const TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+  fontFamily: _FontPoppins,
+);
+
+TextStyle tsBodyMedium = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w500,
-  color: Colors.black,
+  fontFamily: _FontPoppins,
 );
 
-const f32w700 = TextStyle(
-  fontSize: 32,
-  fontWeight: FontWeight.w700,
-  color: Colors.black,
+TextStyle tsBodySmall = const TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w500,
+  fontFamily: _FontPoppins,
 );
