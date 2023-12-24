@@ -38,12 +38,15 @@ class LoginPageSignInButton extends StatelessWidget {
             previous.submitting != current.submitting,
         builder: (context, state) {
           if (state.submitting)
-            return CustomProgressIndicator(color: context.colors.background);
+            return CustomProgressIndicator(
+              color: context.colors.background,
+              size: 20,
+            );
 
           return Text(
             'login.sign_in_button_text'.tr(),
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: FontWeight.w600,
               color: context.colors.background,
             ),
