@@ -22,3 +22,31 @@ class RegistrationUnknownFailure extends RegistrationRepositoryFailure
     return "RegistrationUnknownFailure(); Exception message was: $message";
   }
 }
+
+class RegistrationUsernameAlreadyExistsFailure
+    extends RegistrationRepositoryFailure {
+  const RegistrationUsernameAlreadyExistsFailure(this._message);
+  final String? _message;
+
+  @override
+  List<Object?> get props => [_message];
+
+  @override
+  String toString() {
+    return "RegistrationUsernameAlreadyExistsFailure(); Exception message was: $_message";
+  }
+}
+
+class RegistrationEmailAlreadyExistsFailure
+    extends RegistrationRepositoryFailure {
+  const RegistrationEmailAlreadyExistsFailure(this._message);
+  final String? _message;
+
+  @override
+  List<Object?> get props => [_message];
+
+  @override
+  String toString() {
+    return "RegistrationEmailAlreadyExistsFailure(); Exception message was: $_message";
+  }
+}

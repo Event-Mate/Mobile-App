@@ -48,7 +48,9 @@ class ColorThemeBloc extends Bloc<ColorThemeEvent, ColorThemeState> {
     ColorThemeInitializedEvent event,
     Emitter<ColorThemeState> emit,
   ) async {
-    final theme = _iCacheController.readInt(key: CacheKey.COLOR_THEME);
+    return emit(const ColorThemeLightState());
+    //* Uncomment when dark theme is ready
+/*     final theme = _iCacheController.readInt(key: CacheKey.COLOR_THEME);
 
     if (theme == _light) {
       emit(const ColorThemeLightState());
@@ -58,7 +60,7 @@ class ColorThemeBloc extends Bloc<ColorThemeEvent, ColorThemeState> {
       emit(const ColorThemeSystemState());
     } else {
       emit(const ColorThemeSystemState());
-    }
+    } */
   }
 
   Future<void> _onLightSelected(

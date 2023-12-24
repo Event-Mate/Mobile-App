@@ -1,19 +1,17 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/core/constants/app_icons.dart';
+import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/easy_navigation_ext.dart';
 import 'package:event_mate/presentation/profile/my_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage();
+
 // TODO(Furkan): Burası tasarlanacak.
-
-  const HomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -21,14 +19,16 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: context.colors.background,
         appBar: AppBar(
-          backgroundColor: context.colors.background,
+          backgroundColor: context.colors.primary,
           elevation: 0,
+          centerTitle: true,
           title: const Icon(
             AppIcons.appIcon,
             size: 34,
           ),
           actions: const [
             _CircularProfilePhotoButton(),
+            SizedBox(width: 8),
           ],
         ),
         body: const Center(
@@ -59,7 +59,6 @@ class _CircularProfilePhotoButton extends StatelessWidget {
         );
       },
       child: Container(
-        margin: const EdgeInsets.all(6),
         decoration: BoxDecoration(
           border: Border.all(color: context.colors.borderPrimary),
           borderRadius: BorderRadius.circular(100),
@@ -68,29 +67,31 @@ class _CircularProfilePhotoButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
           child: BlocBuilder<MyProfileBloc, MyProfileState>(
             buildWhen: (previous, current) =>
-                previous.userInformationOption.isNone() &&
-                current.userInformationOption.isSome(),
+                previous.userDataOption.isNone() &&
+                current.userDataOption.isSome(),
             builder: (context, state) {
-              if (state.userInformationOption.isNone()) {
+              if (state.userDataOption.isNone()) {
                 return Center(
                   child:
                       CircularProgressIndicator(color: context.colors.primary),
                 );
               }
-              // TODO(Furkan): UserInfo bir extension yardımıyla edinilebilecek kadar kücük bir parça haline gelsin. Sonrasında tüm state.userInformationOption lar düzenlenecek.
-              final avatarUrl = state.userInformationOption.fold(
+              // TODO(Furkan): UserData bir extension yardımıyla edinilebilecek kadar kücük bir parça haline gelsin. Sonrasında tüm state.userDataOption lar düzenlenecek.
+              final avatarUrl = state.userDataOption.fold(
                 () => null,
-                (userInformationOrFailure) => userInformationOrFailure.fold(
+                (userDataOrFailure) => userDataOrFailure.fold(
                   (failure) => null,
-                  (userInformation) => userInformation.avatarUrl,
+                  (userData) => userData.avatarUrl,
                 ),
               );
 
-              if (avatarUrl == null) const SizedBox();
+              if (avatarUrl == null) return const SizedBox();
 
-              return CachedNetworkImage(
+              return Image.network(
+                avatarUrl,
+                width: 36,
+                height: 36,
                 fit: BoxFit.cover,
-                imageUrl: avatarUrl!,
               );
             },
           ),

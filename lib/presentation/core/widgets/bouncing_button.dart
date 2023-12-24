@@ -40,17 +40,19 @@ class BouncingButtonState extends State<BouncingButton>
 
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerDown: (event) => _controller.forward(),
-      onPointerCancel: (event) => _controller.reverse(),
-      onPointerUp: (event) => _controller.reverse(),
-      child: InkWell(
-        splashFactory: NoSplash.splashFactory,
-        highlightColor: Colors.transparent,
-        onTap: widget.onTap,
-        child: ScaleTransition(
-          scale: _scaleAnimation,
-          child: widget.child,
+    return RepaintBoundary(
+      child: Listener(
+        onPointerDown: (event) => _controller.forward(),
+        onPointerCancel: (event) => _controller.reverse(),
+        onPointerUp: (event) => _controller.reverse(),
+        child: InkWell(
+          splashFactory: NoSplash.splashFactory,
+          highlightColor: Colors.transparent,
+          onTap: widget.onTap,
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: widget.child,
+          ),
         ),
       ),
     );

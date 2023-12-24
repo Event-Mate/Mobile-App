@@ -1,8 +1,10 @@
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/extension/build_context_toast_msg_ext.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,11 +28,11 @@ class MyProfilePage extends StatelessWidget {
         },
         child: BlocBuilder<MyProfileBloc, MyProfileState>(
           builder: (context, state) {
-            if (state.userInformationOption.isNone())
+            if (state.userDataOption.isNone())
               return const Center(child: CircularProgressIndicator());
 
             assert(!state.processFailed);
-            final userInfo = state.userInformationOrNull!;
+            final userData = state.userDataOrNull!;
 
             return SafeArea(
               child: Padding(
@@ -43,9 +45,9 @@ class MyProfilePage extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        Text('displayName: ${userInfo.displayName}'),
-                        Text('email: ${userInfo.email}'),
-                        Text('username: ${userInfo.username}'),
+                        Text('displayName: ${userData.displayName}'),
+                        Text('email: ${userData.email}'),
+                        Text('username: ${userData.username}'),
                       ],
                     ),
                     BouncingButton(
@@ -64,16 +66,19 @@ class MyProfilePage extends StatelessWidget {
                           ),
                         ),
                         child: Text(
+                          // #translate: logout
                           'logout',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(color: context.colors.textPrimary),
+                          style: tsBodyMedium.copyWith(
+                            color: context.colors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       onTap: () {
-                        print('logged out!');
+                        if (kDebugMode) {
+                          print('logged out!');
+                        }
                       },
                     )
                   ],

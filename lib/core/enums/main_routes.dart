@@ -1,8 +1,10 @@
-enum MainRoutes {
+enum AppRoutes {
+  SPLASH('splash'),
+  ROOT('root'),
   AUTH('auth'),
   HOME('home');
 
-  const MainRoutes(this.value);
+  const AppRoutes(this.value);
 
   final String value;
 }

@@ -1,4 +1,4 @@
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class SplashingButton extends StatelessWidget {
@@ -12,7 +12,7 @@ class SplashingButton extends StatelessWidget {
   });
 
   final Widget child;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final BoxDecoration? decoration;
   final double? width;
   final double? height;
@@ -20,16 +20,18 @@ class SplashingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      focusColor: context.colors.primary,
-      borderRadius: decoration?.borderRadius as BorderRadius?,
-      child: Ink(
-        width: width,
-        height: height,
-        padding: padding,
-        decoration: decoration,
-        child: Center(child: child),
+    return RepaintBoundary(
+      child: InkWell(
+        onTap: onTap,
+        focusColor: context.colors.primary,
+        borderRadius: decoration?.borderRadius as BorderRadius?,
+        child: Ink(
+          width: width,
+          height: height,
+          padding: padding,
+          decoration: decoration,
+          child: Center(child: child),
+        ),
       ),
     );
   }

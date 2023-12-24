@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/core/enums/locale_type.dart';
 import 'package:event_mate/event_mate_app.dart';
 import 'package:event_mate/injection.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,9 @@ Future<void> main() async {
   if (injected) {
     runApp(
       EasyLocalization(
-        supportedLocales: const [
-          Locale('en'),
-          Locale('tr'),
+        supportedLocales: [
+          Locale(LocaleType.EN.value),
+          Locale(LocaleType.TR.value),
         ],
         path: 'assets/languages',
         fallbackLocale: const Locale('en'),

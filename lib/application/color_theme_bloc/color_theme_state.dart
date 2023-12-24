@@ -1,7 +1,10 @@
 part of 'color_theme_bloc.dart';
 
-abstract class ColorThemeState extends Equatable {
+final class ColorThemeState extends Equatable {
   const ColorThemeState();
+
+  @override
+  List<Object?> get props => [];
 }
 
 final class ColorThemeInitialState extends ColorThemeState {

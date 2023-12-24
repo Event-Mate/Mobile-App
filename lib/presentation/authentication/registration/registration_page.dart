@@ -1,182 +1,158 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:event_mate/presentation/authentication/registration/widgets/registration_continue_button.dart';
-import 'package:event_mate/presentation/authentication/registration/widgets/registration_progress_circle.dart';
+import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
+import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
+import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
+import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
+import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
+import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
+import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
+import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
+import 'package:event_mate/core/enums/main_routes.dart';
+import 'package:event_mate/injection.dart';
+import 'package:event_mate/presentation/authentication/registration/enum/registration_step_type.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_avatar_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_birthday_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_email_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_gender_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_name_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_password_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_username_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/widgets/registration_progress_path_circles.dart';
+import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_toast_msg_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_back_button.dart';
-import 'package:event_mate/presentation/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
-
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
   late final PageController pageController;
-  late int _currentPageIndex;
-  late int _totalPageCount;
 
   @override
   void initState() {
     super.initState();
     pageController = PageController();
-    _currentPageIndex = 0;
-    // TODO(Furkan): Change this value according to your list size
-    _totalPageCount = 7;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        if (Navigator.of(context).userGestureInProgress)
-          return Future.value(false);
-        else
-          return Future.value(true);
-      },
-      child: Scaffold(
-        backgroundColor: context.colors.background,
-        appBar: AppBar(
-          backgroundColor: context.colors.background,
-          elevation: 0,
-          leading: BouncingBackButton(
-            onTap: () {
-              if (_currentPageIndex == 0) {
-                Navigator.of(context).pop();
-              } else {
-                _navigateToPreviousStep();
-              }
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<EmailRegistrationBloc>()),
+        BlocProvider(create: (_) => getIt<NameEditBloc>()),
+        BlocProvider(create: (_) => getIt<UsernameEditBloc>()),
+        BlocProvider(create: (_) => getIt<EmailEditBloc>()),
+        BlocProvider(create: (_) => getIt<PasswordEditBloc>()),
+        BlocProvider(create: (_) => getIt<GenderEditBloc>()),
+        BlocProvider(
+          create: (_) => getIt<BirthdayEditBloc>()
+            ..addInit(langCode: context.deviceLocale.languageCode),
+        ),
+        BlocProvider(create: (_) => getIt<AvatarEditBloc>()),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
+            listenWhen: (previous, current) =>
+                previous.currentStepIndex != current.currentStepIndex,
+            listener: (context, state) {
+              pageController.animateToPage(
+                state.currentStepIndex,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.easeInOut,
+              );
+              FocusScope.of(context).unfocus();
             },
           ),
-          centerTitle: true,
-          title: Row(
-            children: [
-              for (int i = 0; i < _totalPageCount; i++) ...[
-                const RegistrationProgressCircle(),
-                if (i != _totalPageCount - 1)
-                  Container(
-                    width: 20,
-                    height: 1,
-                    color: context.colors.textPrimary,
-                  )
-              ],
-            ],
+          BlocListener<EmailRegistrationBloc, EmailRegistrationState>(
+            listenWhen: (previous, current) =>
+                previous.processFailureOrUnitOption !=
+                current.processFailureOrUnitOption,
+            listener: (context, state) {
+              state.processFailureOrUnitOption.fold(
+                () {},
+                (failureOrUnit) {
+                  failureOrUnit.fold(
+                    (failure) {
+                      context.showErrorToast(
+                        'registration.registration_failure'.tr(),
+                      );
+                    },
+                    (_) {
+                      context.openNamedPageWithClearStack(AppRoutes.HOME.value);
+                    },
+                  );
+                },
+              );
+            },
           ),
-        ),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              children: [
-                const SizedBox(height: 12),
-                Expanded(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: pageController,
-                    children: [
-                      const _NameFormView(),
-                      Container(
-                        color: Colors.blue,
-                        child: Center(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              _navigateToPreviousStep();
-                            },
-                            child: const Text('Back'),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        color: Colors.green,
-                      ),
-                    ],
+        ],
+        child: BlocBuilder<EmailRegistrationBloc, EmailRegistrationState>(
+          builder: (context, state) {
+            final currentStepIndex = state.currentStepIndex;
+            return PopScope(
+              canPop: false,
+              child: Scaffold(
+                backgroundColor: context.colors.background,
+                appBar: AppBar(
+                  backgroundColor: context.colors.background,
+                  elevation: 0,
+                  leading: BouncingBackButton(
+                    color: context.colors.textPrimary,
+                    onTap: () {
+                      if (currentStepIndex <= 0) {
+                        Navigator.of(context).pop();
+                      } else {
+                        context.read<EmailRegistrationBloc>().addPreviousStep();
+                      }
+                    },
+                  ),
+                  centerTitle: true,
+                  title: const RegistrationProgressPathCircles(),
+                ),
+                body: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: pageController,
+                      children: RegistrationSteps.stepsMap.values.toList(),
+                    ),
                   ),
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );
   }
-
-  void _navigateToNextStep() {
-    pageController.animateToPage(
-      _currentPageIndex + 1,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
-    _currentPageIndex++;
-  }
-
-  void _navigateToPreviousStep() {
-    pageController.animateToPage(
-      _currentPageIndex - 1,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
-    _currentPageIndex--;
-  }
 }
 
-class _NameFormView extends StatelessWidget {
-  const _NameFormView();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 24.0, bottom: 32.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'registration.welcoming_text',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                          color: context.colors.textPrimary,
-                        ),
-                  ).tr(),
-                  const SizedBox(height: 2),
-                  Text(
-                    'registration.name_form_title',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(color: context.colors.textPrimary),
-                  ).tr(),
-                ],
-              ),
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: context.colors.surfacePrimary,
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  borderSide: BorderSide(color: context.colors.borderPrimary),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  borderSide: BorderSide(color: context.colors.textPrimary),
-                ),
-                hintText: 'registration.name_hint_text'.tr(),
-                hintStyle: TextStyle(color: context.colors.textSecondary),
-              ),
-            ),
-          ],
-        ),
-        const Positioned(
-          right: 0,
-          bottom: 8,
-          child: RegistrationContinueButton(),
-        )
-      ],
-    );
-  }
+class RegistrationSteps {
+  const RegistrationSteps._();
+  static Map<RegistrationStepType, Widget> stepsMap = {
+    RegistrationStepType.NAME: const RegistrationNameFormBody(),
+    RegistrationStepType.USERNAME: const RegistrationUsernameFormBody(),
+    RegistrationStepType.EMAIL: const RegistrationEmailFormBody(),
+    RegistrationStepType.PASSWORD: const RegistrationPasswordFormBody(),
+    RegistrationStepType.GENDER: const RegistrationGenderFormBody(),
+    RegistrationStepType.DATE_OF_BIRTH: const RegistrationBirthdayFormBody(),
+    RegistrationStepType.AVATAR_URL: const RegistrationAvatarFormBody(),
+  };
 }
