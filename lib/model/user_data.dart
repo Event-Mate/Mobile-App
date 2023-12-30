@@ -23,7 +23,7 @@ class UserData extends Equatable {
       email: map['email'] as String,
       genderType: GenderType.fromValue(map['gender'] as String),
       dateOfBirth: DateTime.parse(map['dateOfBirth'] as String),
-      avatarUrl: '${env.AWS_ASSETS_HOST}${map['avatar'] as String}',
+      avatarUrl: '${env.AWS_ASSETS_HOST}/${map['avatar'] as String}',
     );
   }
 
