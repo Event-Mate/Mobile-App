@@ -60,5 +60,14 @@
     "redirect_to_registration_button_text": "Kaydol",
     "failed_toast_message": "Giriş başarısız. Lütfen tekrar deneyin.",
     "success_toast_message": "Başarıyla giriş yapıldı!"
+  },
+  "home_page": {
+    "categories_title": "Kategoriler",
+    "concert_chip_title": "Konser",
+    "theater_chip_title": "Tiyatro",
+    "sports_chip_title": "Spor",
+    "festival_chip_title": "Festival",
+    "conference_chip_title": "Konferans",
+    "standup_chip_title": "Stand Up"
   }
 }

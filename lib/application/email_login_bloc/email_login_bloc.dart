@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/failure/repository/login_repostiory_failure.dart';
+import 'package:event_mate/failure/repository/login_repository_failure.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
 import 'package:event_mate/infrastructure/repository/login_repository/i_login_repository.dart';

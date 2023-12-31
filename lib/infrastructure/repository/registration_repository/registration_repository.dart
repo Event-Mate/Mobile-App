@@ -37,7 +37,7 @@ class RegistrationRepository
         uri,
         files,
         body: registrationData.toMap(),
-        headers: nonSessionApiHeader,
+        headers: noTokenApiHeader,
       );
 
       final result = jsonDecode(response.body) as Map<String, dynamic>;
@@ -66,7 +66,7 @@ class RegistrationRepository
 
     final response = await _client.post(
       uri,
-      headers: nonSessionApiHeader,
+      headers: noTokenApiHeader,
     );
 
     final result = jsonDecode(response.body) as Map<String, dynamic>;
@@ -96,7 +96,7 @@ class RegistrationRepository
 
     final response = await _client.post(
       uri,
-      headers: nonSessionApiHeader,
+      headers: noTokenApiHeader,
     );
 
     final result = jsonDecode(response.body) as Map<String, dynamic>;

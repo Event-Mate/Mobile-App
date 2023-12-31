@@ -54,6 +54,7 @@ dependencies:
   auto_size_text: ^3.0.0
   image_picker: ^1.0.4
   rxdart: ^0.27.7
+  kt_dart: ^1.1.0
 
   # Custom EventMate Packages
   ripple_animation:
@@ -88,7 +89,7 @@ flutter:
     - assets/fonts/
   fonts:
     - family: Poppins
-      fonts: 
+      fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
   # To add assets to your application, add an assets section, like this:
   # assets:

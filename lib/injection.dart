@@ -5,6 +5,7 @@ import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_login_bloc/email_login_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
+import 'package:event_mate/application/event_fetcher_bloc/event_fetcher_bloc.dart';
 import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
 import 'package:event_mate/application/image_picker_bloc/image_picker_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
@@ -18,6 +19,8 @@ import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_co
 import 'package:event_mate/infrastructure/controller/cache_controller/shared_preferences_cache_controller.dart';
 import 'package:event_mate/infrastructure/facade/i_image_facade.dart';
 import 'package:event_mate/infrastructure/facade/image_facade.dart';
+import 'package:event_mate/infrastructure/repository/event_repository/event_repository.dart';
+import 'package:event_mate/infrastructure/repository/event_repository/i_event_repository.dart';
 import 'package:event_mate/infrastructure/repository/login_repository/i_login_repository.dart';
 import 'package:event_mate/infrastructure/repository/login_repository/login_repository.dart';
 import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
@@ -88,6 +91,9 @@ Future<bool> _injectFacades() async {
   getIt.registerSingleton<ILoginRepository>(
     LoginRepository(getIt<CustomHttpClient>()),
   );
+  getIt.registerSingleton<IEventRepository>(
+    EventRepository(getIt<CustomHttpClient>()),
+  );
   getIt.registerSingleton<IImageFacade>(
     ImageFacade(getIt<ImagePicker>()),
   );
@@ -153,6 +159,9 @@ Future<bool> _injectBlocs() async {
       getIt<IUserDataStorage>(),
       getIt<ICacheController>(),
     ),
+  );
+  getIt.registerFactory<EventFetcherBloc>(
+    () => EventFetcherBloc(getIt<IEventRepository>()),
   );
   getIt.registerFactory<ColorThemeBloc>(
     () => ColorThemeBloc(getIt<ICacheController>()),

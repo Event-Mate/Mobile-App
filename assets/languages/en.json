@@ -60,5 +60,14 @@
     "redirect_to_registration_button_text": "Sign Up",
     "failed_toast_message": "Login failed. Please try again.",
     "success_toast_message": "Successfully logged in!"
+  },
+  "home_page": {
+    "categories_title": "Categories",
+    "concert_chip_title": "Concert",
+    "theater_chip_title": "Theater",
+    "sports_chip_title": "Sports",
+    "festival_chip_title": "Festival",
+    "conference_chip_title": "Conference",
+    "standup_chip_title": "Stand Up"
   }
 }
