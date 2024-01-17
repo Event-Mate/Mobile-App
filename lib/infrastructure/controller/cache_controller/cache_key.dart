@@ -1,6 +1,6 @@
 enum CacheKey {
   //* BOOL
-  UID("event_mate_user_id"),
+  UID("event_mate_user_id123"),
 
   //* INT
   COLOR_THEME("color_theme"),

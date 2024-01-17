@@ -2,33 +2,54 @@ part of 'event_fetcher_bloc.dart';
 
 final class EventFetcherState extends Equatable {
   const EventFetcherState({
+    required this.failureOrEventsOption,
     required this.failureOrCategoriesOption,
+    required this.isFetching,
   });
 
   factory EventFetcherState.initial() {
     return EventFetcherState(
+      failureOrEventsOption: none(),
       failureOrCategoriesOption: none(),
+      isFetching: false,
     );
   }
 
   EventFetcherState copyWith({
+    Option<Either<EventRepositoryFailure, KtList<EventData>>>?
+        failureOrEventsOption,
     Option<Either<EventRepositoryFailure, KtList<String>>>?
         failureOrCategoriesOption,
+    bool? isFetching,
   }) {
     return EventFetcherState(
+      failureOrEventsOption:
+          failureOrEventsOption ?? this.failureOrEventsOption,
       failureOrCategoriesOption:
           failureOrCategoriesOption ?? this.failureOrCategoriesOption,
+      isFetching: isFetching ?? this.isFetching,
     );
   }
 
+  final Option<Either<EventRepositoryFailure, KtList<EventData>>>
+      failureOrEventsOption;
   final Option<Either<EventRepositoryFailure, KtList<String>>>
       failureOrCategoriesOption;
+  final bool isFetching;
 
-  KtList<String> get categoriesOrEmpty => failureOrCategoriesOption.fold(
+  KtList<String> get categoriesOrEmptyList => failureOrCategoriesOption.fold(
         emptyList,
         (failureOrCategories) => failureOrCategories.fold(
           (failure) => emptyList(),
           (categories) => categories,
+        ),
+      );
+
+  KtList<EventData> get eventsOrEmptyList => failureOrEventsOption.fold(
+        emptyList,
+        (failureOrEvents) => failureOrEvents.fold(
+          (failure) => emptyList(),
+          (events) => events,
         ),
       );
 
@@ -52,5 +73,9 @@ final class EventFetcherState extends Equatable {
   }
 
   @override
-  List<Object> get props => [failureOrCategoriesOption];
+  List<Object> get props => [
+        failureOrEventsOption,
+        failureOrCategoriesOption,
+        isFetching,
+      ];
 }

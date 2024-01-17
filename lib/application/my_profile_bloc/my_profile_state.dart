@@ -25,10 +25,10 @@ final class MyProfileState extends Equatable {
         ),
       );
 
-  String? get avatarUrl => userDataOption.fold(
-        () => null,
-        (userDataOrFailure) => userDataOrFailure.fold(
-          (failure) => null,
+  String get avatarUrlOrEmpty => userDataOption.fold(
+        () => '',
+        (failureOrUserData) => failureOrUserData.fold(
+          (failure) => '',
           (userData) => userData.avatarUrl,
         ),
       );

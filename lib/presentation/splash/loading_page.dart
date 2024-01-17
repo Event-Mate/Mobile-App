@@ -9,10 +9,8 @@ class LoadingPage extends StatelessWidget {
       backgroundColor: context.colors.primary,
       body: Center(
         child: DefaultTextStyle(
-          style: TextStyle(
-            fontSize: 30.0,
+          style: tsHeadLineLarge.copyWith(
             color: context.colors.background,
-            fontWeight: FontWeight.bold,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

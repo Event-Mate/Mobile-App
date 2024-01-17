@@ -1,1 +1,1 @@
-const kAppBarLeadingWith = 70.0;
+const kBottomNavigationBarPadding = 56.0;

@@ -1,11 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/event_fetcher_bloc/event_fetcher_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/injection.dart';
+import 'package:event_mate/model/event_data.dart';
 import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
-import 'package:event_mate/presentation/home/widgets/home_page_app_bar.dart';
+import 'package:event_mate/presentation/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:event_mate/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,16 +20,190 @@ class HomePage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<MyProfileBloc>()..addFetch()),
-        BlocProvider(create: (_) => getIt<EventFetcherBloc>()..addFetch()),
+        BlocProvider(
+          create: (_) => getIt<EventFetcherBloc>()
+            ..addFetchCategories()
+            ..addFetchAllEvents(),
+        ),
       ],
       child: Scaffold(
         backgroundColor: context.colors.background,
-        appBar: const HomePageAppBar(),
-        body: const Column(
-          children: [
-            _CategoriesSection(),
-          ],
+        appBar: const CustomAppBar(),
+        bottomNavigationBar: const CustomBottomNavBar(),
+        body: SafeArea(
+          child: RefreshIndicator(
+            color: context.colors.primary,
+            backgroundColor: context.colors.background,
+            onRefresh: () async {
+              await Future.delayed(const Duration(seconds: 5));
+            },
+            child: const SingleChildScrollView(
+              child: Column(
+                children: [
+                  _CategoriesSection(),
+                  _EventsSection(),
+                ],
+              ),
+            ),
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class _EventsSection extends StatelessWidget {
+  const _EventsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<EventFetcherBloc, EventFetcherState>(
+      buildWhen: (previous, current) =>
+          previous.eventsOrEmptyList != current.eventsOrEmptyList,
+      builder: (context, state) {
+        final events = state.eventsOrEmptyList;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                // TODO(Furkan): translate
+                'Tüm Etkinlikler',
+                style: tsBodyMedium.copyWith(
+                  color: context.colors.textSecondary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+                childAspectRatio: 2 / 3,
+              ),
+              itemCount: events.size,
+              itemBuilder: (context, index) {
+                return _EventCard(event: events[index]);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _EventCard extends StatelessWidget {
+  const _EventCard({required this.event});
+  final EventData event;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: context.colors.borderPrimary),
+      ),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              event.imageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 4.0,
+              ),
+              decoration: BoxDecoration(
+                color: context.colors.surfaceSecondary,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    event.title,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    style: tsBodySmall.copyWith(
+                      color: context.colors.textPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.calendar_today,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        event.date,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: tsBodySmall.copyWith(
+                          color: context.colors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.access_time,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        event.time,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: tsBodySmall.copyWith(
+                          color: context.colors.textSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.location_on,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        child: AutoSizeText(
+                          event.place,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: tsBodySmall.copyWith(
+                            color: context.colors.textSecondary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -39,17 +216,17 @@ class _CategoriesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EventFetcherBloc, EventFetcherState>(
       buildWhen: (previous, current) =>
-          previous.categoriesOrEmpty != current.categoriesOrEmpty,
+          previous.categoriesOrEmptyList != current.categoriesOrEmptyList,
       builder: (context, state) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Text(
                 'home_page.categories_title'.tr(),
-                style: tsBodyLarge.copyWith(
-                  color: context.colors.textPrimary,
+                style: tsBodyMedium.copyWith(
+                  color: context.colors.textSecondary,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -69,9 +246,9 @@ class _EventCategoryChips extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EventFetcherBloc, EventFetcherState>(
       buildWhen: (previous, current) =>
-          previous.categoriesOrEmpty != current.categoriesOrEmpty,
+          previous.categoriesOrEmptyList != current.categoriesOrEmptyList,
       builder: (context, state) {
-        final categories = state.categoriesOrEmpty;
+        final categories = state.categoriesOrEmptyList;
 
         if (categories.isEmpty()) return const SizedBox();
 

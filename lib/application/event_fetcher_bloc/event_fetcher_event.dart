@@ -8,3 +8,7 @@ sealed class EventFetcherEvent extends Equatable {
 }
 
 class _FetchEventCategories extends EventFetcherEvent {}
+
+class _FetchAllEvents extends EventFetcherEvent {
+  const _FetchAllEvents();
+}

@@ -8,6 +8,7 @@ import 'package:event_mate/core/enums/main_routes.dart';
 import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/authentication/authentication_page.dart';
+import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/home/home_page.dart';
