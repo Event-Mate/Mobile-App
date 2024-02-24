@@ -2,7 +2,7 @@ enum AppRoutes {
   SPLASH('splash'),
   ROOT('root'),
   AUTH('auth'),
-  HOME('home');
+  MAIN('main');
 
   const AppRoutes(this.value);
 

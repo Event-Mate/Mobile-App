@@ -7,7 +7,7 @@ class RootPage extends StatelessWidget {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
       listener: (context, state) {
         if (state is AuthLoggedInState) {
-          context.openNamedPageWithClearStack(AppRoutes.HOME.value);
+          context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
         } else if (state is AuthLoggedOutState) {
           context.openNamedPageWithClearStack(AppRoutes.AUTH.value);
         }

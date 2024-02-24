@@ -11,7 +11,7 @@ import 'package:event_mate/presentation/authentication/authentication_page.dart'
 import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_easy_navigation_ext.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
-import 'package:event_mate/presentation/home/home_page.dart';
+import 'package:event_mate/presentation/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,7 +43,7 @@ class EventMateApp extends StatelessWidget {
           AppRoutes.SPLASH.value: (context) => const SplashPage(),
           AppRoutes.ROOT.value: (context) => const RootPage(),
           AppRoutes.AUTH.value: (context) => const AuthenticationPage(),
-          AppRoutes.HOME.value: (context) => const HomePage(),
+          AppRoutes.MAIN.value: (context) => const MainPage(),
         },
       ),
     );

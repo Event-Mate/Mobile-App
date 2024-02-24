@@ -41,7 +41,7 @@ class LoginPage extends StatelessWidget {
                   context.showSuccessToast(
                     'login.success_toast_message'.tr(),
                   );
-                  context.openNamedPageWithClearStack(AppRoutes.HOME.value);
+                  context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
                 },
               );
             },

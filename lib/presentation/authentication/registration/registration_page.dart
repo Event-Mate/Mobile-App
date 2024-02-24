@@ -91,7 +91,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       );
                     },
                     (_) {
-                      context.openNamedPageWithClearStack(AppRoutes.HOME.value);
+                      context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
                     },
                   );
                 },
