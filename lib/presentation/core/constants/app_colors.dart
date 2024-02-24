@@ -21,8 +21,8 @@ class AppColors extends Equatable {
     required this.whiteBase,
     required this.blackBase,
     required this.sheetsBackground,
-    required this.error,
-    required this.success,
+    required this.redBase,
+    required this.greenBase,
     required this.orangeBase,
   });
   factory AppColors.light() {
@@ -45,8 +45,8 @@ class AppColors extends Equatable {
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
       sheetsBackground: Color(0xffFFFFFF),
-      error: Color(0xFFEC5C5C),
-      success: Color(0xFF32A164),
+      redBase: Color(0xFFEC5C5C),
+      greenBase: Color(0xFF32A164),
       orangeBase: Color(0xffFB8C00),
     );
   }
@@ -70,8 +70,8 @@ class AppColors extends Equatable {
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
       sheetsBackground: Color(0xFF1E1E1E),
-      error: Color(0xFFEC5C5C),
-      success: Color(0xFF32A164),
+      redBase: Color(0xFFEC5C5C),
+      greenBase: Color(0xFF32A164),
       orangeBase: Color(0xffFB8C00),
     );
   }
@@ -94,8 +94,8 @@ class AppColors extends Equatable {
   final Color blackBase;
   final Color greenPrimary;
   final Color sheetsBackground;
-  final Color error;
-  final Color success;
+  final Color redBase;
+  final Color greenBase;
   final Color orangeBase;
 
   @override
@@ -119,8 +119,8 @@ class AppColors extends Equatable {
       blackBase,
       greenPrimary,
       sheetsBackground,
-      error,
-      success,
+      redBase,
+      greenBase,
       orangeBase,
     ];
   }

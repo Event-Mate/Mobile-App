@@ -7,6 +7,6 @@ sealed class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class _CheckLoginStatus extends AuthenticationEvent {}
+class _CheckLoginStatusEvent extends AuthenticationEvent {}
 
-class _Logout extends AuthenticationEvent {}
+class _LogoutEvent extends AuthenticationEvent {}

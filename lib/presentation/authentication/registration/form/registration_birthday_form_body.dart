@@ -62,7 +62,7 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
                               onPrimary: context.colors.whiteBase,
                               onSecondary: context.colors.secondary,
                               onBackground: context.colors.borderPrimary,
-                              error: context.colors.error,
+                              error: context.colors.redBase,
                             ),
                             textButtonTheme: TextButtonThemeData(
                               style: TextButton.styleFrom(

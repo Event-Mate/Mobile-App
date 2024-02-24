@@ -15,10 +15,10 @@ class AuthenticationBloc
     this._iCacheController,
     this._iUserDataStorage,
   ) : super(AuthInitialState()) {
-    on<_CheckLoginStatus>(
+    on<_CheckLoginStatusEvent>(
       _onCheckLoginStatus,
     );
-    on<_Logout>(
+    on<_LogoutEvent>(
       _onLogout,
     );
   }
@@ -27,15 +27,15 @@ class AuthenticationBloc
   final IUserDataStorage _iUserDataStorage;
 
   void addCheckLoginStatus() {
-    add(_CheckLoginStatus());
+    add(_CheckLoginStatusEvent());
   }
 
   void addLogout() {
-    add(_Logout());
+    add(_LogoutEvent());
   }
 
   Future<void> _onCheckLoginStatus(
-    _CheckLoginStatus event,
+    _CheckLoginStatusEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
     final uid = _iCacheController.readString(key: CacheKey.UID);
@@ -47,14 +47,14 @@ class AuthenticationBloc
   }
 
   Future<void> _onLogout(
-    _Logout event,
+    _LogoutEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
     final uid = _iCacheController.readString(key: CacheKey.UID);
-    assert(uid != null);
-
-    await _iUserDataStorage.delete(uniqueId: uid!);
-    await _iCacheController.clear();
-    emit(AuthLoggedOutState());
+    if (uid != null) {
+      await _iUserDataStorage.delete(uniqueId: uid);
+      await _iCacheController.clear();
+      emit(AuthLoggedOutState());
+    }
   }
 }

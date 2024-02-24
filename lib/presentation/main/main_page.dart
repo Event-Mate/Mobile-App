@@ -50,14 +50,16 @@ class _HomePageState extends State<MainPage> {
           listener: (context, state) {
             _pageController.jumpToPage(state.selectedIndex);
           },
-          child: PageView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            restorationId: 'home_page_view',
-            controller: _pageController,
-            itemCount: _pages.length,
-            itemBuilder: (context, index) {
-              return _pages[index];
-            },
+          child: SafeArea(
+            child: PageView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              restorationId: 'main_page_view',
+              controller: _pageController,
+              itemCount: _pages.length,
+              itemBuilder: (context, index) {
+                return _pages[index];
+              },
+            ),
           ),
         ),
       ),

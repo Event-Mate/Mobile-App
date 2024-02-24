@@ -24,7 +24,7 @@ mixin TextFormFieldMixin {
         hintText: hintText,
         hintStyle: TextStyle(color: context.colors.textSecondary),
         errorStyle: TextStyle(
-          color: context.colors.error,
+          color: context.colors.redBase,
           fontWeight: FontWeight.w600,
         ),
         enabledBorder: OutlineInputBorder(
@@ -44,14 +44,14 @@ mixin TextFormFieldMixin {
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
-            color: context.colors.error,
+            color: context.colors.redBase,
             width: _borderWidth,
           ),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
-            color: context.colors.error,
+            color: context.colors.redBase,
             width: _borderWidth,
           ),
         ),
