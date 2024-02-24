@@ -1,6 +1,7 @@
 import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
+import 'package:event_mate/application/bottom_navbar_bloc/bottom_navbar_bloc.dart';
 import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_login_bloc/email_login_bloc.dart';
@@ -105,7 +106,10 @@ Future<bool> _injectBlocs() async {
     () => SplashBloc(getIt<ICacheController>()),
   );
   getIt.registerFactory<AuthenticationBloc>(
-    () => AuthenticationBloc(getIt<ICacheController>()),
+    () => AuthenticationBloc(
+      getIt<ICacheController>(),
+      getIt<IUserDataStorage>(),
+    ),
   );
   getIt.registerFactory<EmailRegistrationBloc>(
     () => EmailRegistrationBloc(
@@ -165,6 +169,10 @@ Future<bool> _injectBlocs() async {
   );
   getIt.registerFactory<ColorThemeBloc>(
     () => ColorThemeBloc(getIt<ICacheController>()),
+  );
+  getIt.registerFactory<BottomNavbarBloc>(
+    // ignore: unnecessary_lambdas
+    () => BottomNavbarBloc(),
   );
 
   return true;

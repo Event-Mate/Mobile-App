@@ -42,19 +42,28 @@ class EventFetcherBloc extends Bloc<EventFetcherEvent, EventFetcherState> {
     EventFetcherEvent event,
     Emitter<EventFetcherState> emit,
   ) async {
+    emit(state.copyWith(
+      failureOrCategoriesOption: none(),
+      fetchingCategories: true,
+    ));
+
     final failureOrCategories = await _iEventRepository.getCategories();
-    emit(state.copyWith(failureOrCategoriesOption: some(failureOrCategories)));
+
+    emit(state.copyWith(
+      failureOrCategoriesOption: some(failureOrCategories),
+      fetchingCategories: false,
+    ));
   }
 
   Future<void> _onFetchAllEvents(
     _FetchAllEvents event,
     Emitter<EventFetcherState> emit,
   ) async {
-    emit(state.copyWith(failureOrEventsOption: none(), isFetching: true));
+    emit(state.copyWith(failureOrEventsOption: none(), fetchingEvents: true));
     final failureOrEvents = await _iEventRepository.getAllEvents();
     emit(state.copyWith(
       failureOrEventsOption: some(failureOrEvents),
-      isFetching: false,
+      fetchingEvents: false,
     ));
   }
 }

@@ -1,8 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
+import 'package:event_mate/application/bottom_navbar_bloc/bottom_navbar_bloc.dart';
 import 'package:event_mate/application/color_theme_bloc/color_theme_bloc.dart';
-import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/application/splash_bloc/splash_bloc.dart';
 import 'package:event_mate/core/enums/main_routes.dart';
 import 'package:event_mate/environment.dart' as env;
@@ -25,12 +25,12 @@ class EventMateApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => getIt<MyProfileBloc>()),
         BlocProvider(create: (_) => getIt<SplashBloc>()..addCheckAppState()),
         BlocProvider(
           create: (_) => getIt<AuthenticationBloc>()..addCheckLoginStatus(),
         ),
-        BlocProvider(create: (_) => getIt<ColorThemeBloc>()..addInitialized())
+        BlocProvider(create: (_) => getIt<ColorThemeBloc>()..addInitialized()),
+        BlocProvider(create: (_) => getIt<BottomNavbarBloc>()),
       ],
       child: MaterialApp(
         title: env.APP_TITLE,

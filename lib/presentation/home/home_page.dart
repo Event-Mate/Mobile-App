@@ -1,25 +1,43 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/application/bottom_navbar_bloc/bottom_navbar_bloc.dart';
 import 'package:event_mate/application/event_fetcher_bloc/event_fetcher_bloc.dart';
-import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/injection.dart';
 import 'package:event_mate/model/event_data.dart';
 import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
 import 'package:event_mate/presentation/core/widgets/custom_bottom_nav_bar.dart';
+import 'package:event_mate/presentation/core/widgets/custom_progress_indicator.dart';
 import 'package:event_mate/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage();
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late final PageController _pageController;
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => getIt<MyProfileBloc>()..addFetch()),
         BlocProvider(
           create: (_) => getIt<EventFetcherBloc>()
             ..addFetchCategories()
@@ -30,30 +48,68 @@ class HomePage extends StatelessWidget {
         backgroundColor: context.colors.background,
         appBar: const CustomAppBar(),
         bottomNavigationBar: const CustomBottomNavBar(),
-        body: SafeArea(
-          child: RefreshIndicator(
-            color: context.colors.primary,
-            backgroundColor: context.colors.background,
-            onRefresh: () async {
-              await Future.delayed(const Duration(seconds: 5));
+        body: BlocListener<BottomNavbarBloc, BottomNavbarState>(
+          listenWhen: (previous, current) =>
+              previous.selectedIndex != current.selectedIndex,
+          listener: (context, state) {
+            _pageController.jumpToPage(state.selectedIndex);
+          },
+          child: PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            restorationId: 'home_page_view',
+            controller: _pageController,
+            itemCount: _pages.length,
+            itemBuilder: (context, index) {
+              return _pages[index];
             },
-            child: const SingleChildScrollView(
-              child: Column(
-                children: [
-                  _CategoriesSection(),
-                  _EventsSection(),
-                ],
-              ),
-            ),
           ),
         ),
       ),
     );
   }
+
+  final Map<int, Widget> _pages = {
+    BottomNavbarHomePageState.index: const _HomePageContent(),
+    BottomNavbarEventsPageState.index: const Center(child: Text('Yakında')),
+    BottomNavbarCreateEventPageState.index:
+        const Center(child: Text('Yakında')),
+    BottomNavbarProfilePageState.index: const Center(child: Text('Yakında')),
+  };
 }
 
-class _EventsSection extends StatelessWidget {
-  const _EventsSection();
+class _HomePageContent extends StatelessWidget {
+  const _HomePageContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<EventFetcherBloc, EventFetcherState>(
+      builder: (context, state) {
+        if (state.fetchingCategories || state.fetchingEvents) {
+          return const Center(child: CustomProgressIndicator());
+        }
+        return RefreshIndicator(
+          color: context.colors.primary,
+          backgroundColor: context.colors.background,
+          onRefresh: () async {
+            // TODO(Furkan): Implement refresh logic
+            await Future.delayed(const Duration(seconds: 5));
+          },
+          child: const SingleChildScrollView(
+            child: Column(
+              children: [
+                _CategoriesSection(),
+                _AllEventsSection(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _AllEventsSection extends StatelessWidget {
+  const _AllEventsSection();
 
   @override
   Widget build(BuildContext context) {

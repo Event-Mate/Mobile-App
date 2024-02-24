@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
@@ -31,6 +32,7 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
     _MyProfileFetchEvent event,
     Emitter<MyProfileState> emit,
   ) async {
+    emit(state.copyWith(userDataOption: none()));
     final uniqueId = _iCacheController.readString(key: CacheKey.UID)!;
     final failureOrUserData = await _iUserDataStorage.get(uniqueId: uniqueId);
     emit(state.copyWith(userDataOption: some(failureOrUserData)));

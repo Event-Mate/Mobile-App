@@ -4,14 +4,16 @@ final class EventFetcherState extends Equatable {
   const EventFetcherState({
     required this.failureOrEventsOption,
     required this.failureOrCategoriesOption,
-    required this.isFetching,
+    required this.fetchingEvents,
+    required this.fetchingCategories,
   });
 
   factory EventFetcherState.initial() {
     return EventFetcherState(
       failureOrEventsOption: none(),
       failureOrCategoriesOption: none(),
-      isFetching: false,
+      fetchingEvents: false,
+      fetchingCategories: false,
     );
   }
 
@@ -20,14 +22,16 @@ final class EventFetcherState extends Equatable {
         failureOrEventsOption,
     Option<Either<EventRepositoryFailure, KtList<String>>>?
         failureOrCategoriesOption,
-    bool? isFetching,
+    bool? fetchingEvents,
+    bool? fetchingCategories,
   }) {
     return EventFetcherState(
       failureOrEventsOption:
           failureOrEventsOption ?? this.failureOrEventsOption,
       failureOrCategoriesOption:
           failureOrCategoriesOption ?? this.failureOrCategoriesOption,
-      isFetching: isFetching ?? this.isFetching,
+      fetchingEvents: fetchingEvents ?? this.fetchingEvents,
+      fetchingCategories: fetchingCategories ?? this.fetchingCategories,
     );
   }
 
@@ -35,7 +39,8 @@ final class EventFetcherState extends Equatable {
       failureOrEventsOption;
   final Option<Either<EventRepositoryFailure, KtList<String>>>
       failureOrCategoriesOption;
-  final bool isFetching;
+  final bool fetchingEvents;
+  final bool fetchingCategories;
 
   KtList<String> get categoriesOrEmptyList => failureOrCategoriesOption.fold(
         emptyList,
@@ -76,6 +81,7 @@ final class EventFetcherState extends Equatable {
   List<Object> get props => [
         failureOrEventsOption,
         failureOrCategoriesOption,
-        isFetching,
+        fetchingEvents,
+        fetchingCategories,
       ];
 }
