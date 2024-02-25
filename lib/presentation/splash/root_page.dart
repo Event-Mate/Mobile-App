@@ -1,5 +1,8 @@
 part of 'package:event_mate/event_mate_app.dart';
 
+/// [RootPage] is an onboarding page
+/// that checks if the user is logged in or not
+/// to navigate to the appropriate page at the start of the app.
 class RootPage extends StatelessWidget {
   const RootPage();
   @override
