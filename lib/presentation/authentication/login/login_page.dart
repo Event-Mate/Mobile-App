@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_login_bloc/email_login_bloc.dart';
 import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
@@ -26,27 +27,39 @@ class LoginPage extends StatelessWidget {
         BlocProvider(create: (_) => getIt<PasswordEditBloc>()),
         BlocProvider(create: (_) => getIt<EmailLoginBloc>()),
       ],
-      child: BlocListener<EmailLoginBloc, EmailLoginState>(
-        listenWhen: (previous, current) =>
-            previous.failureOrUserDataWToken != current.failureOrUserDataWToken,
-        listener: (context, state) {
-          state.failureOrUserDataWToken.fold(
-            () {},
-            (failureOrUnit) {
-              failureOrUnit.fold(
-                (failure) {
-                  context.showErrorToast('login.failed_toast_message'.tr());
-                },
-                (_) {
-                  context.showSuccessToast(
-                    'login.success_toast_message'.tr(),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<EmailLoginBloc, EmailLoginState>(
+            listenWhen: (previous, current) =>
+                previous.failureOrUserDataWToken !=
+                current.failureOrUserDataWToken,
+            listener: (context, state) {
+              state.failureOrUserDataWToken.fold(
+                () {},
+                (failureOrUnit) {
+                  failureOrUnit.fold(
+                    (failure) {
+                      context.showErrorToast('login.failed_toast_message'.tr());
+                    },
+                    (_) {
+                      context.read<AuthenticationBloc>().addCheckLoginStatus();
+                    },
                   );
-                  context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
                 },
               );
             },
-          );
-        },
+          ),
+          BlocListener<AuthenticationBloc, AuthenticationState>(
+            listenWhen: (previous, current) =>
+                previous is AuthLoggedOutState && current is AuthLoggedInState,
+            listener: (context, state) {
+              context.showSuccessToast(
+                'login.success_toast_message'.tr(),
+              );
+              context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
+            },
+          ),
+        ],
         child: const Scaffold(
           resizeToAvoidBottomInset: false,
           body: Column(

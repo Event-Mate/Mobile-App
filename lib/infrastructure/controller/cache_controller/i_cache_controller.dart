@@ -1,7 +1,6 @@
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 
 abstract class ICacheController {
-  Future<void> clear();
   Future<void> delete({required CacheKey key});
 
   Future<void> writeBool({required CacheKey key, required bool value});

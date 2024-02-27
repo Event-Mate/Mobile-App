@@ -27,16 +27,13 @@ final class MyProfileState extends Equatable {
 
   String get avatarUrlOrEmpty => userDataOption.fold(
         () {
-          log('userDataOption is none');
           return '';
         },
         (failureOrUserData) => failureOrUserData.fold(
           (failure) {
-            log('avatarUrl failure: $failure');
             return '';
           },
           (userData) {
-            log('avatarUrl: ${userData.avatarUrl}');
             return userData.avatarUrl;
           },
         ),

@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
@@ -15,11 +15,15 @@ class AuthenticationBloc
     this._iCacheController,
     this._iUserDataStorage,
   ) : super(AuthInitialState()) {
-    on<_CheckLoginStatusEvent>(
-      _onCheckLoginStatus,
-    );
-    on<_LogoutEvent>(
-      _onLogout,
+    on<AuthenticationEvent>(
+      (event, emit) async {
+        if (event is _CheckLoginStatusEvent) {
+          await _onCheckLoginStatus(event, emit);
+        } else if (event is _AuthLogoutEvent) {
+          await _onAuthLogout(event, emit);
+        }
+      },
+      transformer: sequential(),
     );
   }
 
@@ -31,7 +35,7 @@ class AuthenticationBloc
   }
 
   void addLogout() {
-    add(_LogoutEvent());
+    add(_AuthLogoutEvent());
   }
 
   Future<void> _onCheckLoginStatus(
@@ -46,15 +50,22 @@ class AuthenticationBloc
     }
   }
 
-  Future<void> _onLogout(
-    _LogoutEvent event,
+  Future<void> _onAuthLogout(
+    _AuthLogoutEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
+    await _deleteSessionInfo();
+    emit(AuthLoggedOutState());
+  }
+
+  Future<void> _deleteSessionInfo() async {
     final uid = _iCacheController.readString(key: CacheKey.UID);
-    if (uid != null) {
-      await _iUserDataStorage.delete(uniqueId: uid);
-      await _iCacheController.clear();
-      emit(AuthLoggedOutState());
-    }
+    assert(uid != null, 'uid must not be null! ');
+
+    await Future.wait([
+      _iUserDataStorage.delete(uniqueId: uid!),
+      _iCacheController.delete(key: CacheKey.UID),
+      _iCacheController.delete(key: CacheKey.ACCESS_TOKEN),
+    ]);
   }
 }

@@ -23,7 +23,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _onSplashCheckAppStateEvent(
     _SplashCheckAppStateEvent event,
     Emitter<SplashState> emit,
-  ) async {   
+  ) async {
     emit(SplashLoadingState());
 
     // TODO(Furkan): Splash implementation

@@ -8,6 +8,8 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthenticationBloc, AuthenticationState>(
+      listenWhen: (previous, current) =>
+          previous is AuthInitialState && current is! AuthInitialState,
       listener: (context, state) {
         if (state is AuthLoggedInState) {
           context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
