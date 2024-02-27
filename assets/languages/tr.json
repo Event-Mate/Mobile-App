@@ -46,6 +46,7 @@
     "input_validating_text": "Doğrulanıyor",
     "input_validated_text": "Doğrulandı!",
     "registration_failure": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "success_toast_message": "EventMate'e hoş geldin!",
     "form_button_next_title": "İleri",
     "form_button_complete_title": "Kaydı tamamla"
   },
@@ -68,6 +69,18 @@
     "sports_chip_title": "Spor",
     "festival_chip_title": "Festival",
     "conference_chip_title": "Konferans",
-    "standup_chip_title": "Stand Up"
+    "standup_chip_title": "Stand Up",
+    "all_events_section_title": "Tüm Etkinlikler"
+  },
+  "bottom_navbar": {
+    "home": "Anasayfa",
+    "find_mate": "Arkadaş Bul",
+    "profile": "Profil",
+    "events": "Etkinlikler"
+  },
+  "my_profile_page": {
+    "page_title": "Profilim",
+    "logout_button_title": "Çıkış Yap",
+    "loading_user_profile_error_toast_message": "Kullanıcı profili yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
   }
 }

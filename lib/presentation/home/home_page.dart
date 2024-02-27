@@ -56,8 +56,7 @@ class _AllEventsSection extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                // TODO(Furkan): translate
-                'Tüm Etkinlikler',
+                'home_page.all_events_section_title'.tr(),
                 style: tsBodyMedium.copyWith(
                   color: context.colors.textSecondary,
                   fontWeight: FontWeight.w600,

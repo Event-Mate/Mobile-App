@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/injection.dart';
@@ -21,7 +22,6 @@ class MyProfilePage extends StatelessWidget {
           listener: (context, state) {
             if (state.processFailed) {
               context.showErrorToast(
-                // #translate: my_profile_page.loading_user_profile_error_text
                 'Error occured while loading user profile',
               );
               Navigator.of(context).pop();
@@ -65,8 +65,7 @@ class MyProfilePage extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          // #translate: log_out
-                          'Log out',
+                          'my_profile_page.logout_button_title'.tr(),
                           textAlign: TextAlign.center,
                           style: tsBodyMedium.copyWith(
                             color: context.colors.background,

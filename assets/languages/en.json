@@ -46,6 +46,7 @@
     "input_validating_text": "Validating",
     "input_validated_text": "Validated!",
     "registration_failure": "An error occured. Please try again later.",
+    "success_toast_message": "Welcome to EventMate!",
     "form_button_next_title": "Next",
     "form_button_complete_title": "Complete"
   },
@@ -68,6 +69,18 @@
     "sports_chip_title": "Sports",
     "festival_chip_title": "Festival",
     "conference_chip_title": "Conference",
-    "standup_chip_title": "Stand Up"
+    "standup_chip_title": "Stand Up",
+    "all_events_section_title": "All Events"
+  },
+  "bottom_navbar": {
+    "home": "Home",
+    "find_mate": "Find Mate",
+    "profile": "Profile",
+    "events": "Events"
+  },
+  "my_profile_page": {
+    "page_title": "My Profile",
+    "logout_button_title": "Log Out",
+    "loading_user_profile_error_toast_message": "An error occured while loading the profile. Please try again later."
   }
 }
