@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/failure/repository/login_repository_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
 import 'package:event_mate/infrastructure/repository/login_repository/i_login_repository.dart';
@@ -31,7 +31,7 @@ class EmailLoginBloc extends Bloc<EmailLoginEvent, EmailLoginState> {
     EmailLoginFormSentEvent event,
     Emitter<EmailLoginState> emit,
   ) async {
-    emit(state.copyWith(failureOrUserDataWToken: none(), submitting: true));
+    emit(state.copyWith(failureOrUnitOption: none(), submitting: true));
 
     final email = event.email;
     final password = event.password;
@@ -44,7 +44,7 @@ class EmailLoginBloc extends Bloc<EmailLoginEvent, EmailLoginState> {
     final newState = await failureOrUserDataWToken.fold(
       (failure) async {
         return state.copyWith(
-          failureOrUserDataWToken: some(left(failure)),
+          failureOrUnitOption: some(left(failure)),
         );
       },
       (userDataWToken) async {
@@ -61,11 +61,12 @@ class EmailLoginBloc extends Bloc<EmailLoginEvent, EmailLoginState> {
           value: token,
         );
 
-        await _iUserDataStorage.put(uniqueId: userData.id, userData: userData);
-
-        return state.copyWith(
-          failureOrUserDataWToken: some(right(userDataWToken)),
+        final failureOrUnit = await _iUserDataStorage.put(
+          uniqueId: userData.id,
+          userData: userData,
         );
+
+        return state.copyWith(failureOrUnitOption: some(failureOrUnit));
       },
     );
 

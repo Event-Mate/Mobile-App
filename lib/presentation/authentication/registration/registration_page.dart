@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
@@ -91,11 +92,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       );
                     },
                     (_) {
-                      context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
+                      context.read<AuthenticationBloc>().addUpdateLoginStatus();
                     },
                   );
                 },
               );
+            },
+          ),
+          BlocListener<AuthenticationBloc, AuthenticationState>(
+            listenWhen: (previous, current) =>
+                previous is AuthLoggedOutState && current is AuthLoggedInState,
+            listener: (context, state) {
+              context.showSuccessToast(
+                'registration.success_toast_message'.tr(),
+              );
+              context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
             },
           ),
         ],

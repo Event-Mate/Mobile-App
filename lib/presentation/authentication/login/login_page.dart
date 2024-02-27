@@ -31,10 +31,9 @@ class LoginPage extends StatelessWidget {
         listeners: [
           BlocListener<EmailLoginBloc, EmailLoginState>(
             listenWhen: (previous, current) =>
-                previous.failureOrUserDataWToken !=
-                current.failureOrUserDataWToken,
+                previous.failureOrUnitOption != current.failureOrUnitOption,
             listener: (context, state) {
-              state.failureOrUserDataWToken.fold(
+              state.failureOrUnitOption.fold(
                 () {},
                 (failureOrUnit) {
                   failureOrUnit.fold(
@@ -42,7 +41,7 @@ class LoginPage extends StatelessWidget {
                       context.showErrorToast('login.failed_toast_message'.tr());
                     },
                     (_) {
-                      context.read<AuthenticationBloc>().addCheckLoginStatus();
+                      context.read<AuthenticationBloc>().addUpdateLoginStatus();
                     },
                   );
                 },
