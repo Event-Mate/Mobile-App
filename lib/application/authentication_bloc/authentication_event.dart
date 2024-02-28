@@ -7,6 +7,6 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class _CheckLoginStatusEvent extends AuthenticationEvent {}
+class _UpdateLoginStatusEvent extends AuthenticationEvent {}
 
 class _AuthLogoutEvent extends AuthenticationEvent {}

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';
+import 'package:event_mate/model/user_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'authentication_event.dart';
@@ -14,11 +15,11 @@ class AuthenticationBloc
   AuthenticationBloc(
     this._iCacheController,
     this._iUserDataStorage,
-  ) : super(AuthInitialState()) {
+  ) : super(const AuthInitialState()) {
     on<AuthenticationEvent>(
       (event, emit) async {
-        if (event is _CheckLoginStatusEvent) {
-          await _onCheckLoginStatus(event, emit);
+        if (event is _UpdateLoginStatusEvent) {
+          await _onUpdateLoginStatus(event, emit);
         } else if (event is _AuthLogoutEvent) {
           await _onAuthLogout(event, emit);
         }
@@ -30,23 +31,27 @@ class AuthenticationBloc
   final ICacheController _iCacheController;
   final IUserDataStorage _iUserDataStorage;
 
-  void addCheckLoginStatus() {
-    add(_CheckLoginStatusEvent());
+  void addUpdateLoginStatus() {
+    add(_UpdateLoginStatusEvent());
   }
 
   void addLogout() {
     add(_AuthLogoutEvent());
   }
 
-  Future<void> _onCheckLoginStatus(
-    _CheckLoginStatusEvent event,
+  Future<void> _onUpdateLoginStatus(
+    _UpdateLoginStatusEvent event,
     Emitter<AuthenticationState> emit,
   ) async {
     final uid = _iCacheController.readString(key: CacheKey.UID);
     if (uid != null) {
-      emit(AuthLoggedInState());
+      final userDataOrFailure = await _iUserDataStorage.get(uniqueId: uid);
+      userDataOrFailure.fold(
+        (_) => emit(const AuthLoggedOutState()),
+        (userData) => emit(AuthLoggedInState(userData: userData)),
+      );
     } else {
-      emit(AuthLoggedOutState());
+      emit(const AuthLoggedOutState());
     }
   }
 
@@ -55,7 +60,7 @@ class AuthenticationBloc
     Emitter<AuthenticationState> emit,
   ) async {
     await _deleteSessionInfo();
-    emit(AuthLoggedOutState());
+    emit(const AuthLoggedOutState());
   }
 
   Future<void> _deleteSessionInfo() async {

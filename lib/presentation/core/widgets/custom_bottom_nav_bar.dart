@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/bottom_navbar_bloc/bottom_navbar_bloc.dart';
 import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
@@ -14,11 +15,12 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bottom = MediaQuery.of(context).padding.bottom;
-
+    final imageUrl = 'https://via.placeholder.com/150';
     return Padding(
       padding: EdgeInsets.only(bottom: bottom),
       child: BlocBuilder<BottomNavbarBloc, BottomNavbarState>(
-        // TODO(Furkan): bwhen
+        buildWhen: (previous, current) =>
+            previous.selectedIndex != current.selectedIndex,
         builder: (context, state) {
           final selectedIndex = state.selectedIndex;
           return GNav(
@@ -40,18 +42,17 @@ class CustomBottomNavBar extends StatelessWidget {
               context.read<BottomNavbarBloc>().addUpdateIndex(index);
             },
             tabs: [
-              // #translate: buton textleri
-              const GButton(
+              GButton(
                 icon: Icons.home_rounded,
-                text: 'Anasayfa',
+                text: 'bottom_navbar.home'.tr(),
               ),
-              const GButton(
+              GButton(
                 icon: Icons.list,
-                text: 'Etkinlikler',
+                text: 'bottom_navbar.events'.tr(),
               ),
-              const GButton(
+              GButton(
                 icon: Icons.people,
-                text: 'Arkadaş Bul',
+                text: 'bottom_navbar.find_mate'.tr(),
               ),
               GButton(
                 //! This icon is not used, but it is required by the package
@@ -71,11 +72,11 @@ class CustomBottomNavBar extends StatelessWidget {
                     height: 24,
                     width: 24,
                     placeholder: (context, url) => const CustomPlaceholder(),
-                    // TODO(Furkan): replace with profile avatar url
-                    imageUrl: '',
+                    // TODO(Furkan): Add user profile image url
+                    imageUrl: imageUrl,
                   ),
                 ),
-                text: 'Profil',
+                text: 'bottom_navbar.profile'.tr(),
               ),
             ],
           );

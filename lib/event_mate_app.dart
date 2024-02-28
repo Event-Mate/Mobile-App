@@ -27,7 +27,7 @@ class EventMateApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<SplashBloc>()..addCheckAppState()),
         BlocProvider(
-          create: (_) => getIt<AuthenticationBloc>()..addCheckLoginStatus(),
+          create: (_) => getIt<AuthenticationBloc>()..addUpdateLoginStatus(),
         ),
         BlocProvider(create: (_) => getIt<ColorThemeBloc>()..addInitialized()),
         BlocProvider(create: (_) => getIt<BottomNavbarBloc>()),
