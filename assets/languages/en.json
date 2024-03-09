@@ -79,8 +79,13 @@
     "events": "Events"
   },
   "my_profile_page": {
-    "page_title": "My Profile",
+    "page_title": "{}'s Profile",
     "logout_button_title": "Log Out",
-    "loading_user_profile_error_toast_message": "An error occured while loading the profile. Please try again later."
+    "loading_user_profile_error_toast_message": "An error occured while loading the profile. Please try again later.",
+    "display_name_section_title": "Name",
+    "email_section_title": "Email",
+    "username_section_title": "Username",
+    "gender_section_title": "Gender",
+    "birthdate_section_title": "Birthdate"
   }
 }

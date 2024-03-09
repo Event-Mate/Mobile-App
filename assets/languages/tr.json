@@ -81,6 +81,11 @@
   "my_profile_page": {
     "page_title": "Profilim",
     "logout_button_title": "Çıkış Yap",
-    "loading_user_profile_error_toast_message": "Kullanıcı profili yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+    "loading_user_profile_error_toast_message": "Kullanıcı profili yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+    "display_name_section_title": "Ad",
+    "email_section_title": "E-posta",
+    "username_section_title": "Kullanıcı Adı",
+    "gender_section_title": "Cinsiyet",
+    "birthdate_section_title": "Doğum Tarihi"
   }
 }
