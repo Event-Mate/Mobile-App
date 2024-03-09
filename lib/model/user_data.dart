@@ -81,6 +81,8 @@ class UserData extends Equatable {
     );
   }
 
+  String get dateOfBirthStr => dateOfBirth.toString().split(' ').first;
+
   @override
   List<Object?> get props => [
         id,

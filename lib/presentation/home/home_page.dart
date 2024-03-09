@@ -6,6 +6,7 @@ import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/bouncing_button.dart';
 import 'package:event_mate/presentation/core/widgets/custom_progress_indicator.dart';
+import 'package:event_mate/presentation/home/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,28 +15,32 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<EventFetcherBloc, EventFetcherState>(
-      builder: (context, state) {
-        if (state.fetchingCategories || state.fetchingEvents) {
-          return const Center(child: CustomProgressIndicator());
-        }
-        return RefreshIndicator(
-          color: context.colors.primary,
-          backgroundColor: context.colors.background,
-          onRefresh: () async {
-            // TODO(Furkan): Implement refresh logic
-            await Future.delayed(const Duration(seconds: 5));
-          },
-          child: const SingleChildScrollView(
-            child: Column(
-              children: [
-                _CategoriesSection(),
-                _AllEventsSection(),
-              ],
+    return Scaffold(
+      backgroundColor: context.colors.background,
+      appBar: const CustomAppBar(),
+      body: BlocBuilder<EventFetcherBloc, EventFetcherState>(
+        builder: (context, state) {
+          if (state.fetchingCategories || state.fetchingEvents) {
+            return const Center(child: CustomProgressIndicator());
+          }
+          return RefreshIndicator(
+            color: context.colors.primary,
+            backgroundColor: context.colors.background,
+            onRefresh: () async {
+              // TODO(Furkan): Implement refresh logic
+              await Future.delayed(const Duration(seconds: 5));
+            },
+            child: const SingleChildScrollView(
+              child: Column(
+                children: [
+                  _CategoriesSection(),
+                  _AllEventsSection(),
+                ],
+              ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

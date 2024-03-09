@@ -5,7 +5,6 @@ import 'package:event_mate/injection.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:event_mate/presentation/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:event_mate/presentation/home/home_page.dart';
-import 'package:event_mate/presentation/home/widgets/custom_app_bar.dart';
 import 'package:event_mate/presentation/profile/my_profile_page.dart';
 import 'package:event_mate/restartable_app.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +14,10 @@ class MainPage extends StatefulWidget {
   const MainPage();
 
   @override
-  State<MainPage> createState() => _HomePageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _HomePageState extends State<MainPage> {
+class _MainPageState extends State<MainPage> {
   late final PageController _pageController;
   @override
   void initState() {
@@ -44,7 +43,6 @@ class _HomePageState extends State<MainPage> {
       ],
       child: Scaffold(
         backgroundColor: context.colors.background,
-        appBar: const CustomAppBar(),
         bottomNavigationBar: const CustomBottomNavBar(),
         body: MultiBlocListener(
           listeners: [
@@ -52,7 +50,9 @@ class _HomePageState extends State<MainPage> {
               listenWhen: (previous, current) =>
                   previous.selectedIndex != current.selectedIndex,
               listener: (context, state) {
-                _pageController.jumpToPage(state.selectedIndex);
+                if (mounted) {
+                  _pageController.jumpToPage(state.selectedIndex);
+                }
               },
             ),
             BlocListener<AuthenticationBloc, AuthenticationState>(
@@ -64,14 +64,12 @@ class _HomePageState extends State<MainPage> {
               },
             ),
           ],
-          child: SafeArea(
-            child: PageView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              restorationId: 'main_page_view',
-              controller: _pageController,
-              itemCount: _pages.length,
-              itemBuilder: (context, index) => _pages[index],
-            ),
+          child: PageView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            restorationId: 'main_page_view',
+            controller: _pageController,
+            itemCount: _pages.length,
+            itemBuilder: (context, index) => _pages[index],
           ),
         ),
       ),
@@ -80,9 +78,10 @@ class _HomePageState extends State<MainPage> {
 
   final Map<int, Widget> _pages = {
     BottomNavbarHomePageState.index: const HomePage(),
-    BottomNavbarEventsPageState.index: const Center(child: Text('Yakında')),
+    BottomNavbarEventsPageState.index:
+        const Scaffold(body: Center(child: Text('Yakında'))),
     BottomNavbarCreateEventPageState.index:
-        const Center(child: Text('Yakında')),
+        const Scaffold(body: Center(child: Text('Yakında'))),
     BottomNavbarProfilePageState.index: const MyProfilePage(),
   };
 }

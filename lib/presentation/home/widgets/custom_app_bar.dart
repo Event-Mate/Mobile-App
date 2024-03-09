@@ -15,11 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavbarBloc, BottomNavbarState>(
       builder: (context, state) {
-        if (state is BottomNavbarProfilePageState) {
-          return const SizedBox(height: kToolbarHeight);
-        } else {
-          return const _DefaultAppBar();
-        }
+        return const _DefaultAppBar();
       },
     );
   }
