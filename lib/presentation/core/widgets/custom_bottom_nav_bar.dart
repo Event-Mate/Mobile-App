@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/bottom_navbar_bloc/bottom_navbar_bloc.dart';
 import 'package:event_mate/presentation/core/constants/app_text_styles.dart';
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
+import 'package:event_mate/presentation/core/extension/build_context_user_data_ext.dart';
 import 'package:event_mate/presentation/core/widgets/custom_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bottom = MediaQuery.of(context).padding.bottom;
-    final imageUrl = 'https://via.placeholder.com/150';
+    final imageUrl = context.auth.userData.avatarUrl;
     return Padding(
       padding: EdgeInsets.only(bottom: bottom),
       child: BlocBuilder<BottomNavbarBloc, BottomNavbarState>(
@@ -72,7 +73,6 @@ class CustomBottomNavBar extends StatelessWidget {
                     height: 24,
                     width: 24,
                     placeholder: (context, url) => const CustomPlaceholder(),
-                    // TODO(Furkan): Add user profile image url
                     imageUrl: imageUrl,
                   ),
                 ),

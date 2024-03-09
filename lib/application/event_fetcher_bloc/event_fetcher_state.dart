@@ -1,3 +1,5 @@
+// ignore_for_file: unused_result
+
 part of 'event_fetcher_bloc.dart';
 
 final class EventFetcherState extends Equatable {
