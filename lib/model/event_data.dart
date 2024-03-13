@@ -10,7 +10,6 @@ class EventData extends Equatable {
     required this.imageUrl,
     required this.price,
     required this.location,
-    required this.place,
     required this.date,
     required this.time,
     required this.category,
@@ -26,7 +25,6 @@ class EventData extends Equatable {
       price: map['price'] as String,
       location: LocationData.fromMap(map['location'] as Map<String, dynamic>),
       // TODO(Furkan): Remove these hardcoded values
-      place: "Küçükçiftlik Park - İstanbul",
       date: "12 Ağustos Cmt",
       time: "20:30",
       // place: map['place'] as String,
@@ -45,7 +43,6 @@ class EventData extends Equatable {
   final String imageUrl;
   final String price;
   final LocationData location;
-  final String place;
   final String date;
   final String time;
   final String category;
@@ -59,7 +56,6 @@ class EventData extends Equatable {
         imageUrl,
         price,
         location,
-        place,
         date,
         time,
         category,

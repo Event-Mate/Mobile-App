@@ -190,7 +190,7 @@ class _EventCard extends StatelessWidget {
                     const SizedBox(width: 4),
                     Expanded(
                       child: AutoSizeText(
-                        event.place,
+                        event.location.name,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: tsBodySmall.copyWith(

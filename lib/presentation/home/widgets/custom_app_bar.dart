@@ -73,20 +73,3 @@ class _OpenChatButton extends StatelessWidget {
     );
   }
 }
-
-class _ProfileAppBar extends StatelessWidget {
-  const _ProfileAppBar();
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: context.colors.primary,
-      elevation: 0,
-      centerTitle: true,
-      title: Text(
-        'Profil',
-        style: tsHeadLineMedium.copyWith(color: context.colors.background),
-      ),
-    );
-  }
-}
