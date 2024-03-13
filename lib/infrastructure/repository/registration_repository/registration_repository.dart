@@ -41,6 +41,7 @@ class RegistrationRepository
       );
 
       final result = jsonDecode(response.body) as Map<String, dynamic>;
+
       final error = _handleNetworkErrors(response.statusCode, result);
 
       if (error != null) {

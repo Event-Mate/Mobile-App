@@ -65,7 +65,7 @@ class InterestsEditBloc extends Bloc<InterestsEditEvent, InterestsEditState> {
     emit(
       state.copyWith(
         validating: false,
-        errorOption: state.selectedInterests.isEmpty()
+        errorOption: state.selectedInterests.size < 3
             ? some('registration.interests_size_error_message')
             : some(null),
       ),

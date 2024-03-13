@@ -146,7 +146,7 @@ class _EventCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.calendar_today,
-                      size: 16,
+                      size: 14,
                       color: context.colors.secondary,
                     ),
                     const SizedBox(width: 4),
@@ -165,7 +165,7 @@ class _EventCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.access_time,
-                      size: 16,
+                      size: 14,
                       color: context.colors.secondary,
                     ),
                     const SizedBox(width: 4),
@@ -184,7 +184,7 @@ class _EventCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.location_on,
-                      size: 16,
+                      size: 14,
                       color: context.colors.secondary,
                     ),
                     const SizedBox(width: 4),

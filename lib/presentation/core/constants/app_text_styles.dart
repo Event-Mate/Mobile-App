@@ -21,19 +21,19 @@ TextStyle tsHeadLineSmall = const TextStyle(
 );
 
 TextStyle tsBodyLarge = const TextStyle(
-  fontSize: 18,
-  fontWeight: FontWeight.w500,
-  fontFamily: _FontPoppins,
-);
-
-TextStyle tsBodyMedium = const TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w500,
   fontFamily: _FontPoppins,
 );
 
-TextStyle tsBodySmall = const TextStyle(
+TextStyle tsBodyMedium = const TextStyle(
   fontSize: 14,
+  fontWeight: FontWeight.w500,
+  fontFamily: _FontPoppins,
+);
+
+TextStyle tsBodySmall = const TextStyle(
+  fontSize: 12,
   fontWeight: FontWeight.w500,
   fontFamily: _FontPoppins,
 );
