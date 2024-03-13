@@ -14,8 +14,9 @@ class FormBody extends StatelessWidget {
     this.onRegistrationContinue,
     this.onRegistrationSubmit,
   }) : assert(
-          onRegistrationContinue != null || onRegistrationSubmit != null,
-          'onContinue and onSubmit cannot be null at the same time',
+          (onRegistrationContinue != null || onRegistrationSubmit != null) &&
+              (onRegistrationContinue == null || onRegistrationSubmit == null),
+          'onContinue and onSubmit cannot be used together!',
         );
 
   final String title;
@@ -68,9 +69,7 @@ class FormBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   RegistrationCompleteButton(onTap: onRegistrationSubmit!),
-                  if (skipStepButton != null) ...[
-                    skipStepButton!,
-                  ],
+                  if (skipStepButton != null) ...[skipStepButton!],
                 ],
               ),
             )

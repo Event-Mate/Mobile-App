@@ -9,6 +9,7 @@ import 'package:event_mate/application/email_registration_bloc/email_registratio
 import 'package:event_mate/application/event_fetcher_bloc/event_fetcher_bloc.dart';
 import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
 import 'package:event_mate/application/image_picker_bloc/image_picker_bloc.dart';
+import 'package:event_mate/application/interests_edit_bloc/interests_edit_bloc.dart';
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
 import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
@@ -173,6 +174,9 @@ Future<bool> _injectBlocs() async {
   getIt.registerFactory<BottomNavbarBloc>(
     // ignore: unnecessary_lambdas
     () => BottomNavbarBloc(),
+  );
+  getIt.registerFactory<InterestsEditBloc>(
+    () => InterestsEditBloc(getIt<IEventRepository>()),
   );
 
   return true;

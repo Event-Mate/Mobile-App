@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
+import 'package:event_mate/model/interest_category_data.dart';
+import 'package:kt_dart/kt.dart';
 
 class RegistrationData extends Equatable {
   const RegistrationData({
@@ -11,6 +14,7 @@ class RegistrationData extends Equatable {
     required this.password,
     required this.genderType,
     required this.dateOfBirth,
+    required this.interests,
     required this.avatarFile,
   });
 
@@ -22,6 +26,7 @@ class RegistrationData extends Equatable {
       password: '',
       genderType: GenderType.NONE,
       dateOfBirth: DateTime.now(),
+      interests: const KtList.empty(),
       avatarFile: null,
     );
   }
@@ -32,10 +37,12 @@ class RegistrationData extends Equatable {
   final String password;
   final GenderType genderType;
   final DateTime dateOfBirth;
+  final KtList<InterestCategoryData> interests;
   final File? avatarFile;
 
   //* This doesn't involve avatar file, attach it to multipart request as a file.
   Map<String, String> toMap() {
+    final interests = jsonEncode(this.interests.map((e) => e.toMap()).asList());
     return {
       'fullName': displayName,
       'username': username,
@@ -43,6 +50,7 @@ class RegistrationData extends Equatable {
       'password': password,
       'gender': genderType.value,
       'dateOfBirth': dateOfBirth.toIso8601String(),
+      'interests': interests,
     };
   }
 
@@ -53,6 +61,7 @@ class RegistrationData extends Equatable {
     String? password,
     GenderType? genderType,
     DateTime? dateOfBirth,
+    KtList<InterestCategoryData>? interests,
     File? avatarFile,
   }) {
     return RegistrationData(
@@ -62,6 +71,7 @@ class RegistrationData extends Equatable {
       password: password ?? this.password,
       genderType: genderType ?? this.genderType,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      interests: interests ?? this.interests,
       avatarFile: avatarFile ?? this.avatarFile,
     );
   }
@@ -77,6 +87,7 @@ class RegistrationData extends Equatable {
         password,
         genderType,
         dateOfBirth,
+        interests,
         avatarFile,
       ];
 }

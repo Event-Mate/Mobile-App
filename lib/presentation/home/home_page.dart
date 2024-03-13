@@ -110,89 +110,98 @@ class _EventCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 4.0,
-              ),
-              decoration: BoxDecoration(
-                color: context.colors.surfaceSecondary,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    event.title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: tsBodySmall.copyWith(
-                      color: context.colors.textPrimary,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_today,
-                        size: 16,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        event.date,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: tsBodySmall.copyWith(
-                          color: context.colors.textSecondary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.access_time,
-                        size: 16,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        event.time,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: tsBodySmall.copyWith(
-                          color: context.colors.textSecondary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on,
-                        size: 16,
-                      ),
-                      const SizedBox(width: 4),
-                      Expanded(
-                        child: AutoSizeText(
-                          event.place,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: tsBodySmall.copyWith(
-                            color: context.colors.textSecondary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                stops: const [0.0, 0.25, 0.5, 0.75],
+                colors: [
+                  context.colors.blackBase.withOpacity(1.0),
+                  context.colors.blackBase.withOpacity(0.75),
+                  context.colors.blackBase.withOpacity(0.5),
+                  context.colors.blackBase.withOpacity(0.0),
                 ],
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 12,
+            left: 8,
+            right: 8,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AutoSizeText(
+                  event.title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: tsBodySmall.copyWith(
+                    color: context.colors.whiteBase,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 16,
+                      color: context.colors.secondary,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      event.date,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: tsBodySmall.copyWith(
+                        color: context.colors.grayBase,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time,
+                      size: 16,
+                      color: context.colors.secondary,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      event.time,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: tsBodySmall.copyWith(
+                        color: context.colors.grayBase,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      size: 16,
+                      color: context.colors.secondary,
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      child: AutoSizeText(
+                        event.place,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: tsBodySmall.copyWith(
+                          color: context.colors.grayBase,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ],

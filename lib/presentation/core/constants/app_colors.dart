@@ -20,6 +20,7 @@ class AppColors extends Equatable {
     required this.textDisabled,
     required this.whiteBase,
     required this.blackBase,
+    required this.grayBase,
     required this.sheetsBackground,
     required this.redBase,
     required this.greenBase,
@@ -44,6 +45,7 @@ class AppColors extends Equatable {
       textDisabled: Color(0xFFD0D0D0),
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
+      grayBase: Color(0xFFD8D8D8),
       sheetsBackground: Color(0xffFFFFFF),
       redBase: Color(0xFFEC5C5C),
       greenBase: Color(0xFF32A164),
@@ -69,6 +71,7 @@ class AppColors extends Equatable {
       textDisabled: Color(0xFFD0D0D0),
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
+      grayBase: Color(0xFFD8D8D8),
       sheetsBackground: Color(0xFF1E1E1E),
       redBase: Color(0xFFEC5C5C),
       greenBase: Color(0xFF32A164),
@@ -92,6 +95,7 @@ class AppColors extends Equatable {
   final Color textDisabled;
   final Color whiteBase;
   final Color blackBase;
+  final Color grayBase;
   final Color greenPrimary;
   final Color sheetsBackground;
   final Color redBase;
@@ -117,6 +121,7 @@ class AppColors extends Equatable {
       textDisabled,
       whiteBase,
       blackBase,
+      grayBase,
       greenPrimary,
       sheetsBackground,
       redBase,

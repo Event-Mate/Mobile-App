@@ -6,6 +6,7 @@ import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/failure/repository/event_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/event_repository/i_event_repository.dart';
 import 'package:event_mate/model/event_data.dart';
+import 'package:event_mate/model/interest_category_data.dart';
 import 'package:event_mate/service/custom_http_client.dart';
 import 'package:kt_dart/kt.dart';
 
@@ -81,6 +82,41 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
       }
     } catch (e) {
       return left(EventUnknownFailure('EventUnknownFailure: $e'));
+    }
+  }
+
+  @override
+  Future<Either<EventRepositoryFailure, KtList<InterestCategoryData>>>
+      getAllInterestCategories() async {
+    try {
+      final uri = Uri(
+        scheme: env.HTTPS_SCHEME,
+        host: env.AWS_HOST,
+        path: '/api/interest',
+      );
+
+      final response = await _client.get(
+        uri,
+        headers: noTokenApiHeader,
+      );
+
+      final result = jsonDecode(response.body) as Map<String, dynamic>;
+
+      final error = _handleNetworkErrors(response.statusCode, result);
+
+      if (error != null) {
+        return left(error);
+      } else {
+        final data = result['data'] as List<dynamic>;
+
+        final interestCategories = data
+            .map((e) => InterestCategoryData.fromMap(e as Map<String, dynamic>))
+            .toImmutableList();
+
+        return right(interestCategories);
+      }
+    } catch (e) {
+      return left(EventUnknownFailure('InterestCategoryUnknownFailure: $e'));
     }
   }
 

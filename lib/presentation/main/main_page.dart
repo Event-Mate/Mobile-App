@@ -76,12 +76,12 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  final Map<int, Widget> _pages = {
-    BottomNavbarHomePageState.index: const HomePage(),
+  static const Map<int, Widget> _pages = {
+    BottomNavbarHomePageState.index: HomePage(),
     BottomNavbarEventsPageState.index:
-        const Scaffold(body: Center(child: Text('Yakında'))),
+        Scaffold(body: Center(child: Text('Yakında'))),
     BottomNavbarCreateEventPageState.index:
-        const Scaffold(body: Center(child: Text('Yakında'))),
-    BottomNavbarProfilePageState.index: const MyProfilePage(),
+        Scaffold(body: Center(child: Text('Yakında'))),
+    BottomNavbarProfilePageState.index: MyProfilePage(),
   };
 }
