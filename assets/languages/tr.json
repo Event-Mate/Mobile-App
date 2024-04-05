@@ -73,7 +73,8 @@
     "festival_chip_title": "Festival",
     "conference_chip_title": "Konferans",
     "standup_chip_title": "Stand Up",
-    "all_events_section_title": "Tüm Etkinlikler"
+    "all_events_section_title": "Tüm Etkinlikler",
+    "suggested_events_section_title": "Senin İçin Önerilen Etkinlikler"
   },
   "bottom_navbar": {
     "home": "Anasayfa",

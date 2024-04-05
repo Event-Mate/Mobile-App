@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/application/bottom_navbar_bloc/bottom_navbar_bloc.dart';
 import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/presentation/chat/chat_page.dart';
@@ -15,13 +16,61 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<BottomNavbarBloc, BottomNavbarState>(
       builder: (context, state) {
-        return const _DefaultAppBar();
+        if (state is BottomNavbarEventsPageState) {
+          return const _SuggestedEventsAppBar();
+        } else {
+          return const _DefaultAppBar();
+        }
       },
     );
   }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+}
+
+class _SuggestedEventsAppBar extends StatelessWidget {
+  const _SuggestedEventsAppBar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: kToolbarHeight * 4,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          stops: const [0.0, 0.7, 0.9, 1.0],
+          colors: [
+            context.colors.primary,
+            context.colors.primary.withOpacity(0.5),
+            context.colors.primary.withOpacity(0.25),
+            context.colors.primary.withOpacity(0.0),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            '🎭 ${'home_page.suggested_events_section_title'.tr()}',
+            style: tsHeadLineSmall.copyWith(
+              color: context.colors.background,
+              shadows: [
+                Shadow(
+                  color: context.colors.accent,
+                  offset: const Offset(4, 4),
+                  blurRadius: 12,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _DefaultAppBar extends StatelessWidget {
@@ -39,7 +88,7 @@ class _DefaultAppBar extends StatelessWidget {
           Icon(
             Icons.flare_rounded,
             color: context.colors.background,
-            size: 26,
+            size: 20,
           ),
           const SizedBox(width: 2),
           Text(

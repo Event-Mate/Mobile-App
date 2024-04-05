@@ -73,7 +73,8 @@
     "festival_chip_title": "Festival",
     "conference_chip_title": "Conference",
     "standup_chip_title": "Stand Up",
-    "all_events_section_title": "All Events"
+    "all_events_section_title": "All Events",
+    "suggested_events_section_title": "Suggested Events For You"
   },
   "bottom_navbar": {
     "home": "Home",

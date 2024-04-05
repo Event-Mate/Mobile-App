@@ -10,8 +10,6 @@ class EventData extends Equatable {
     required this.imageUrl,
     required this.price,
     required this.location,
-    required this.date,
-    required this.time,
     required this.category,
     required this.participantIds,
   });
@@ -24,12 +22,6 @@ class EventData extends Equatable {
       imageUrl: map['image'] as String,
       price: map['price'] as String,
       location: LocationData.fromMap(map['location'] as Map<String, dynamic>),
-      // TODO(Furkan): Remove these hardcoded values
-      date: "12 Ağustos Cmt",
-      time: "20:30",
-      // place: map['place'] as String,
-      // date: map['date'] as String,
-      // time: map['time'] as String,
       category: map['category'] as String,
       participantIds: (map['participants'] as List<dynamic>)
           .map((e) => e as String)
@@ -43,10 +35,13 @@ class EventData extends Equatable {
   final String imageUrl;
   final String price;
   final LocationData location;
-  final String date;
-  final String time;
   final String category;
   final KtList<String> participantIds;
+
+  String get dateTime => info.split("\n")[1];
+  String get date => dateTime.split("-")[0];
+  String get time => dateTime.split("- ")[1];
+  String get place => location.name;
 
   @override
   List<Object?> get props => [

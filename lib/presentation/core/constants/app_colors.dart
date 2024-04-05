@@ -25,7 +25,9 @@ class AppColors extends Equatable {
     required this.redBase,
     required this.greenBase,
     required this.orangeBase,
+    required this.purpleBase,
   });
+
   factory AppColors.light() {
     return const AppColors._(
       background: Color(0xffFCFCFC),
@@ -50,8 +52,10 @@ class AppColors extends Equatable {
       redBase: Color(0xFFEC5C5C),
       greenBase: Color(0xFF32A164),
       orangeBase: Color(0xffFB8C00),
+      purpleBase: Color(0xFF6A4C93),
     );
   }
+
   factory AppColors.dark() {
     return const AppColors._(
       background: Color(0xFF1E1E1E),
@@ -76,6 +80,7 @@ class AppColors extends Equatable {
       redBase: Color(0xFFEC5C5C),
       greenBase: Color(0xFF32A164),
       orangeBase: Color(0xffFB8C00),
+      purpleBase: Color(0xFF6A4C93),
     );
   }
 
@@ -101,6 +106,7 @@ class AppColors extends Equatable {
   final Color redBase;
   final Color greenBase;
   final Color orangeBase;
+  final Color purpleBase;
 
   @override
   List<Object> get props {
@@ -127,6 +133,7 @@ class AppColors extends Equatable {
       redBase,
       greenBase,
       orangeBase,
+      purpleBase,
     ];
   }
 }
