@@ -43,7 +43,6 @@ dependencies:
     git:
       url: https://github.com/Event-Mate/ripple_animation.git
       ref: 804558ad4842095249e40dac8224e0844a96206f
-  google_maps_flutter: ^2.6.0
 
 dev_dependencies:
   flutter_test:
