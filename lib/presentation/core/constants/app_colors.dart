@@ -20,11 +20,14 @@ class AppColors extends Equatable {
     required this.textDisabled,
     required this.whiteBase,
     required this.blackBase,
+    required this.grayBase,
     required this.sheetsBackground,
-    required this.error,
-    required this.success,
+    required this.redBase,
+    required this.greenBase,
     required this.orangeBase,
+    required this.purpleBase,
   });
+
   factory AppColors.light() {
     return const AppColors._(
       background: Color(0xffFCFCFC),
@@ -44,12 +47,15 @@ class AppColors extends Equatable {
       textDisabled: Color(0xFFD0D0D0),
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
+      grayBase: Color(0xFFD8D8D8),
       sheetsBackground: Color(0xffFFFFFF),
-      error: Color(0xFFEC5C5C),
-      success: Color(0xFF32A164),
+      redBase: Color(0xFFEC5C5C),
+      greenBase: Color(0xFF32A164),
       orangeBase: Color(0xffFB8C00),
+      purpleBase: Color(0xFF6A4C93),
     );
   }
+
   factory AppColors.dark() {
     return const AppColors._(
       background: Color(0xFF1E1E1E),
@@ -69,10 +75,12 @@ class AppColors extends Equatable {
       textDisabled: Color(0xFFD0D0D0),
       whiteBase: Color(0xffFFFFFF),
       blackBase: Color(0xff000000),
+      grayBase: Color(0xFFD8D8D8),
       sheetsBackground: Color(0xFF1E1E1E),
-      error: Color(0xFFEC5C5C),
-      success: Color(0xFF32A164),
+      redBase: Color(0xFFEC5C5C),
+      greenBase: Color(0xFF32A164),
       orangeBase: Color(0xffFB8C00),
+      purpleBase: Color(0xFF6A4C93),
     );
   }
 
@@ -92,11 +100,13 @@ class AppColors extends Equatable {
   final Color textDisabled;
   final Color whiteBase;
   final Color blackBase;
+  final Color grayBase;
   final Color greenPrimary;
   final Color sheetsBackground;
-  final Color error;
-  final Color success;
+  final Color redBase;
+  final Color greenBase;
   final Color orangeBase;
+  final Color purpleBase;
 
   @override
   List<Object> get props {
@@ -117,11 +127,13 @@ class AppColors extends Equatable {
       textDisabled,
       whiteBase,
       blackBase,
+      grayBase,
       greenPrimary,
       sheetsBackground,
-      error,
-      success,
+      redBase,
+      greenBase,
       orangeBase,
+      purpleBase,
     ];
   }
 }

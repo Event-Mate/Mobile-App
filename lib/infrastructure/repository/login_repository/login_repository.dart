@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:event_mate/core/mixins/api_header_mixin.dart';
 import 'package:event_mate/environment.dart' as env;
-import 'package:event_mate/failure/repository/login_repostiory_failure.dart';
+import 'package:event_mate/failure/repository/login_repository_failure.dart';
 import 'package:event_mate/infrastructure/repository/login_repository/i_login_repository.dart';
 import 'package:event_mate/model/user_data.dart';
 import 'package:event_mate/service/custom_http_client.dart';
@@ -31,7 +31,7 @@ class LoginRepository with ApiHeaderMixin implements ILoginRepository {
 
       final response = await _client.post(
         uri,
-        headers: nonSessionApiHeader,
+        headers: noTokenApiHeader,
         body: json.encode(body),
       );
 

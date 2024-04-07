@@ -11,4 +11,8 @@ abstract class IUserDataStorage {
   Future<Either<UserDataStorageFailure, UserData>> get({
     required String uniqueId,
   });
+
+  Future<Either<UserDataStorageFailure, Unit>> delete({
+    required String uniqueId,
+  });
 }

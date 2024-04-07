@@ -15,7 +15,7 @@ class InputErrorText extends StatelessWidget {
         Icon(
           Icons.error,
           size: 20,
-          color: context.colors.error,
+          color: context.colors.redBase,
         ),
         const SizedBox(width: 4),
         Expanded(
@@ -24,7 +24,7 @@ class InputErrorText extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 2,
             style: tsBodySmall.copyWith(
-              color: context.colors.error,
+              color: context.colors.redBase,
               fontWeight: FontWeight.w600,
             ),
           ),

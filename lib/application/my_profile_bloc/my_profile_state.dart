@@ -25,6 +25,20 @@ final class MyProfileState extends Equatable {
         ),
       );
 
+  String get avatarUrlOrEmpty => userDataOption.fold(
+        () {
+          return '';
+        },
+        (failureOrUserData) => failureOrUserData.fold(
+          (failure) {
+            return '';
+          },
+          (userData) {
+            return userData.avatarUrl;
+          },
+        ),
+      );
+
   bool get processFailed => userDataOption.fold(
         () => false,
         (failureOrUserData) => failureOrUserData.isLeft(),

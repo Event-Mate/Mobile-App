@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:event_mate/core/enums/gender_type.dart';
 import 'package:event_mate/environment.dart' as env;
 import 'package:event_mate/infrastructure/storage/user_data_storage/user_data_storage.dart';
+import 'package:event_mate/model/interest_category_data.dart';
+import 'package:kt_dart/kt.dart';
 
 class UserData extends Equatable {
   const UserData({
@@ -11,6 +13,7 @@ class UserData extends Equatable {
     required this.email,
     required this.genderType,
     required this.dateOfBirth,
+    required this.interests,
     required this.avatarUrl,
   });
 
@@ -23,6 +26,8 @@ class UserData extends Equatable {
       email: map['email'] as String,
       genderType: GenderType.fromValue(map['gender'] as String),
       dateOfBirth: DateTime.parse(map['dateOfBirth'] as String),
+      interests: KtList.from(map['interests'] as List)
+          .map((e) => InterestCategoryData.fromMap(e as Map<String, dynamic>)),
       avatarUrl: '${env.AWS_ASSETS_HOST}/${map['avatar'] as String}',
     );
   }
@@ -36,6 +41,8 @@ class UserData extends Equatable {
       email: map['email'] as String,
       genderType: GenderType.fromValue(map['gender'] as String),
       dateOfBirth: DateTime.parse(map['dateOfBirth'] as String),
+      interests: KtList.from(map['interests'] as List)
+          .map((e) => InterestCategoryData.fromMap(e as Map<String, dynamic>)),
       avatarUrl: map['avatar'] as String,
     );
   }
@@ -48,6 +55,7 @@ class UserData extends Equatable {
       'email': email,
       'gender': genderType.value,
       'dateOfBirth': dateOfBirth.toIso8601String(),
+      'interests': interests.map((e) => e.toMap()).asList(),
       'avatar': avatarUrl,
     };
   }
@@ -59,6 +67,7 @@ class UserData extends Equatable {
   final GenderType genderType;
   final DateTime dateOfBirth;
   final String avatarUrl;
+  final KtList<InterestCategoryData> interests;
 
   UserData copyWith({
     String? id,
@@ -68,6 +77,7 @@ class UserData extends Equatable {
     String? password,
     GenderType? genderType,
     DateTime? dateOfBirth,
+    KtList<InterestCategoryData>? interests,
     String? avatarUrl,
   }) {
     return UserData(
@@ -77,9 +87,12 @@ class UserData extends Equatable {
       email: email ?? this.email,
       genderType: genderType ?? this.genderType,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      interests: interests ?? this.interests,
       avatarUrl: avatarUrl ?? this.avatarUrl,
     );
   }
+
+  String get dateOfBirthStr => dateOfBirth.toString().split(' ').first;
 
   @override
   List<Object?> get props => [
@@ -89,6 +102,7 @@ class UserData extends Equatable {
         email,
         genderType,
         dateOfBirth,
+        interests,
         avatarUrl,
       ];
 

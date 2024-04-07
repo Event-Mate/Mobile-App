@@ -57,7 +57,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     final borderColor = widget.errorText != null
-        ? context.colors.error
+        ? context.colors.redBase
         : _focusNode.hasFocus
             ? context.colors.primary
             : context.colors.borderPrimary;
@@ -83,7 +83,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   keyboardType: widget.keyboardType,
                   obscureText: widget.obscureText,
                   cursorColor: widget.errorText != null
-                      ? context.colors.error
+                      ? context.colors.redBase
                       : context.colors.primary,
                   style: tsBodyMedium.copyWith(
                     color: context.colors.textPrimary,

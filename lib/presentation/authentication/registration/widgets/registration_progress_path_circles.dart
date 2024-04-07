@@ -15,7 +15,6 @@ class RegistrationProgressPathCircles extends StatelessWidget {
           previous.currentStepIndex != current.currentStepIndex,
       builder: (context, state) {
         final currentStepIndex = state.currentStepIndex;
-
         return Row(
           children: [
             for (int i = 0; i < RegistrationSteps.stepsMap.length; i++) ...[
@@ -35,7 +34,7 @@ class RegistrationProgressPathCircles extends StatelessWidget {
                 _ProgressPathCircle(stepCompleted: i < currentStepIndex),
               if (i != RegistrationSteps.stepsMap.length - 1)
                 Container(
-                  width: 20,
+                  width: 16,
                   height: 4,
                   color: i < currentStepIndex
                       ? context.colors.secondary

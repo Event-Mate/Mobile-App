@@ -1,14 +1,36 @@
 part of 'authentication_bloc.dart';
 
-sealed class AuthenticationState extends Equatable {
+abstract class AuthenticationState extends Equatable {
   const AuthenticationState();
 
+  UserData get userData;
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [userData];
 }
 
-final class AuthInitialState extends AuthenticationState {}
+class AuthInitialState extends AuthenticationState {
+  const AuthInitialState();
 
-final class AuthLoggedInState extends AuthenticationState {}
+  @override
+  UserData get userData =>
+      throw StateError('$runtimeType does not have userData.');
+}
 
-final class AuthLoggedOutState extends AuthenticationState {}
+class AuthLoggedOutState extends AuthenticationState {
+  const AuthLoggedOutState();
+
+  @override
+  UserData get userData =>
+      throw StateError('$runtimeType does not have userData.');
+}
+
+class AuthLoggedInState extends AuthenticationState {
+  const AuthLoggedInState({required this.userData});
+
+  @override
+  final UserData userData;
+
+  @override
+  List<Object> get props => [userData];
+}

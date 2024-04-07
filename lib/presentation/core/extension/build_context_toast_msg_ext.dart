@@ -25,7 +25,7 @@ extension BuildContextToastMsgExt on BuildContext {
       msg: message,
       gravity: gravity,
       toastLength: Toast.LENGTH_LONG,
-      backgroundColor: colors.success,
+      backgroundColor: colors.greenBase,
       textColor: colors.whiteBase,
       fontSize: 16.0,
     );
@@ -39,7 +39,7 @@ extension BuildContextToastMsgExt on BuildContext {
       msg: message,
       gravity: gravity,
       toastLength: Toast.LENGTH_LONG,
-      backgroundColor: colors.error,
+      backgroundColor: colors.redBase,
       textColor: colors.whiteBase,
       fontSize: 16.0,
     );

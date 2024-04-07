@@ -7,11 +7,6 @@ class SharedPreferencesCacheController implements ICacheController {
   final SharedPreferences _sharedPref;
 
   @override
-  Future<void> clear() {
-    return _sharedPref.clear();
-  }
-
-  @override
   Future<void> delete({required CacheKey key}) {
     return _sharedPref.remove(key.value);
   }

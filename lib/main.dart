@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:event_mate/core/enums/locale_type.dart';
 import 'package:event_mate/event_mate_app.dart';
 import 'package:event_mate/injection.dart';
+import 'package:event_mate/restartable_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -25,8 +26,8 @@ Future<void> main() async {
           Locale(LocaleType.TR.value),
         ],
         path: 'assets/languages',
-        fallbackLocale: const Locale('en'),
-        child: const EventMateApp(),
+        fallbackLocale: Locale(LocaleType.EN.value),
+        child: const RestartableApp(child: EventMateApp()),
       ),
     );
   } else {

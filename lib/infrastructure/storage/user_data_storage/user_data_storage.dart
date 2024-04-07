@@ -54,4 +54,21 @@ class UserDataStorage implements IUserDataStorage {
       );
     }
   }
+
+  @override
+  Future<Either<UserDataStorageFailure, Unit>> delete({
+    required String uniqueId,
+  }) async {
+    try {
+      final result = await _store.record(uniqueId).delete(_database);
+
+      if (result != null) subject.add(0);
+
+      return right(unit);
+    } catch (e) {
+      return left(
+        UserDataStorageUnknownFailure('UserDataStorageUnknownFailure: $e'),
+      );
+    }
+  }
 }

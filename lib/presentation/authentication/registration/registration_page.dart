@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:event_mate/application/authentication_bloc/authentication_bloc.dart';
 import 'package:event_mate/application/avatar_edit_bloc/avatar_edit_bloc.dart';
 import 'package:event_mate/application/birthday_edit_bloc/birthday_edit_bloc.dart';
 import 'package:event_mate/application/email_edit_bloc/email_edit_bloc.dart';
 import 'package:event_mate/application/email_registration_bloc/email_registration_bloc.dart';
 import 'package:event_mate/application/gender_edit_bloc/gender_edit_bloc.dart';
+import 'package:event_mate/application/interests_edit_bloc/interests_edit_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
 import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
@@ -14,6 +16,7 @@ import 'package:event_mate/presentation/authentication/registration/form/registr
 import 'package:event_mate/presentation/authentication/registration/form/registration_birthday_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_email_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_gender_form_body.dart';
+import 'package:event_mate/presentation/authentication/registration/form/registration_interests_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_name_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_password_form_body.dart';
 import 'package:event_mate/presentation/authentication/registration/form/registration_username_form_body.dart';
@@ -60,6 +63,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           create: (_) => getIt<BirthdayEditBloc>()
             ..addInit(langCode: context.deviceLocale.languageCode),
         ),
+        BlocProvider(create: (_) => getIt<InterestsEditBloc>()),
         BlocProvider(create: (_) => getIt<AvatarEditBloc>()),
       ],
       child: MultiBlocListener(
@@ -91,11 +95,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       );
                     },
                     (_) {
-                      context.openNamedPageWithClearStack(AppRoutes.HOME.value);
+                      context.read<AuthenticationBloc>().addUpdateLoginStatus();
                     },
                   );
                 },
               );
+            },
+          ),
+          BlocListener<AuthenticationBloc, AuthenticationState>(
+            listenWhen: (previous, current) =>
+                previous is AuthLoggedOutState && current is AuthLoggedInState,
+            listener: (context, state) {
+              context.showSuccessToast(
+                'registration.success_toast_message'.tr(),
+              );
+              context.openNamedPageWithClearStack(AppRoutes.MAIN.value);
             },
           ),
         ],
@@ -153,6 +167,7 @@ class RegistrationSteps {
     RegistrationStepType.PASSWORD: const RegistrationPasswordFormBody(),
     RegistrationStepType.GENDER: const RegistrationGenderFormBody(),
     RegistrationStepType.DATE_OF_BIRTH: const RegistrationBirthdayFormBody(),
+    RegistrationStepType.INTERESTS: const RegistrationInterestsFormBody(),
     RegistrationStepType.AVATAR_URL: const RegistrationAvatarFormBody(),
   };
 }
