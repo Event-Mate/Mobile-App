@@ -73,7 +73,7 @@ class MyProfilePage extends StatelessWidget {
                         ),
                         _ProfileInformationTile(
                           title: 'my_profile_page.username_section_title'.tr(),
-                          value: userData.username,
+                          value: '@${userData.username}',
                         ),
                         _ProfileInformationTile(
                           title: 'my_profile_page.gender_section_title'.tr(),
