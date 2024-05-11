@@ -3,7 +3,7 @@ import 'package:event_mate/presentation/authentication/registration/registration
 import 'package:event_mate/presentation/core/extension/build_context_theme_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ripple_animation/ripple_animation.dart';
+import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 class RegistrationProgressPathCircles extends StatelessWidget {
   const RegistrationProgressPathCircles();

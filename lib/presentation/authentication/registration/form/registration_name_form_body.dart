@@ -13,8 +13,8 @@ class RegistrationNameFormBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<NameEditBloc, NameEditState>(
       listenWhen: (previous, current) {
-        return previous.validating == true &&
-            current.validating == false &&
+        return previous.validating &&
+            !current.validating &&
             current.isFormValid;
       },
       listener: (context, state) {

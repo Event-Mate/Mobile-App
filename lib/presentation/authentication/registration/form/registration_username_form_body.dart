@@ -14,8 +14,8 @@ class RegistrationUsernameFormBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<UsernameEditBloc, UsernameEditState>(
       listenWhen: (previous, current) {
-        return previous.validating == true &&
-            current.validating == false &&
+        return previous.validating &&
+            !current.validating &&
             current.isFormValid;
       },
       listener: (context, state) {

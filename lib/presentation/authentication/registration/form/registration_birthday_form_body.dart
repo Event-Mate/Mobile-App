@@ -17,8 +17,8 @@ class RegistrationBirthdayFormBody extends StatelessWidget {
     final DateTime dateNow = DateTime.now();
     return BlocListener<BirthdayEditBloc, BirthdayEditState>(
       listenWhen: (previous, current) {
-        return previous.validating == true &&
-            current.validating == false &&
+        return previous.validating &&
+            !current.validating &&
             current.isFormValid;
       },
       listener: (context, state) {

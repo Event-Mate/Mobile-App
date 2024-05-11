@@ -35,7 +35,7 @@ class _RegistrationInterestsFormBodyState
   Widget build(BuildContext context) {
     return BlocListener<InterestsEditBloc, InterestsEditState>(
       listenWhen: (previous, current) {
-        return previous.validating == true && current.validating == false;
+        return previous.validating && !current.validating;
       },
       listener: (context, state) {
         if (!state.isFormValid) {
