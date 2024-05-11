@@ -165,7 +165,7 @@ class _EventLocationInfoView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          // const SizedBox(height: 8),
           // TODO(Furkan): Add map widget here.
         ],
       ),
