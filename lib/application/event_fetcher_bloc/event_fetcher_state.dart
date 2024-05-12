@@ -20,10 +20,8 @@ final class EventFetcherState extends Equatable {
   }
 
   EventFetcherState copyWith({
-    Option<Either<EventRepositoryFailure, KtList<EventData>>>?
-        failureOrEventsOption,
-    Option<Either<EventRepositoryFailure, KtList<String>>>?
-        failureOrCategoriesOption,
+    Option<Either<CustomFailure, KtList<EventData>>>? failureOrEventsOption,
+    Option<Either<CustomFailure, KtList<String>>>? failureOrCategoriesOption,
     bool? fetchingEvents,
     bool? fetchingCategories,
   }) {
@@ -37,10 +35,8 @@ final class EventFetcherState extends Equatable {
     );
   }
 
-  final Option<Either<EventRepositoryFailure, KtList<EventData>>>
-      failureOrEventsOption;
-  final Option<Either<EventRepositoryFailure, KtList<String>>>
-      failureOrCategoriesOption;
+  final Option<Either<CustomFailure, KtList<EventData>>> failureOrEventsOption;
+  final Option<Either<CustomFailure, KtList<String>>> failureOrCategoriesOption;
   final bool fetchingEvents;
   final bool fetchingCategories;
 

@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:event_mate/core/mixins/api_header_mixin.dart';
 import 'package:event_mate/environment.dart' as env;
-import 'package:event_mate/failure/repository/event_repository_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
+
 import 'package:event_mate/infrastructure/repository/event_repository/i_event_repository.dart';
 import 'package:event_mate/model/event_data.dart';
 import 'package:event_mate/model/interest_category_data.dart';
@@ -16,7 +17,7 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
   final CustomHttpClient _client;
 
   @override
-  Future<Either<EventRepositoryFailure, KtList<String>>> getCategories() async {
+  Future<Either<CustomFailure, KtList<String>>> getCategories() async {
     try {
       final uri = Uri(
         scheme: env.HTTPS_SCHEME,
@@ -46,13 +47,12 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
         return right(categories);
       }
     } catch (e) {
-      return left(EventUnknownFailure('EventUnknownFailure: $e'));
+      return left(UnknownCustomFailure('UnknownCustomFailure: $e'));
     }
   }
 
   @override
-  Future<Either<EventRepositoryFailure, KtList<EventData>>>
-      getAllEvents() async {
+  Future<Either<CustomFailure, KtList<EventData>>> getAllEvents() async {
     try {
       final uri = Uri(
         scheme: env.HTTPS_SCHEME,
@@ -81,12 +81,12 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
         return right(events);
       }
     } catch (e) {
-      return left(EventUnknownFailure('EventUnknownFailure: $e'));
+      return left(UnknownCustomFailure('UnknownCustomFailure: $e'));
     }
   }
 
   @override
-  Future<Either<EventRepositoryFailure, KtList<InterestCategoryData>>>
+  Future<Either<CustomFailure, KtList<InterestCategoryData>>>
       getAllInterestCategories() async {
     try {
       final uri = Uri(
@@ -116,21 +116,21 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
         return right(interestCategories);
       }
     } catch (e) {
-      return left(EventUnknownFailure('InterestCategoryUnknownFailure: $e'));
+      return left(UnknownCustomFailure('InterestCategoryUnknownFailure: $e'));
     }
   }
 
-  EventRepositoryFailure? _handleNetworkErrors(
+  CustomFailure? _handleNetworkErrors(
     int statusCode,
     Map<String, dynamic> result,
   ) {
     if (statusCode == 200) return null;
 
-    return EventUnknownFailure('EventUnknownFailure: $result');
+    return UnknownCustomFailure('UnknownCustomFailure: $result');
   }
 
   @override
-  Future<Either<EventRepositoryFailure, EventData>> attendEvent(
+  Future<Either<CustomFailure, EventData>> attendEvent(
     String eventId,
   ) async {
     try {
@@ -140,10 +140,7 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
         path: '/api/event',
       );
 
-      final response = await _client.put(
-        uri,
-        headers: noTokenApiHeader,
-      );
+      final response = await _client.put(uri, headers: tokenApiHeader);
 
       final result = jsonDecode(response.body) as Map<String, dynamic>;
 
@@ -157,7 +154,7 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
         return right(eventData);
       }
     } catch (e) {
-      return left(EventUnknownFailure('EventUnknownFailure: $e'));
+      return left(UnknownCustomFailure('UnknownCustomFailure: $e'));
     }
   }
 }

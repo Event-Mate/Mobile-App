@@ -7,10 +7,10 @@ final class MyProfileState extends Equatable {
     return MyProfileState(userDataOption: none());
   }
 
-  final Option<Either<UserDataStorageFailure, UserData>> userDataOption;
+  final Option<Either<CustomFailure, UserData>> userDataOption;
 
   MyProfileState copyWith({
-    Option<Either<UserDataStorageFailure, UserData>>? userDataOption,
+    Option<Either<CustomFailure, UserData>>? userDataOption,
   }) {
     return MyProfileState(
       userDataOption: userDataOption ?? this.userDataOption,

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:event_mate/core/mixins/api_header_mixin.dart';
 import 'package:event_mate/environment.dart' as env;
-import 'package:event_mate/failure/repository/login_repository_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
 import 'package:event_mate/infrastructure/repository/login_repository/i_login_repository.dart';
 import 'package:event_mate/model/user_data.dart';
 import 'package:event_mate/service/custom_http_client.dart';
@@ -13,7 +13,7 @@ class LoginRepository with ApiHeaderMixin implements ILoginRepository {
   final CustomHttpClient _client;
 
   @override
-  Future<Either<LoginRepositoryFailure, UserDataWithToken>> loginUser({
+  Future<Either<CustomFailure, UserDataWithToken>> loginUser({
     required String email,
     required String password,
   }) async {
@@ -47,11 +47,11 @@ class LoginRepository with ApiHeaderMixin implements ILoginRepository {
         return right(Tuple2(UserData.fromMap(data), token));
       }
     } catch (e) {
-      return left(LoginUnknownFailure('LoginUnknownFailure: $e'));
+      return left(UnknownCustomFailure('UnknownCustomFailure: $e'));
     }
   }
 
-  LoginRepositoryFailure? _handleNetworkErrors(
+  CustomFailure? _handleNetworkErrors(
     int statusCode,
     Map<String, dynamic> result,
   ) {
@@ -60,16 +60,16 @@ class LoginRepository with ApiHeaderMixin implements ILoginRepository {
     final errorMap = result['error'];
 
     if (statusCode == 400) {
-      return LoginInvalidCredentialsFailure(
+      return BadRequestCustomFailure(
         "LoginInvalidCredentialsFailure: $errorMap",
       );
     } else if (statusCode == 404) {
-      return LoginUserNotExistFailure(
+      return NotFoundCustomFailure(
         "LoginUserNotExistFailure: $errorMap",
       );
     } else {
-      return LoginUnknownFailure(
-        "LoginUnknownFailure: $errorMap",
+      return UnknownCustomFailure(
+        "UnknownCustomFailure: $errorMap",
       );
     }
   }

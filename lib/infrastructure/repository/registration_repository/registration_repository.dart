@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:event_mate/core/mixins/api_header_mixin.dart';
 import 'package:event_mate/environment.dart' as env;
-import 'package:event_mate/failure/repository/registration_repository_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
 import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
 
 import 'package:event_mate/model/registration_data.dart';
@@ -18,8 +18,7 @@ class RegistrationRepository
   final CustomHttpClient _client;
 
   @override
-  Future<Either<RegistrationRepositoryFailure, UserDataWithToken>>
-      registerUser({
+  Future<Either<CustomFailure, UserDataWithToken>> registerUser({
     required RegistrationData registrationData,
   }) async {
     try {
@@ -52,13 +51,13 @@ class RegistrationRepository
         return right(Tuple2(UserData.fromMap(data), accessToken));
       }
     } catch (e) {
-      return left(RegistrationUnknownFailure('RegistartionUnknownFailure: $e'));
+      return left(UnknownCustomFailure('RegistartionUnknownFailure: $e'));
     }
   }
 
   @override
-  Future<Either<RegistrationUsernameAlreadyExistsFailure, Unit>>
-      validateUsername({required String username}) async {
+  Future<Either<ConflictCustomFailure, Unit>> validateUsername(
+      {required String username}) async {
     final uri = Uri(
       scheme: env.HTTPS_SCHEME,
       host: env.AWS_HOST,
@@ -78,15 +77,13 @@ class RegistrationRepository
       return right(unit);
     } else {
       return left(
-        RegistrationUsernameAlreadyExistsFailure(
-          "RegistrationUsernameAlreadyExistsFailure: $error",
-        ),
+        ConflictCustomFailure("ConflictCustomFailure: $error"),
       );
     }
   }
 
   @override
-  Future<Either<RegistrationEmailAlreadyExistsFailure, Unit>> validateEmail({
+  Future<Either<ConflictCustomFailure, Unit>> validateEmail({
     required String email,
   }) async {
     final uri = Uri(
@@ -108,21 +105,19 @@ class RegistrationRepository
       return right(unit);
     } else {
       return left(
-        RegistrationEmailAlreadyExistsFailure(
-          "RegistrationEmailAlreadyExistsFailure: $error",
+        ConflictCustomFailure(
+          "ConflictCustomFailure: $error",
         ),
       );
     }
   }
 }
 
-RegistrationRepositoryFailure? _handleNetworkErrors(
+CustomFailure? _handleNetworkErrors(
   int statusCode,
   Map<String, dynamic> result,
 ) {
   if (statusCode == 200) return null;
 
-  return RegistrationUnknownFailure(
-    "RegistrationUnknownFailure: ${result['error']}",
-  );
+  return UnknownCustomFailure("UnknownCustomFailure: ${result['error']}");
 }

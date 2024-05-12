@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/failure/storage/user_data_storage_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
+
 import 'package:event_mate/infrastructure/controller/cache_controller/cache_key.dart';
 import 'package:event_mate/infrastructure/controller/cache_controller/i_cache_controller.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';

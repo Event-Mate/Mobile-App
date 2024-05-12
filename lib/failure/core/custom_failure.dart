@@ -3,37 +3,37 @@ abstract class CustomFailure {
 }
 
 /// 403 - Forbidden
-abstract class ForbiddenCustomFailure extends CustomFailure {
-  const ForbiddenCustomFailure();
-  String? get message;
+class ForbiddenCustomFailure extends CustomFailure {
+  const ForbiddenCustomFailure(this.message);
+  final String message;
 }
 
 /// 404 - Not Found
-abstract class NotFoundCustomFailure extends CustomFailure {
-  const NotFoundCustomFailure();
-  String? get message;
+class NotFoundCustomFailure extends CustomFailure {
+  const NotFoundCustomFailure(this.message);
+  final String message;
 }
 
 /// 401 - Unauthorized
-abstract class UnauthorizedCustomFailure extends CustomFailure {
-  const UnauthorizedCustomFailure();
-  String? get message;
+class UnauthorizedCustomFailure extends CustomFailure {
+  const UnauthorizedCustomFailure(this.message);
+  final String message;
 }
 
 /// 403 - Forbidden
-abstract class ConflictCustomFailure extends CustomFailure {
-  const ConflictCustomFailure();
-  String? get message;
+class ConflictCustomFailure extends CustomFailure {
+  const ConflictCustomFailure(this.message);
+  final String message;
 }
 
 /// 400 - Bad Request
-abstract class BadRequestCustomFailure extends CustomFailure {
-  const BadRequestCustomFailure();
-  String? get message;
+class BadRequestCustomFailure extends CustomFailure {
+  const BadRequestCustomFailure(this.message);
+  final String message;
 }
 
 /// 500 - Internal Server Error
-abstract class UnknownCustomFailure extends CustomFailure {
-  const UnknownCustomFailure();
-  String? get message;
+class UnknownCustomFailure extends CustomFailure {
+  const UnknownCustomFailure(this.message);
+  final String message;
 }

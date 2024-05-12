@@ -24,6 +24,7 @@ class EventData extends Equatable {
       price: map['price'] as String,
       location: LocationData.fromMap(map['location'] as Map<String, dynamic>),
       category: map['category'] as String,
+      // TODO(Furkan): nullable may be deleted
       attending: map['attending'] as bool? ?? false,
       participantIds: (map['participants'] as List<dynamic>)
           .map((e) => e as String)

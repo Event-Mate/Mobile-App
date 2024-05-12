@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:event_mate/failure/repository/event_repository_failure.dart';
+import 'package:event_mate/failure/core/custom_failure.dart';
+
 import 'package:event_mate/infrastructure/repository/event_repository/i_event_repository.dart';
 import 'package:event_mate/model/event_data.dart';
 import 'package:flutter/material.dart';
