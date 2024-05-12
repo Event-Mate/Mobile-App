@@ -6,6 +6,7 @@ import 'package:event_mate/presentation/core/extension/build_context_theme_ext.d
 import 'package:event_mate/presentation/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:event_mate/presentation/home/home_page.dart';
 import 'package:event_mate/presentation/profile/my_profile_page.dart';
+import 'package:event_mate/presentation/social/social_page.dart';
 import 'package:event_mate/presentation/suggested_events/suggested_events_page.dart';
 import 'package:event_mate/restartable_app.dart';
 import 'package:flutter/material.dart';
@@ -80,8 +81,7 @@ class _MainPageState extends State<MainPage> {
   static const Map<int, Widget> _pages = {
     BottomNavbarHomePageState.index: HomePage(),
     BottomNavbarEventsPageState.index: SuggestedEventsPage(),
-    BottomNavbarCreateEventPageState.index:
-        Scaffold(body: Center(child: Text('Yakında'))),
+    BottomNavbarSocialPageState.index: SocialPage(),
     BottomNavbarProfilePageState.index: MyProfilePage(),
   };
 }

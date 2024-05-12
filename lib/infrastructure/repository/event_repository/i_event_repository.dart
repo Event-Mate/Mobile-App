@@ -9,4 +9,5 @@ abstract class IEventRepository {
   Future<Either<EventRepositoryFailure, KtList<EventData>>> getAllEvents();
   Future<Either<EventRepositoryFailure, KtList<InterestCategoryData>>>
       getAllInterestCategories();
+  Future<Either<EventRepositoryFailure, EventData>> attendEvent(String eventId);
 }

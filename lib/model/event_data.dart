@@ -11,6 +11,7 @@ class EventData extends Equatable {
     required this.price,
     required this.location,
     required this.category,
+    required this.attending,
     required this.participantIds,
   });
 
@@ -23,6 +24,7 @@ class EventData extends Equatable {
       price: map['price'] as String,
       location: LocationData.fromMap(map['location'] as Map<String, dynamic>),
       category: map['category'] as String,
+      attending: map['attending'] as bool? ?? false,
       participantIds: (map['participants'] as List<dynamic>)
           .map((e) => e as String)
           .toImmutableList(),
@@ -36,6 +38,7 @@ class EventData extends Equatable {
   final String price;
   final LocationData location;
   final String category;
+  final bool attending;
   final KtList<String> participantIds;
 
   String get dateTime => info.split("\n")[1];
@@ -54,6 +57,7 @@ class EventData extends Equatable {
         date,
         time,
         category,
+        attending,
         participantIds,
       ];
 }

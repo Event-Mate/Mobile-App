@@ -7,8 +7,7 @@ abstract class BottomNavbarState extends Equatable {
   Map<int, BottomNavbarState> get indexStateMap => {
         BottomNavbarHomePageState.index: const BottomNavbarHomePageState(),
         BottomNavbarEventsPageState.index: const BottomNavbarEventsPageState(),
-        BottomNavbarCreateEventPageState.index:
-            const BottomNavbarCreateEventPageState(),
+        BottomNavbarSocialPageState.index: const BottomNavbarSocialPageState(),
         BottomNavbarProfilePageState.index:
             const BottomNavbarProfilePageState(),
       };
@@ -27,8 +26,8 @@ final class BottomNavbarEventsPageState extends BottomNavbarState {
   static const index = 1;
 }
 
-final class BottomNavbarCreateEventPageState extends BottomNavbarState {
-  const BottomNavbarCreateEventPageState() : super(selectedIndex: index);
+final class BottomNavbarSocialPageState extends BottomNavbarState {
+  const BottomNavbarSocialPageState() : super(selectedIndex: index);
   static const index = 2;
 }
 

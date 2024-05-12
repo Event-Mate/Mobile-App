@@ -128,4 +128,36 @@ class EventRepository with ApiHeaderMixin implements IEventRepository {
 
     return EventUnknownFailure('EventUnknownFailure: $result');
   }
+
+  @override
+  Future<Either<EventRepositoryFailure, EventData>> attendEvent(
+    String eventId,
+  ) async {
+    try {
+      final uri = Uri(
+        scheme: env.HTTPS_SCHEME,
+        host: env.AWS_HOST,
+        path: '/api/event',
+      );
+
+      final response = await _client.put(
+        uri,
+        headers: noTokenApiHeader,
+      );
+
+      final result = jsonDecode(response.body) as Map<String, dynamic>;
+
+      final error = _handleNetworkErrors(response.statusCode, result);
+
+      if (error != null) {
+        return left(error);
+      } else {
+        final eventData = result['data'] as EventData;
+
+        return right(eventData);
+      }
+    } catch (e) {
+      return left(EventUnknownFailure('EventUnknownFailure: $e'));
+    }
+  }
 }
