@@ -32,6 +32,20 @@ class EventData extends Equatable {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      '_id': id,
+      'title': title,
+      'info': info,
+      'image': imageUrl,
+      'price': price,
+      'location': location.toMap(),
+      'category': category,
+      'attending': attending,
+      'participants': participantIds.asList(),
+    };
+  }
+
   final String id;
   final String title;
   final String info;

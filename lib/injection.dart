@@ -13,6 +13,7 @@ import 'package:event_mate/application/interests_edit_bloc/interests_edit_bloc.d
 import 'package:event_mate/application/my_profile_bloc/my_profile_bloc.dart';
 import 'package:event_mate/application/name_edit_bloc/name_edit_bloc.dart';
 import 'package:event_mate/application/password_edit_bloc/password_edit_bloc.dart';
+import 'package:event_mate/application/social_posts_bloc/social_posts_bloc.dart';
 import 'package:event_mate/application/splash_bloc/splash_bloc.dart';
 import 'package:event_mate/application/username_edit_bloc/username_edit_bloc.dart';
 import 'package:event_mate/configuration/sembast_configuration.dart'
@@ -27,6 +28,8 @@ import 'package:event_mate/infrastructure/repository/login_repository/i_login_re
 import 'package:event_mate/infrastructure/repository/login_repository/login_repository.dart';
 import 'package:event_mate/infrastructure/repository/registration_repository/i_registration_repository.dart';
 import 'package:event_mate/infrastructure/repository/registration_repository/registration_repository.dart';
+import 'package:event_mate/infrastructure/repository/social_repository/i_social_repository.dart';
+import 'package:event_mate/infrastructure/repository/social_repository/social_repository.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/i_user_data_storage.dart';
 import 'package:event_mate/infrastructure/storage/user_data_storage/user_data_storage.dart';
 import 'package:event_mate/service/custom_http_client.dart';
@@ -95,6 +98,9 @@ Future<bool> _injectFacades() async {
   );
   getIt.registerSingleton<IEventRepository>(
     EventRepository(getIt<CustomHttpClient>()),
+  );
+  getIt.registerSingleton<ISocialRepository>(
+    SocialRepository(getIt<CustomHttpClient>()),
   );
   getIt.registerSingleton<IImageFacade>(
     ImageFacade(getIt<ImagePicker>()),
@@ -177,6 +183,10 @@ Future<bool> _injectBlocs() async {
   );
   getIt.registerFactory<InterestsEditBloc>(
     () => InterestsEditBloc(getIt<IEventRepository>()),
+  );
+
+  getIt.registerFactory<SocialPostsBloc>(
+    () => SocialPostsBloc(getIt<ISocialRepository>()),
   );
 
   return true;

@@ -18,6 +18,14 @@ class LocationData extends Equatable {
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      '_id': id,
+      'name': name,
+      'coords': [latitude, longitude],
+    };
+  }
+
   final String id;
   final String name;
   final double latitude;
