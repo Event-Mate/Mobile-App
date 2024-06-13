@@ -17,31 +17,31 @@ class SocialPostsBloc extends Bloc<SocialPostsEvent, SocialPostsState> {
   SocialPostsBloc(
     this._iSocialRepository,
   ) : super(SocialPostsState.initial()) {
-    on<FetchAllPosts>(
+    on<_FetchAllPosts>(
       _onFetchAllPosts,
       transformer: droppable(),
     );
-    on<CreatePost>(
+    on<_CreatePost>(
       _onCreatePost,
       transformer: droppable(),
     );
   }
 
   void addFetchAllPosts() {
-    add(const FetchAllPosts());
+    add(const _FetchAllPosts());
   }
 
   void addCreatePost({
     required String content,
     required EventData eventData,
   }) {
-    add(CreatePost(content: content, eventData: eventData));
+    add(_CreatePost(content: content, eventData: eventData));
   }
 
   final ISocialRepository _iSocialRepository;
 
   Future<void> _onFetchAllPosts(
-    FetchAllPosts event,
+    _FetchAllPosts event,
     Emitter<SocialPostsState> emit,
   ) async {
     emit(state.copyWith(failureOrPostListOption: none()));
@@ -52,7 +52,7 @@ class SocialPostsBloc extends Bloc<SocialPostsEvent, SocialPostsState> {
   }
 
   Future<void> _onCreatePost(
-    CreatePost event,
+    _CreatePost event,
     Emitter<SocialPostsState> emit,
   ) async {
     emit(state.copyWith(failureOrUnitOption: none()));

@@ -26,7 +26,33 @@ class AuthenticationPage extends StatelessWidget {
                 assetSvgAuthPageImage,
                 height: MediaQuery.sizeOf(context).height * 0.5,
               ),
-              SvgPicture.asset(assetSvgEventMateIcon, width: 100, height: 100),
+              Container(
+                height: 100,
+                width: 200,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: context.colors.primary,
+                      offset: const Offset(0, 4),
+                      blurRadius: 30,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    'EventMate',
+                    style: tsHeadLineLarge.copyWith(
+                      color: context.colors.background,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
               const _AuthButtons(),
             ],
           ),

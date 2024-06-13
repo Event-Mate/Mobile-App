@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_mate/failure/core/custom_failure.dart';
@@ -76,8 +75,6 @@ class EmailRegistrationBloc
     final failureOrUserDataWToken = await _iRegistrationRepository.registerUser(
       registrationData: event.registrationData,
     );
-
-    log('failureOrUserDataWToken: $failureOrUserDataWToken');
 
     final newState = await failureOrUserDataWToken.fold(
       (failure) async {

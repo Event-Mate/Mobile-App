@@ -7,12 +7,12 @@ sealed class SocialPostsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchAllPosts extends SocialPostsEvent {
-  const FetchAllPosts();
+class _FetchAllPosts extends SocialPostsEvent {
+  const _FetchAllPosts();
 }
 
-class CreatePost extends SocialPostsEvent {
-  const CreatePost({required this.content, required this.eventData});
+class _CreatePost extends SocialPostsEvent {
+  const _CreatePost({required this.content, required this.eventData});
 
   final String content;
   final EventData eventData;
